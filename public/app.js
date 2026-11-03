@@ -99,7 +99,29 @@ function appendMessage(sender, text, products = [], chips = []) {
   bubble.className = 'message-bubble';
   bubble.innerHTML = formatMarkdown(text);
 
-  // 1. Render in-chat product cards (if any)
+  // 1. Render Suggested Chips directly below the question / message text
+  if (sender === 'bot' && chips && chips.length > 0) {
+    const chipsWrapper = document.createElement('div');
+    chipsWrapper.className = 'bubble-chips';
+
+    chips.forEach(chipText => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'chip-btn';
+      btn.textContent = chipText;
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        chipsWrapper.classList.add('disabled');
+        trackEvent('chip_clicked', { chip: chipText });
+        sendMessage(chipText);
+      });
+      chipsWrapper.appendChild(btn);
+    });
+
+    bubble.appendChild(chipsWrapper);
+  }
+
+  // 2. Render Suggested Products below the chips
   if (products && products.length > 0) {
     const shelf = document.createElement('div');
     shelf.className = 'products-shelf';
@@ -138,28 +160,6 @@ function appendMessage(sender, text, products = [], chips = []) {
     });
 
     bubble.appendChild(shelf);
-  }
-
-  // 2. Render Suggested Chips directly INSIDE the last message bubble
-  if (sender === 'bot' && chips && chips.length > 0) {
-    const chipsWrapper = document.createElement('div');
-    chipsWrapper.className = 'bubble-chips';
-
-    chips.forEach(chipText => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'chip-btn';
-      btn.textContent = chipText;
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        chipsWrapper.classList.add('disabled');
-        trackEvent('chip_clicked', { chip: chipText });
-        sendMessage(chipText);
-      });
-      chipsWrapper.appendChild(btn);
-    });
-
-    bubble.appendChild(chipsWrapper);
   }
 
   // Timestamp
