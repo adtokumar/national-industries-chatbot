@@ -150,8 +150,8 @@ async function runTestSuite() {
 
     assert(res.text.includes('Ashok Kumar Chowdhury'), 'CEO name should be Ashok Kumar Chowdhury');
     assert(res.text.includes('Sultanpur'), 'Address should mention Sultanpur, New Delhi');
-    assert(res.text.includes('7942534248'), 'PNS phone number should always be present');
-    assert(res.text.includes('tel:7942534248'), 'Must include clickable PNS dialer link');
+    assert(res.text.includes('+91-7942534248'), 'PNS phone number should always have +91 prefix');
+    assert(res.text.includes('tel:+917942534248'), 'Must include clickable PNS dialer link with +91');
     assert(!res.text.includes('wa.me'), 'WhatsApp CTA URL must NOT be shown when IM-Insta flag is false');
   });
 
@@ -220,7 +220,7 @@ async function runTestSuite() {
     assert.strictEqual(res.leadSummary.specs.form_factor, 'Desktop');
     assert(res.text.includes('Summary of your requirement'));
     assert(res.text.includes('quotation'));
-    assert(res.leadSummary.sellerContact.includes('7942534248'), 'Seller contact must include PNS number');
+    assert(res.leadSummary.sellerContact.includes('+91-7942534248'), 'Seller contact must include PNS with +91 prefix');
     assert(res.products && res.products.length > 0, 'Must include recommended products for enquired category on summary');
     assert(res.products[0].url.includes('namibind.co.in'), 'Product URL must link to namibind.co.in');
   });
@@ -241,8 +241,8 @@ async function runTestSuite() {
     assert(resFreight.text.toLowerCase().includes('freight charges are quote-specific'));
 
     const resContact = await engine.processMessage(sId, 'Company Location & Contact');
-    assert(resContact.text.includes('7942534248'), 'Contact info must include PNS number');
-    assert(resContact.text.includes('tel:7942534248'), 'Must include clickable PNS dialer link');
+    assert(resContact.text.includes('+91-7942534248'), 'Contact info must include PNS number with +91 prefix');
+    assert(resContact.text.includes('tel:+917942534248'), 'Must include clickable PNS dialer link with +91');
     assert(!resContact.text.includes('wa.me'), 'WhatsApp CTA URL must NOT be shown when IM-Insta flag is false');
     assert(!resContact.text.includes('Ashok Kumar Chowdhury'), 'Contact output must not include CEO name');
     assert(!resContact.text.includes('Sultanpur'), 'Contact output must not include address');
@@ -262,8 +262,8 @@ async function runTestSuite() {
     assert(!resQuote.products, 'Must not return random catalog products on Get a Quote');
 
     const resSales = await engine.processMessage(sId, 'Contact Sales');
-    assert(resSales.text.includes('7942534248'), 'Must provide PNS number');
-    assert(resSales.text.includes('tel:7942534248'), 'Must include clickable PNS dialer link');
+    assert(resSales.text.includes('+91-7942534248'), 'Must provide PNS number with +91 prefix');
+    assert(resSales.text.includes('tel:+917942534248'), 'Must include clickable PNS dialer link with +91');
     assert(!resSales.text.includes('wa.me'), 'Must NOT show WhatsApp CTA URL without IM-Insta flag');
   });
 
@@ -421,15 +421,15 @@ async function runTestSuite() {
     assert.strictEqual(uniqueChips.size, res.chips.length, 'Chips must not contain duplicates');
   });
 
-  // TEST 27: Contact Policy: Always PNS number, never other details, WhatsApp only if IM-Insta flag present
-  await testAsync('Contact Policy: Always show PNS number; WhatsApp CTA URL only if IM-Insta flag present', async () => {
+  // TEST 27: Contact Policy: Always PNS number with +91 prefix; WhatsApp only if IM-Insta flag present
+  await testAsync('Contact Policy: Always show PNS number with +91 prefix; WhatsApp CTA URL only if IM-Insta flag present', async () => {
     const sId = 't_contact_policy_' + Date.now();
     
     // Default state: IM-Insta is NOT present
     assert.strictEqual(engine.businessCard.hasImInsta, false, 'National Industries should have IM-Insta false by default');
     const resNoInsta = await engine.processMessage(sId, 'Company Location & Contact');
-    assert(resNoInsta.text.includes('7942534248'), 'Must display PNS number');
-    assert(resNoInsta.text.includes('tel:7942534248'), 'Must include clickable tel: link for PNS');
+    assert(resNoInsta.text.includes('+91-7942534248'), 'Must display PNS number with +91- prefix');
+    assert(resNoInsta.text.includes('tel:+917942534248'), 'Must include clickable tel: link for PNS with +91');
     assert(!resNoInsta.text.includes('wa.me'), 'Must NOT display WhatsApp CTA URL when IM-Insta flag is false');
     assert(!resNoInsta.text.includes('WhatsApp'), 'Must NOT mention WhatsApp when IM-Insta flag is false');
 
@@ -438,7 +438,7 @@ async function runTestSuite() {
     engine.businessCard.whatsapp = '+91-8046060065';
     const sIdInsta = 't_contact_insta_' + Date.now();
     const resWithInsta = await engine.processMessage(sIdInsta, 'Company Location & Contact');
-    assert(resWithInsta.text.includes('7942534248'), 'Must still display PNS number');
+    assert(resWithInsta.text.includes('+91-7942534248'), 'Must still display PNS number with +91- prefix');
     assert(resWithInsta.text.includes('wa.me/918046060065'), 'Must display WhatsApp CTA URL when IM-Insta flag is true');
     assert(resWithInsta.text.includes('+91-8046060065'), 'Must display WhatsApp number when IM-Insta flag is true');
 

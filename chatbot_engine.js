@@ -83,9 +83,8 @@ class ChatbotEngine {
 
     if (this.catalogData?.seller) {
       if (this.catalogData.seller.phone) {
-        const rawPhone = this.catalogData.seller.phone.replace(/^\+91-?/, '').trim();
-        this.businessCard.pnsNumber = rawPhone;
-        this.businessCard.phone = rawPhone;
+        this.businessCard.pnsNumber = this.formatPnsNumber(this.catalogData.seller.phone);
+        this.businessCard.phone = this.businessCard.pnsNumber;
       }
       if (this.catalogData.seller.im_insta !== undefined) {
         this.businessCard.hasImInsta = !!(this.catalogData.seller.im_insta === true || this.catalogData.seller.im_insta === 1);
@@ -96,9 +95,17 @@ class ChatbotEngine {
     this.buildIndices();
   }
 
+  formatPnsNumber(raw) {
+    if (!raw) return '+91-7942534248';
+    const str = String(raw).trim();
+    const digits = str.replace(/[^0-9]/g, '');
+    const cleanDigits = digits.startsWith('91') && digits.length > 10 ? digits.slice(2) : digits;
+    return `+91-${cleanDigits}`;
+  }
+
   parseBusinessCard(markdown) {
     const pnsMatch = (markdown || '').match(/(?:PNS(?: Number)?|Phone|Contact)[^\n:]*[:\-]\s*(\+?\d[\d-]+)/i);
-    const pnsNumber = pnsMatch ? pnsMatch[1].replace(/^\+91-?/, '').trim() : '7942534248';
+    const pnsNumber = this.formatPnsNumber(pnsMatch ? pnsMatch[1] : '7942534248');
     const hasImInsta = /IM-Insta[:\s]+(true|yes|enabled|1)/i.test(markdown || '');
 
     return {
@@ -866,8 +873,9 @@ class ChatbotEngine {
     );
 
     if (isContactQuery) {
-      const pns = this.businessCard?.pnsNumber || this.businessCard?.phone || '7942534248';
-      let contactLine = `• **Phone (PNS)**: [${pns}](tel:${pns})`;
+      const pns = this.formatPnsNumber(this.businessCard?.pnsNumber || this.businessCard?.phone);
+      const telHref = pns.replace(/[^0-9+]/g, '');
+      let contactLine = `• **Phone (PNS)**: [${pns}](tel:${telHref})`;
       if (this.businessCard?.hasImInsta && this.businessCard?.whatsapp) {
         const cleanWa = this.businessCard.whatsapp.replace(/[^0-9]/g, '');
         contactLine += ` | **WhatsApp**: [${this.businessCard.whatsapp} ↗](https://wa.me/${cleanWa})`;
@@ -889,8 +897,9 @@ class ChatbotEngine {
     );
 
     if (isAddressOrCeoQuery) {
-      const pns = this.businessCard?.pnsNumber || this.businessCard?.phone || '7942534248';
-      let contactLine = `• **Phone (PNS)**: [${pns}](tel:${pns})`;
+      const pns = this.formatPnsNumber(this.businessCard?.pnsNumber || this.businessCard?.phone);
+      const telHref = pns.replace(/[^0-9+]/g, '');
+      let contactLine = `• **Phone (PNS)**: [${pns}](tel:${telHref})`;
       if (this.businessCard?.hasImInsta && this.businessCard?.whatsapp) {
         const cleanWa = this.businessCard.whatsapp.replace(/[^0-9]/g, '');
         contactLine += ` | **WhatsApp**: [${this.businessCard.whatsapp} ↗](https://wa.me/${cleanWa})`;
@@ -1603,7 +1612,7 @@ class ChatbotEngine {
         specs: session.collectedSpecs,
         quantity: session.collectedQuantity,
         reasonNote,
-        sellerContact: `PNS: ${this.businessCard?.pnsNumber || '7942534248'}${this.businessCard?.hasImInsta && this.businessCard?.whatsapp ? ' / WhatsApp: ' + this.businessCard.whatsapp : ''}`
+        sellerContact: `PNS: ${this.formatPnsNumber(this.businessCard?.pnsNumber || this.businessCard?.phone)}${this.businessCard?.hasImInsta && this.businessCard?.whatsapp ? ' / WhatsApp: ' + this.businessCard.whatsapp : ''}`
       }
     };
   }
