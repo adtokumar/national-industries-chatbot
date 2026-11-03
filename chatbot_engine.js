@@ -1574,6 +1574,14 @@ class ChatbotEngine {
     try {
       const line = JSON.stringify(logEntry) + '\n';
       fs.appendFileSync(this.logFilePath, line, 'utf8');
+
+      // On Vercel / serverless cloud environments, stream structured log to Vercel Runtime Logs
+      if (process.env.VERCEL) {
+        console.log(`[CHAT_LOG] [${logEntry.sessionId}] Turn ${logEntry.turn}: "${logEntry.userMessage}" -> ${logEntry.response.stage}`);
+        if (logEntry.leadSummary) {
+          console.log(`[LEAD_QUALIFIED]`, JSON.stringify(logEntry.leadSummary));
+        }
+      }
     } catch (err) {
       console.error('Failed to write conversation log:', err.message);
     }
