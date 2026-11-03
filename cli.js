@@ -18,7 +18,7 @@ const rl = readline.createInterface({
 console.log('\n================================================================');
 console.log('🤖 National Industries (Namibind) AI Sales Assistant — CLI Mode');
 console.log('🏢 Manufacturer & Exporter of Office Automation Machinery');
-console.log('🌐 Website: https://www.namibind.co.in/ | 📞 Phone: 7942534248');
+console.log('🌐 Website: https://www.namibind.co.in/ | 💬 WhatsApp: +91-8046060065');
 console.log('⚖️ Guardrails Active: Indicative pricing only | No final shipping/stock promises');
 console.log('================================================================\n');
 

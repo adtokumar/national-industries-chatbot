@@ -34,7 +34,7 @@ The chatbot strictly adheres to the primary guardrail: **Do not make final promi
 | **Stock & Lead Time** | Varies by machine type: Standard paper shredders in stock; heavy binding/finishing machines against order (5–6 days). | **No global availability guarantees.** Quotes category guidelines and confirms dispatch upon order placement. |
 | **Pricing Basis** | Catalog prices are indicative / starting references. | Explicitly labels prices as **indicative reference prices**, deferring final volume discounts to the sales management team. |
 | **Warranty** | Category-dependent: 1-Yr On-site (Photo Lamination & Currency Counters), 6 Mos (Shoe Shine), Lifetime (Vinyl Plotters). | Answers specific warranties where known; defers unlisted machinery warranties to quotation. |
-| **Escalation** | Bulk discounts, custom machinery, finalized freight. | Seamlessly transitions qualified leads to the sales desk via Phone (**7942534248**) and WhatsApp (**+91-8046060065**). |
+| **Escalation** | Bulk discounts, custom machinery, finalized freight. | Seamlessly transitions qualified leads to the sales desk via WhatsApp (**+91-8046060065**). |
 
 ---
 
@@ -144,7 +144,6 @@ To onboard another company or seller into the system, consult the comprehensive 
 - **CEO**: Ashok Kumar Chowdhury
 - **Established**: 1990 (35+ years in office automation)
 - **Registered Address**: Ground Floor, KH. No. 13/2, Sultanpur Village, Sultanpur, New Delhi — 110030
-- **Phone**: `7942534248`
 - **WhatsApp**: `+91-8046060065`
 - **Official Website**: [https://www.namibind.co.in/](https://www.namibind.co.in/)
 - **GSTIN**: `07ADFPC0400Q1ZV` (Verified)

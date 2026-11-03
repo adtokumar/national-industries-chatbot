@@ -63,7 +63,7 @@ async function sendMessage(text, isInitial = false) {
 
   } catch (err) {
     console.error('Chat error:', err);
-    appendMessage('bot', 'Sorry, I encountered a temporary connection issue. Please try again or call our sales desk at **7942534248**.');
+    appendMessage('bot', 'Sorry, I encountered a temporary connection issue. Please try again or reach out on WhatsApp at **+91-8046060065**.');
   } finally {
     userInput.disabled = false;
     userInput.focus();

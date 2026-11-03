@@ -89,7 +89,7 @@ class ChatbotEngine {
       name: 'National Industries',
       brand: 'Namibind',
       ceo: 'Ashok Kumar Chowdhury',
-      phone: '7942534248',
+      phone: null,
       whatsapp: '+91-8046060065',
       website: 'https://www.namibind.co.in/',
       location: 'Ground Floor, KH. No. 13/2, Sultanpur Village, Sultanpur — 110030, New Delhi, India',
@@ -851,7 +851,7 @@ class ChatbotEngine {
       return {
         type: 'contact',
         guardrail: 'Official verified factsheet details',
-        answer: `🏢 **National Industries (Brand: Namibind)**\n• **Established**: 1990 (35+ years of manufacturing excellence)\n• **Nature**: Manufacturer & Exporter of Office Automation & Industrial Machinery\n• **Phone**: [7942534248](tel:7942534248) | **WhatsApp**: [+91-8046060065](https://wa.me/918046060065)\n• **Website**: [https://www.namibind.co.in/](https://www.namibind.co.in/)\n• **IndiaMART Rating**: 4.3 ★ (265+ reviews)`
+        answer: `🏢 **National Industries (Brand: Namibind)**\n• **Established**: 1990 (35+ years of manufacturing excellence)\n• **Nature**: Manufacturer & Exporter of Office Automation & Industrial Machinery\n• **WhatsApp**: [+91-8046060065](https://wa.me/918046060065)\n• **Website**: [https://www.namibind.co.in/](https://www.namibind.co.in/)\n• **IndiaMART Rating**: 4.3 ★ (265+ reviews)`
       };
     }
 
@@ -867,7 +867,7 @@ class ChatbotEngine {
       return {
         type: 'address_ceo',
         guardrail: 'Official verified factsheet details',
-        answer: `🏢 **National Industries (Brand: Namibind)**\n• **CEO**: Ashok Kumar Chowdhury\n• **Registered Office**: Ground Floor, KH. No. 13/2, Sultanpur Village, Sultanpur, New Delhi — 110030\n• **Phone**: [7942534248](tel:7942534248) | **WhatsApp**: [+91-8046060065](https://wa.me/918046060065)\n• **Website**: [https://www.namibind.co.in/](https://www.namibind.co.in/)\n• **IndiaMART Rating**: 4.3 ★ (265+ reviews)`
+        answer: `🏢 **National Industries (Brand: Namibind)**\n• **CEO**: Ashok Kumar Chowdhury\n• **Registered Office**: Ground Floor, KH. No. 13/2, Sultanpur Village, Sultanpur, New Delhi — 110030\n• **WhatsApp**: [+91-8046060065](https://wa.me/918046060065)\n• **Website**: [https://www.namibind.co.in/](https://www.namibind.co.in/)\n• **IndiaMART Rating**: 4.3 ★ (265+ reviews)`
       };
     }
 
@@ -1571,7 +1571,7 @@ class ChatbotEngine {
         specs: session.collectedSpecs,
         quantity: session.collectedQuantity,
         reasonNote,
-        sellerContact: '7942534248 / +91-8046060065'
+        sellerContact: '+91-8046060065'
       }
     };
   }

@@ -150,7 +150,8 @@ async function runTestSuite() {
 
     assert(res.text.includes('Ashok Kumar Chowdhury'), 'CEO name should be Ashok Kumar Chowdhury');
     assert(res.text.includes('Sultanpur'), 'Address should mention Sultanpur, New Delhi');
-    assert(res.text.includes('7942534248'), 'Phone number should be present');
+    assert(res.text.includes('+91-8046060065'), 'WhatsApp contact should be present');
+    assert(!res.text.includes('7942534248'), 'Phone number 7942534248 must NOT be shared');
   });
 
   // TEST 11: Catalog Product Search & Namibind URL (No prices shared)
@@ -218,7 +219,8 @@ async function runTestSuite() {
     assert.strictEqual(res.leadSummary.specs.form_factor, 'Desktop');
     assert(res.text.includes('Summary of your requirement'));
     assert(res.text.includes('quotation'));
-    assert(res.leadSummary.sellerContact.includes('7942534248'));
+    assert(res.leadSummary.sellerContact.includes('+91-8046060065'));
+    assert(!res.leadSummary.sellerContact.includes('7942534248'));
     assert(res.products && res.products.length > 0, 'Must include recommended products for enquired category on summary');
     assert(res.products[0].url.includes('namibind.co.in'), 'Product URL must link to namibind.co.in');
   });
@@ -239,11 +241,12 @@ async function runTestSuite() {
     assert(resFreight.text.toLowerCase().includes('freight charges are quote-specific'));
 
     const resContact = await engine.processMessage(sId, 'Company Location & Contact');
-    assert(resContact.text.includes('7942534248'));
+    assert(resContact.text.includes('+91-8046060065'), 'Contact info must include WhatsApp');
+    assert(!resContact.text.includes('7942534248'), 'Contact output must NOT include 7942534248');
     assert(!resContact.text.includes('Ashok Kumar Chowdhury'), 'Contact output must not include CEO name');
     assert(!resContact.text.includes('Sultanpur'), 'Contact output must not include address');
     assert(!resContact.chips.includes('Contact Sales'), 'Contact output chips must not self-reference Contact Sales');
-    assert(resContact.text.includes('tel:7942534248'), 'Must include clickable phone link');
+    assert(!resContact.text.includes('tel:7942534248'), 'Must NOT include 7942534248 phone link');
   });
 
   // TEST 17: Explore Products & Get a Quote navigation
@@ -259,7 +262,8 @@ async function runTestSuite() {
     assert(!resQuote.products, 'Must not return random catalog products on Get a Quote');
 
     const resSales = await engine.processMessage(sId, 'Contact Sales');
-    assert(resSales.text.includes('7942534248'));
+    assert(resSales.text.includes('+91-8046060065'));
+    assert(!resSales.text.includes('7942534248'));
   });
 
   // TEST 18: General enquiry intent (e.g. "what all do you sell?")
