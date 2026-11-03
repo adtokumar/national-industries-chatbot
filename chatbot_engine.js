@@ -299,6 +299,22 @@ class ChatbotEngine {
     if (attribute === 'form_factor' && qLower.includes('desktop or floor model')) {
       return ['Desktop', 'Floor Model'];
     }
+    if (attribute === 'function' && (qLower.includes('plotter') || qLower.includes('cutting plotter'))) {
+      return [
+        'Sticker & Label Cutting (Half Cut)',
+        'Box & Packaging Creasing',
+        'Full Cut & Perforation',
+        'All-in-One (Cut & Crease)'
+      ];
+    }
+    if (attribute === 'cut_type' && (qLower.includes('half cut, full cut') || qLower.includes('creasing'))) {
+      return [
+        'Half Cut (Stickers & Labels)',
+        'Full Cut & Perforation',
+        'Creasing (Packaging & Boxes)',
+        'Cut & Crease (All-in-One)'
+      ];
+    }
     return rawOptions || [];
   }
 
@@ -560,12 +576,8 @@ class ChatbotEngine {
     const cleanText = text.trim();
     const lower = cleanText.toLowerCase();
 
-    // Do not treat price or policy inquiries as product selections
-    if (this.checkBusinessOrPolicyQuery(cleanText) || /\b(price|cost|rate|pricing|how much)\b/i.test(cleanText)) {
-      return null;
-    }
-
-    // 1. Check explicit selection prefixes
+    // 1. Check explicit selection prefixes first (e.g. "Select <Model>")
+    // This allows selecting models even if their name includes the word "price" (e.g. "Cold Lamination Machine Price / Photo Laminator")
     const selectPrefixes = [
       /^select\s+/i,
       /^i\s+want\s+to\s+select\s+/i,
@@ -590,6 +602,11 @@ class ChatbotEngine {
         const matched = this.findCatalogProduct(explicitTarget);
         if (matched) return matched;
       }
+    }
+
+    // 2. Do not treat general price or policy inquiries as product selections when no explicit selection prefix was used
+    if (this.checkBusinessOrPolicyQuery(cleanText) || /\b(price|cost|rate|pricing|how much)\b/i.test(cleanText)) {
+      return null;
     }
 
     // 2. If session is active and user provided a product name from current recommendations or catalog
@@ -719,6 +736,21 @@ class ChatbotEngine {
           } else if (val.includes('loose')) {
             if (fullText.includes('loose note')) score += 60;
             if (fullText.includes('bundle')) score -= 60;
+          }
+        }
+
+        if (key === 'function' || key === 'cut_type') {
+          if (val.includes('sticker') || val.includes('half')) {
+            if (fullText.includes('sticker') || fullText.includes('label') || fullText.includes('half cut') || fullText.includes('half')) score += 70;
+          }
+          if (val.includes('creasing') || val.includes('box') || val.includes('packaging')) {
+            if (fullText.includes('creasing') || fullText.includes('packaging') || fullText.includes('box')) score += 70;
+          }
+          if (val.includes('full') || val.includes('perforation')) {
+            if (fullText.includes('full cut') || fullText.includes('die cutting') || fullText.includes('perforation')) score += 70;
+          }
+          if (val.includes('all-in-one') || val.includes('dual')) {
+            if (fullText.includes('dual head') || fullText.includes('double head') || (fullText.includes('cut') && fullText.includes('creasing'))) score += 80;
           }
         }
 

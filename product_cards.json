@@ -3076,11 +3076,10 @@
         {
           "attribute": "function",
           "options": [
-            "Half cut, full cut, creasing",
-            "Light creasing",
-            "In-depth creasing with wheel",
-            "Half cut, perforation, creasing",
-            "Half cut, Full cut, and Creasing"
+            "Sticker & Label Cutting (Half Cut)",
+            "Box & Packaging Creasing",
+            "Full Cut & Perforation",
+            "All-in-One (Cut & Crease)"
           ],
           "option_evidence": {
             "Half cut, full cut, creasing": [
@@ -3742,35 +3741,16 @@
         ],
         "values": [
           {
-            "value": "Half cut, full cut, creasing",
-            "evidence_ids": [
-              "1908297",
-              "2180550"
-            ]
+            "value": "Sticker & Label Cutting (Half Cut)"
           },
           {
-            "value": "Light creasing",
-            "evidence_ids": [
-              "1655558"
-            ]
+            "value": "Box & Packaging Creasing"
           },
           {
-            "value": "In-depth creasing with wheel",
-            "evidence_ids": [
-              "1655558"
-            ]
+            "value": "Full Cut & Perforation"
           },
           {
-            "value": "Half cut, perforation, creasing",
-            "evidence_ids": [
-              "4491277"
-            ]
-          },
-          {
-            "value": "Half cut, Full cut, and Creasing",
-            "evidence_ids": [
-              "3547228"
-            ]
+            "value": "All-in-One (Cut & Crease)"
           }
         ],
         "ask_order": 1,

@@ -383,6 +383,39 @@ async function runTestSuite() {
     assert(!res4.products || res4.products.length === 0, 'Subsequent policy query must not recommend other products');
   });
 
+  // TEST 25: Product Selection works even if model name contains the word 'Price'
+  await testAsync('Product Selection: Models with "Price" in name are selected without triggering price guardrail', async () => {
+    const sId = 't_sel_price_' + Date.now();
+    await engine.processMessage(sId, 'Lamination Machine');
+    const resSelect = await engine.processMessage(sId, 'Select Cold Lamination Machine Price / Photo Laminator, 1300 mm');
+    assert.strictEqual(resSelect.stage, 'COLLECTING_QUANTITY', 'Should transition to COLLECTING_QUANTITY on select');
+    assert(resSelect.text.includes('Cold Lamination Machine Price'), 'Must acknowledge the selected model');
+    assert(!resSelect.text.includes('Pricing is shared directly'), 'Must NOT trigger price guardrail when explicitly selecting model');
+
+    // General price inquiry on same model SHOULD trigger guardrail
+    const sIdInquiry = 't_price_inquiry_' + Date.now();
+    await engine.processMessage(sIdInquiry, 'Lamination Machine');
+    const resInquiry = await engine.processMessage(sIdInquiry, 'What is the price of Cold Lamination Machine Price / Photo Laminator, 1300 mm?');
+    assert(resInquiry.text.includes('Pricing is shared directly by our sales team'), 'Must trigger pricing guardrail for actual price inquiry');
+  });
+
+  // TEST 26: Cutting Plotter Standardized Chips (Rule B & C Compliance)
+  await testAsync('Standardized Chips: Cutting Plotter returns clean, non-duplicate, buyer-centric chips', async () => {
+    const sId = 't_plotter_chips_' + Date.now();
+    const res = await engine.processMessage(sId, 'plotter');
+    assert.strictEqual(res.stage, 'COLLECTING_SPECS');
+    assert(Array.isArray(res.chips) && res.chips.length === 4, 'Should offer 4 standardized chips');
+    assert.deepStrictEqual(res.chips, [
+      'Sticker & Label Cutting (Half Cut)',
+      'Box & Packaging Creasing',
+      'Full Cut & Perforation',
+      'All-in-One (Cut & Crease)'
+    ], 'Chips must match standardized buyer requirement options');
+    // Verify no duplicates
+    const uniqueChips = new Set(res.chips.map(c => c.toLowerCase()));
+    assert.strictEqual(uniqueChips.size, res.chips.length, 'Chips must not contain duplicates');
+  });
+
   console.log('\n====================================================');
   console.log(`🏁 Test Results: ${passed} / ${total} Passed`);
   console.log('====================================================\n');
