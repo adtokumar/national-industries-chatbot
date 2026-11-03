@@ -144,14 +144,15 @@ async function runTestSuite() {
   });
 
   // TEST 10: Business Card Info & Address
-  await testAsync('Business Card: Verified identity and address', async () => {
+  await testAsync('Business Card: Verified identity, address, and PNS', async () => {
     const sId = 't_identity_' + Date.now();
     const res = await engine.processMessage(sId, 'Where is your factory located and who is the CEO?');
 
     assert(res.text.includes('Ashok Kumar Chowdhury'), 'CEO name should be Ashok Kumar Chowdhury');
     assert(res.text.includes('Sultanpur'), 'Address should mention Sultanpur, New Delhi');
-    assert(res.text.includes('+91-8046060065'), 'WhatsApp contact should be present');
-    assert(!res.text.includes('7942534248'), 'Phone number 7942534248 must NOT be shared');
+    assert(res.text.includes('7942534248'), 'PNS phone number should always be present');
+    assert(res.text.includes('tel:7942534248'), 'Must include clickable PNS dialer link');
+    assert(!res.text.includes('wa.me'), 'WhatsApp CTA URL must NOT be shown when IM-Insta flag is false');
   });
 
   // TEST 11: Catalog Product Search & Namibind URL (No prices shared)
@@ -219,8 +220,7 @@ async function runTestSuite() {
     assert.strictEqual(res.leadSummary.specs.form_factor, 'Desktop');
     assert(res.text.includes('Summary of your requirement'));
     assert(res.text.includes('quotation'));
-    assert(res.leadSummary.sellerContact.includes('+91-8046060065'));
-    assert(!res.leadSummary.sellerContact.includes('7942534248'));
+    assert(res.leadSummary.sellerContact.includes('7942534248'), 'Seller contact must include PNS number');
     assert(res.products && res.products.length > 0, 'Must include recommended products for enquired category on summary');
     assert(res.products[0].url.includes('namibind.co.in'), 'Product URL must link to namibind.co.in');
   });
@@ -241,12 +241,12 @@ async function runTestSuite() {
     assert(resFreight.text.toLowerCase().includes('freight charges are quote-specific'));
 
     const resContact = await engine.processMessage(sId, 'Company Location & Contact');
-    assert(resContact.text.includes('+91-8046060065'), 'Contact info must include WhatsApp');
-    assert(!resContact.text.includes('7942534248'), 'Contact output must NOT include 7942534248');
+    assert(resContact.text.includes('7942534248'), 'Contact info must include PNS number');
+    assert(resContact.text.includes('tel:7942534248'), 'Must include clickable PNS dialer link');
+    assert(!resContact.text.includes('wa.me'), 'WhatsApp CTA URL must NOT be shown when IM-Insta flag is false');
     assert(!resContact.text.includes('Ashok Kumar Chowdhury'), 'Contact output must not include CEO name');
     assert(!resContact.text.includes('Sultanpur'), 'Contact output must not include address');
     assert(!resContact.chips.includes('Contact Sales'), 'Contact output chips must not self-reference Contact Sales');
-    assert(!resContact.text.includes('tel:7942534248'), 'Must NOT include 7942534248 phone link');
   });
 
   // TEST 17: Explore Products & Get a Quote navigation
@@ -262,8 +262,9 @@ async function runTestSuite() {
     assert(!resQuote.products, 'Must not return random catalog products on Get a Quote');
 
     const resSales = await engine.processMessage(sId, 'Contact Sales');
-    assert(resSales.text.includes('+91-8046060065'));
-    assert(!resSales.text.includes('7942534248'));
+    assert(resSales.text.includes('7942534248'), 'Must provide PNS number');
+    assert(resSales.text.includes('tel:7942534248'), 'Must include clickable PNS dialer link');
+    assert(!resSales.text.includes('wa.me'), 'Must NOT show WhatsApp CTA URL without IM-Insta flag');
   });
 
   // TEST 18: General enquiry intent (e.g. "what all do you sell?")
@@ -418,6 +419,32 @@ async function runTestSuite() {
     // Verify no duplicates
     const uniqueChips = new Set(res.chips.map(c => c.toLowerCase()));
     assert.strictEqual(uniqueChips.size, res.chips.length, 'Chips must not contain duplicates');
+  });
+
+  // TEST 27: Contact Policy: Always PNS number, never other details, WhatsApp only if IM-Insta flag present
+  await testAsync('Contact Policy: Always show PNS number; WhatsApp CTA URL only if IM-Insta flag present', async () => {
+    const sId = 't_contact_policy_' + Date.now();
+    
+    // Default state: IM-Insta is NOT present
+    assert.strictEqual(engine.businessCard.hasImInsta, false, 'National Industries should have IM-Insta false by default');
+    const resNoInsta = await engine.processMessage(sId, 'Company Location & Contact');
+    assert(resNoInsta.text.includes('7942534248'), 'Must display PNS number');
+    assert(resNoInsta.text.includes('tel:7942534248'), 'Must include clickable tel: link for PNS');
+    assert(!resNoInsta.text.includes('wa.me'), 'Must NOT display WhatsApp CTA URL when IM-Insta flag is false');
+    assert(!resNoInsta.text.includes('WhatsApp'), 'Must NOT mention WhatsApp when IM-Insta flag is false');
+
+    // Enabled state: When IM-Insta flag is explicitly true
+    engine.businessCard.hasImInsta = true;
+    engine.businessCard.whatsapp = '+91-8046060065';
+    const sIdInsta = 't_contact_insta_' + Date.now();
+    const resWithInsta = await engine.processMessage(sIdInsta, 'Company Location & Contact');
+    assert(resWithInsta.text.includes('7942534248'), 'Must still display PNS number');
+    assert(resWithInsta.text.includes('wa.me/918046060065'), 'Must display WhatsApp CTA URL when IM-Insta flag is true');
+    assert(resWithInsta.text.includes('+91-8046060065'), 'Must display WhatsApp number when IM-Insta flag is true');
+
+    // Reset back to default
+    engine.businessCard.hasImInsta = false;
+    engine.businessCard.whatsapp = null;
   });
 
   console.log('\n====================================================');

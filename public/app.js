@@ -8,7 +8,7 @@ function trackEvent(name, data = {}) {
     if (typeof window.va === 'function') {
       window.va('event', { name, ...data });
     }
-  } catch (e) {}
+  } catch (e) { }
 }
 
 const chatMessages = document.getElementById('chat-messages');
@@ -130,7 +130,7 @@ function appendMessage(sender, text, products = [], chips = []) {
       const pCard = document.createElement('div');
       pCard.className = 'product-card';
 
-      const imgHtml = p.imageUrl 
+      const imgHtml = p.imageUrl
         ? `<img class="product-img" src="${p.imageUrl}" alt="${p.displayName}" loading="lazy">`
         : `<div class="product-img" style="display:flex;align-items:center;justify-content:center;color:#9ca3af;font-size:11px;">No Image</div>`;
 
@@ -191,7 +191,7 @@ function formatMarkdown(text) {
   // Convert bullet points
   html = html.replace(/^[•\-\*]\s+(.*)$/gm, '<li>$1</li>');
   html = html.replace(/(<li>.*<\/li>(\n|))+/g, match => '<ul>' + match.replace(/\n/g, '') + '</ul>');
-  
+
   html = html.replace(/\n\n/g, '<br><br>');
   html = html.replace(/\n/g, '<br>');
   html = html.replace(/<br><ul>/g, '<ul>');

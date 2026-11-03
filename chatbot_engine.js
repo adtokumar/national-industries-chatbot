@@ -81,16 +81,34 @@ class ChatbotEngine {
       this.catalogCategories = this.catalogData.categories || [];
     }
 
+    if (this.catalogData?.seller) {
+      if (this.catalogData.seller.phone) {
+        const rawPhone = this.catalogData.seller.phone.replace(/^\+91-?/, '').trim();
+        this.businessCard.pnsNumber = rawPhone;
+        this.businessCard.phone = rawPhone;
+      }
+      if (this.catalogData.seller.im_insta !== undefined) {
+        this.businessCard.hasImInsta = !!(this.catalogData.seller.im_insta === true || this.catalogData.seller.im_insta === 1);
+        this.businessCard.whatsapp = this.businessCard.hasImInsta ? (this.catalogData.seller.whatsapp_number || '+91-8046060065') : null;
+      }
+    }
+
     this.buildIndices();
   }
 
   parseBusinessCard(markdown) {
+    const pnsMatch = (markdown || '').match(/(?:PNS(?: Number)?|Phone|Contact)[^\n:]*[:\-]\s*(\+?\d[\d-]+)/i);
+    const pnsNumber = pnsMatch ? pnsMatch[1].replace(/^\+91-?/, '').trim() : '7942534248';
+    const hasImInsta = /IM-Insta[:\s]+(true|yes|enabled|1)/i.test(markdown || '');
+
     return {
       name: 'National Industries',
       brand: 'Namibind',
       ceo: 'Ashok Kumar Chowdhury',
-      phone: null,
-      whatsapp: '+91-8046060065',
+      pnsNumber,
+      phone: pnsNumber,
+      hasImInsta,
+      whatsapp: hasImInsta ? '+91-8046060065' : null,
       website: 'https://www.namibind.co.in/',
       location: 'Ground Floor, KH. No. 13/2, Sultanpur Village, Sultanpur — 110030, New Delhi, India',
       nature: 'Manufacturer & Exporter',
@@ -848,10 +866,17 @@ class ChatbotEngine {
     );
 
     if (isContactQuery) {
+      const pns = this.businessCard?.pnsNumber || this.businessCard?.phone || '7942534248';
+      let contactLine = `• **Phone (PNS)**: [${pns}](tel:${pns})`;
+      if (this.businessCard?.hasImInsta && this.businessCard?.whatsapp) {
+        const cleanWa = this.businessCard.whatsapp.replace(/[^0-9]/g, '');
+        contactLine += ` | **WhatsApp**: [${this.businessCard.whatsapp} ↗](https://wa.me/${cleanWa})`;
+      }
+
       return {
         type: 'contact',
-        guardrail: 'Official verified factsheet details',
-        answer: `🏢 **National Industries (Brand: Namibind)**\n• **Established**: 1990 (35+ years of manufacturing excellence)\n• **Nature**: Manufacturer & Exporter of Office Automation & Industrial Machinery\n• **WhatsApp**: [+91-8046060065](https://wa.me/918046060065)\n• **Website**: [https://www.namibind.co.in/](https://www.namibind.co.in/)\n• **IndiaMART Rating**: 4.3 ★ (265+ reviews)`
+        guardrail: 'Official verified factsheet details (PNS only; WhatsApp only if IM-Insta flag present)',
+        answer: `🏢 **National Industries (Brand: Namibind)**\n• **Established**: 1990 (35+ years of manufacturing excellence)\n• **Nature**: Manufacturer & Exporter of Office Automation & Industrial Machinery\n${contactLine}\n• **Website**: [https://www.namibind.co.in/](https://www.namibind.co.in/)\n• **IndiaMART Rating**: 4.3 ★ (265+ reviews)`
       };
     }
 
@@ -864,10 +889,17 @@ class ChatbotEngine {
     );
 
     if (isAddressOrCeoQuery) {
+      const pns = this.businessCard?.pnsNumber || this.businessCard?.phone || '7942534248';
+      let contactLine = `• **Phone (PNS)**: [${pns}](tel:${pns})`;
+      if (this.businessCard?.hasImInsta && this.businessCard?.whatsapp) {
+        const cleanWa = this.businessCard.whatsapp.replace(/[^0-9]/g, '');
+        contactLine += ` | **WhatsApp**: [${this.businessCard.whatsapp} ↗](https://wa.me/${cleanWa})`;
+      }
+
       return {
         type: 'address_ceo',
-        guardrail: 'Official verified factsheet details',
-        answer: `🏢 **National Industries (Brand: Namibind)**\n• **CEO**: Ashok Kumar Chowdhury\n• **Registered Office**: Ground Floor, KH. No. 13/2, Sultanpur Village, Sultanpur, New Delhi — 110030\n• **WhatsApp**: [+91-8046060065](https://wa.me/918046060065)\n• **Website**: [https://www.namibind.co.in/](https://www.namibind.co.in/)\n• **IndiaMART Rating**: 4.3 ★ (265+ reviews)`
+        guardrail: 'Official verified factsheet details (PNS only; WhatsApp only if IM-Insta flag present)',
+        answer: `🏢 **National Industries (Brand: Namibind)**\n• **CEO**: Ashok Kumar Chowdhury\n• **Registered Office**: Ground Floor, KH. No. 13/2, Sultanpur Village, Sultanpur, New Delhi — 110030\n${contactLine}\n• **Website**: [https://www.namibind.co.in/](https://www.namibind.co.in/)\n• **IndiaMART Rating**: 4.3 ★ (265+ reviews)`
       };
     }
 
@@ -1571,7 +1603,7 @@ class ChatbotEngine {
         specs: session.collectedSpecs,
         quantity: session.collectedQuantity,
         reasonNote,
-        sellerContact: '+91-8046060065'
+        sellerContact: `PNS: ${this.businessCard?.pnsNumber || '7942534248'}${this.businessCard?.hasImInsta && this.businessCard?.whatsapp ? ' / WhatsApp: ' + this.businessCard.whatsapp : ''}`
       }
     };
   }
