@@ -16,7 +16,7 @@ class ChatbotEngine {
     this.baseDir = baseDir;
     this.options = options;
     this.enableLogging = options.enableLogging !== false;
-    this.logsDir = options.logsDir || path.join(this.baseDir, 'logs');
+    this.logsDir = options.logsDir || (process.env.VERCEL ? path.join('/tmp', 'logs') : path.join(this.baseDir, 'logs'));
     this.logFilePath = options.logFilePath || path.join(this.logsDir, 'chat_conversations.jsonl');
 
     if (this.enableLogging) {

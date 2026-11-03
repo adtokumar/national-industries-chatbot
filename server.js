@@ -77,7 +77,7 @@ function serveStatic(req, res, parsedUrl) {
   fs.createReadStream(filePath).pipe(res);
 }
 
-const server = http.createServer(async (req, res) => {
+async function handleRequest(req, res) {
   const parsedUrl = url.parse(req.url, true);
 
   // Handle CORS Preflight
@@ -177,7 +177,9 @@ const server = http.createServer(async (req, res) => {
     console.error('Server error:', err);
     sendJson(res, 500, { error: 'Internal Server Error', details: err.message });
   }
-});
+}
+
+const server = http.createServer(handleRequest);
 
 if (require.main === module) {
   server.listen(PORT, () => {
@@ -191,5 +193,5 @@ if (require.main === module) {
   });
 }
 
-module.exports = { server, engine };
+module.exports = { server, engine, handleRequest };
 
