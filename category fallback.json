@@ -1,0 +1,6369 @@
+[
+  {
+    "mcat_id": 335,
+    "mcat_name": "Hot Melt Adhesives",
+    "specifications": [
+      {
+        "name": "Color",
+        "options": [
+          "Transparent",
+          "Yellow",
+          "White",
+          "Black"
+        ]
+      },
+      {
+        "name": "Diameter",
+        "options": [
+          "11 mm",
+          "7 mm"
+        ]
+      },
+      {
+        "name": "Why do you need this",
+        "options": [
+          "For Reselling",
+          "For Business Use",
+          "For Home Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 481,
+    "mcat_name": "Fire Proof Safes",
+    "specifications": [
+      {
+        "name": "Height",
+        "options": [
+          "5 ft (60 inch)",
+          "4 ft (48 inch)",
+          "3 ft (36 inch)",
+          "6 ft (72 inch)",
+          "49 inch",
+          "2.5 ft (30 inch)"
+        ]
+      },
+      {
+        "name": "Weight",
+        "options": [
+          "1200 kg (12 Qtl)",
+          "1300 kg (13 Qtl)",
+          "1500 kg (15 Qtl)",
+          "1000 kg (1 Ton)",
+          "500 kg (5 Qtl)",
+          "400 kg (4 Qtl)"
+        ]
+      },
+      {
+        "name": "Protection Features",
+        "options": [
+          "Fire; Drill; Gas",
+          "Drill Proof",
+          "Gas & Drill Proof",
+          "Fire;Drill;Bullet",
+          "TRTL",
+          "Bullet Proof"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 1233,
+    "mcat_name": "Rotary Cutters",
+    "specifications": [
+      {
+        "name": "Why do you need this",
+        "options": [
+          "For Reselling",
+          "For Business Use",
+          "For Personal Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 1304,
+    "mcat_name": "Electronic Safes",
+    "specifications": [
+      {
+        "name": "Lock Type",
+        "options": [
+          "Digital Keypad",
+          "Biometric Lock",
+          "Digital + Key Lock",
+          "Key Lock (Override)"
+        ]
+      },
+      {
+        "name": "Capacity (L)",
+        "options": [
+          "25 L",
+          "40 L",
+          "20 L",
+          "30 L",
+          "15 L",
+          "45 L"
+        ]
+      },
+      {
+        "name": "Fire Resistant",
+        "options": [
+          "Yes",
+          "No",
+          "Semi Fire-resistant",
+          "Up to 60 min"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 1305,
+    "mcat_name": "Security Safes",
+    "specifications": [
+      {
+        "name": "Door Type",
+        "options": [
+          "Double Door",
+          "Single Door"
+        ]
+      },
+      {
+        "name": "Brand",
+        "options": [
+          "Godrej",
+          "Ozone",
+          "Yale",
+          "Local"
+        ]
+      },
+      {
+        "name": "Height",
+        "options": [
+          "36 inch",
+          "61 inch",
+          "72 inch",
+          "12 inch",
+          "18 inch",
+          "24 inch"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 1408,
+    "mcat_name": "Shrink Wrapping Machine",
+    "specifications": [
+      {
+        "name": "Automation Grade",
+        "options": [
+          "Semi Automatic",
+          "Fully Automatic",
+          "Automatic",
+          "Manual"
+        ]
+      },
+      {
+        "name": "Application",
+        "options": [
+          "Water Bottles",
+          "PET Bottles",
+          "Sweet Box",
+          "Juice Bottles",
+          "Box",
+          "Paper Plates"
+        ]
+      },
+      {
+        "name": "Bottle Size",
+        "options": [
+          "1 L",
+          "500 ml",
+          "2 L",
+          "1-2 L"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 1445,
+    "mcat_name": "Paper Folding Machines",
+    "specifications": [
+      {
+        "name": "Production Capacity",
+        "options": [
+          "40 Ton/Day",
+          "100 Ton/Day",
+          "10 Ton/Day",
+          "50 Ton/Day",
+          "80 Ton/Day",
+          "20 Ton/Day",
+          "90 Ton/Day",
+          "60 Ton/Day",
+          "70 Ton/Day",
+          "30 Ton/Day"
+        ]
+      },
+      {
+        "name": "Automatic Grade",
+        "options": [
+          "Automatic",
+          "Semi Automatic"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 1491,
+    "mcat_name": "Plastic Shredders",
+    "specifications": [
+      {
+        "name": "Shaft Configuration",
+        "options": [
+          "Double Shaft",
+          "Single Shaft",
+          "4 Shaft"
+        ]
+      },
+      {
+        "name": "Production Capacity",
+        "options": [
+          "100 kg/hr",
+          "1 ton/hr",
+          "500 kg/hr",
+          "200 kg/hr",
+          "50 kg/hr",
+          "200-300 kg/hr"
+        ]
+      },
+      {
+        "name": "Motor Power",
+        "options": [
+          "5 HP",
+          "20 HP",
+          "3 HP",
+          "7.5 HP",
+          "10 HP",
+          "15 HP"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 1543,
+    "mcat_name": "Book Stitching Machines",
+    "specifications": [
+      {
+        "name": "Capacity(book/hr)",
+        "options": [
+          "50 book/hr",
+          "100 book/hr",
+          "150 book/hr",
+          "200 book/hr",
+          "250 book/hr",
+          "300 book/hr",
+          "350 book/hr",
+          "400 book/hr",
+          "450 book/hr",
+          "500 book/hr"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 1652,
+    "mcat_name": "Strapping Machines",
+    "specifications": [
+      {
+        "name": "Automation Grade",
+        "options": [
+          "Semi-Automatic",
+          "Automatic",
+          "Manual Heat Seal",
+          "Manual"
+        ]
+      },
+      {
+        "name": "Country of Origin",
+        "options": [
+          "Taiwan",
+          "China",
+          "India",
+          "Japan",
+          "Imported"
+        ]
+      },
+      {
+        "name": "Brand",
+        "options": [
+          "Packway",
+          "Euro Pack",
+          "Joinpack",
+          "King Pack",
+          "Transpak",
+          "Bandma"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 2056,
+    "mcat_name": "Die Cutting Machines",
+    "specifications": [
+      {
+        "name": "Machine Size",
+        "options": [
+          "36 x 46 inch",
+          "25 x 35 inch",
+          "28 x 40 inch",
+          "22 x 32 inch",
+          "32 x 43 inch",
+          "13 x 19 inch"
+        ]
+      },
+      {
+        "name": "I am interested in",
+        "options": [
+          "Used Die Cutting Machines",
+          "Die Cutter",
+          "Die Cutting Presses",
+          "Rotary Die Cutting Machine",
+          "Die Face Cutter",
+          "Envelope Die Cutting Machine"
+        ]
+      },
+      {
+        "name": "Application",
+        "options": [
+          "Wedding Pouches",
+          "PVC Cards",
+          "Corrugated Boxes",
+          "Sweet Boxes",
+          "Stickers/Boxes",
+          "Barcode Labels"
+        ]
+      },
+      {
+        "name": "Operation Type",
+        "options": [
+          "Heavy Duty",
+          "Manual",
+          "Automatic",
+          "Semi-automatic",
+          "Hydraulic"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 2069,
+    "mcat_name": "Flat Screen Printing Machines",
+    "specifications": [
+      {
+        "name": "Automation Grade",
+        "options": [
+          "Semi-Automatic",
+          "Manual",
+          "Fully Automatic"
+        ]
+      },
+      {
+        "name": "Application/Usage",
+        "options": [
+          "Stationery Cards",
+          "Industrial Print",
+          "Fabric Printing",
+          "Plastic Pouches",
+          "Plastic Packaging",
+          "Sunpack Boards"
+        ]
+      },
+      {
+        "name": "Print Size",
+        "options": [
+          "15 x 20 inch",
+          "12 x 18 inch",
+          "18 x 24 inch",
+          "20 x 30 inch",
+          "12 x 15 inch",
+          "10 x 15 inch"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 3421,
+    "mcat_name": "Flatbed Plotter",
+    "specifications": [
+      {
+        "name": "Production Capacity",
+        "options": [
+          "250 sheets/day",
+          "1500 sheets/day",
+          "2000 sheets/day",
+          "1000 sheets/day",
+          "500 sheets/day",
+          "750 sheets/day"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 3441,
+    "mcat_name": "Wire Straightening and Cutting Machines",
+    "specifications": [
+      {
+        "name": "Wire Diameter Capacity",
+        "options": [
+          "4 mm",
+          "3 mm",
+          "8 mm",
+          "6 mm",
+          "14 mm",
+          "12 mm"
+        ]
+      },
+      {
+        "name": "Maximum Cutting Length",
+        "options": [
+          "1 m",
+          "10 ft",
+          "90 m",
+          "6 ft",
+          "4 ft",
+          "2 m"
+        ]
+      },
+      {
+        "name": "Material",
+        "options": [
+          "Mild Steel (MS)",
+          "Stainless Steel",
+          "MS & SS",
+          "Steel Rod",
+          "GI",
+          "HB Wire"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 5719,
+    "mcat_name": "Paper Cutting Machine",
+    "specifications": [
+      {
+        "name": "Operation Type",
+        "options": [
+          "Manual",
+          "Motorized",
+          "Semi Automatic",
+          "Automatic",
+          "Hydraulic"
+        ]
+      },
+      {
+        "name": "I am interested in",
+        "options": [
+          "Second Hand Paper Cutting Machine",
+          "Paper Sheet Cutting Machine",
+          "Paper Roll Cutting Machine",
+          "Programmable Paper Cutting Machines",
+          "Hydraulic Paper Cutting Machine",
+          "Digital Cutting Machine"
+        ]
+      },
+      {
+        "name": "Machine Size",
+        "options": [
+          "32 inch",
+          "36 inch",
+          "24 inch",
+          "20 inch",
+          "26 inch",
+          "18 inch"
+        ]
+      },
+      {
+        "name": "Condition",
+        "options": [
+          "New",
+          "Second Hand",
+          "Refurbished"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 7090,
+    "mcat_name": "Polishing Machine",
+    "specifications": [
+      {
+        "name": "Machine Configuration",
+        "options": [
+          "Automatic",
+          "Heavy Duty",
+          "Table Type",
+          "Vibratory",
+          "Single Head",
+          "Double Ended"
+        ]
+      },
+      {
+        "name": "Power",
+        "options": [
+          "3 HP",
+          "2 HP",
+          "1 HP",
+          "5 HP",
+          "0.5 HP",
+          "2.5 HP"
+        ]
+      },
+      {
+        "name": "Phase",
+        "options": [
+          "1 Phase",
+          "3 Phase"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 8149,
+    "mcat_name": "RO Water Purifiers",
+    "specifications": [
+      {
+        "name": "Purification Capacity",
+        "options": [
+          "50 LPH",
+          "100 LPH",
+          "25 LPH",
+          "250 LPH",
+          "20 LPH",
+          "15 LPH"
+        ]
+      },
+      {
+        "name": "Purification Technology",
+        "options": [
+          "RO",
+          "RO + UV",
+          "UV",
+          "RO + UV + UF",
+          "RO+UV+UF+TDS",
+          "UF"
+        ]
+      },
+      {
+        "name": "Brand",
+        "options": [
+          "Kent",
+          "Aquaguard",
+          "Havells",
+          "AquaGrand",
+          "Kenzo",
+          "Aqua Fresh"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 8440,
+    "mcat_name": "Scrap Baling Press",
+    "specifications": [
+      {
+        "name": "Material Application",
+        "options": [
+          "PET Bottle",
+          "Mild Steel (MS)",
+          "Cardboard",
+          "Aluminium",
+          "MS and SS",
+          "Plastic"
+        ]
+      },
+      {
+        "name": "Bale Weight",
+        "options": [
+          "50 kg",
+          "150 kg",
+          "100 kg",
+          "30-40 kg",
+          "10-15 kg",
+          "200-250 kg"
+        ]
+      },
+      {
+        "name": "Pressing Force",
+        "options": [
+          "100 Ton",
+          "25 Ton",
+          "40 Ton",
+          "50 Ton",
+          "30 Ton",
+          "60 Ton"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 9829,
+    "mcat_name": "Manual Stacker",
+    "specifications": [
+      {
+        "name": "Load Capacity",
+        "options": [
+          "1 ton",
+          "2 ton",
+          "1.5 ton",
+          "0.5 ton (500 kg)",
+          "3 ton"
+        ]
+      },
+      {
+        "name": "Lifting Height",
+        "options": [
+          "1.6 m",
+          "1.5 m (5 ft)",
+          "3 m",
+          "2 m",
+          "2.5 m"
+        ]
+      },
+      {
+        "name": "Brand",
+        "options": [
+          "Nilkamal",
+          "Godrej",
+          "Stanley",
+          "Voltas",
+          "Maini",
+          "Jost's"
+        ]
+      },
+      {
+        "name": "Usage/Application",
+        "options": [
+          "Warehouse Use",
+          "Resale"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 11324,
+    "mcat_name": "Laminated Rolls",
+    "specifications": [
+      {
+        "name": "Width",
+        "options": [
+          "12 inch",
+          "36 inch (3 ft)",
+          "24 inch",
+          "48 inch (4 ft)",
+          "40 inch",
+          "42 inch"
+        ]
+      },
+      {
+        "name": "Thickness",
+        "options": [
+          "12 micron",
+          "80 micron",
+          "100 micron",
+          "30 micron",
+          "75 micron",
+          "17 micron"
+        ]
+      },
+      {
+        "name": "Finish",
+        "options": [
+          "Matte",
+          "Transparent",
+          "Sparkle",
+          "Glossy",
+          "White",
+          "Milky"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 11333,
+    "mcat_name": "Lamination Machines",
+    "specifications": [
+      {
+        "name": "Lamination Width",
+        "options": [
+          "32 inch",
+          "63 inch",
+          "60 inch",
+          "24 inch",
+          "30 inch",
+          "13 inch"
+        ]
+      },
+      {
+        "name": "Automation Grade",
+        "options": [
+          "Automatic",
+          "Semi-Automatic",
+          "Manual"
+        ]
+      },
+      {
+        "name": "Lamination Technology",
+        "options": [
+          "Thermal",
+          "Hot & Cold",
+          "Cold",
+          "Water-based"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 17966,
+    "mcat_name": "Screen Printer",
+    "specifications": [
+      {
+        "name": "Application",
+        "options": [
+          "Paper",
+          "T-Shirt",
+          "Non-woven Bag",
+          "Braille",
+          "UV Varnish",
+          "Round Bottle"
+        ]
+      },
+      {
+        "name": "Automation Grade",
+        "options": [
+          "Semi Automatic",
+          "Manual",
+          "Automatic"
+        ]
+      },
+      {
+        "name": "Printing Size",
+        "options": [
+          "12 x 18 inch",
+          "15 x 20 inch",
+          "18 x 24 inch",
+          "20 x 30 inch",
+          "12 x 15 inch",
+          "30 x 40 inch"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 20411,
+    "mcat_name": "Paper Cutters",
+    "specifications": [
+      {
+        "name": "Paper Size",
+        "options": [
+          "A3",
+          "A4",
+          "12x18 inch",
+          "A3+",
+          "B4",
+          "A2"
+        ]
+      },
+      {
+        "name": "Sheet Cutting Capacity",
+        "options": [
+          "300 sheets",
+          "500 sheets",
+          "10 sheets",
+          "400 sheets",
+          "1 sheet",
+          "125 sheets"
+        ]
+      },
+      {
+        "name": "Operation Mode",
+        "options": [
+          "Manual",
+          "Electric",
+          "Semi-Automatic",
+          "Digital",
+          "Hydraulic"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 20535,
+    "mcat_name": "Plotter Paper Rolls",
+    "specifications": [
+      {
+        "name": "Width",
+        "options": [
+          "36 inch (3 ft)",
+          "24 inch (2 ft)",
+          "62 inch",
+          "18 inch (1.5 ft)",
+          "48 inch (4 ft)",
+          "42 inch"
+        ]
+      },
+      {
+        "name": "Paper Density",
+        "options": [
+          "80 GSM",
+          "90 GSM",
+          "60 GSM",
+          "100 GSM",
+          "85 GSM",
+          "180 GSM"
+        ]
+      },
+      {
+        "name": "Length",
+        "options": [
+          "50 m",
+          "150 m",
+          "45 m",
+          "100 m",
+          "140 m",
+          "30 m"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 21081,
+    "mcat_name": "Binding Machines",
+    "specifications": [
+      {
+        "name": "Operation Mode",
+        "options": [
+          "Manual",
+          "Electric",
+          "Automatic"
+        ]
+      },
+      {
+        "name": "Binding Type",
+        "options": [
+          "Spiral",
+          "Hot Thermal",
+          "Comb Binding",
+          "Wiro Binding"
+        ]
+      },
+      {
+        "name": "Punching Capacity",
+        "options": [
+          "15 Sheets",
+          "25 Sheets",
+          "30 Sheets",
+          "20 Sheets",
+          "12-15 Sheets",
+          "40 Sheets"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 22827,
+    "mcat_name": "Bank Machines",
+    "specifications": [
+      {
+        "name": "Machine Function",
+        "options": [
+          "Count & Detect",
+          "Counting Only",
+          "Bundle Counter",
+          "Note Sorter"
+        ]
+      },
+      {
+        "name": "Counterfeit Tech",
+        "options": [
+          "UV; MG & IR",
+          "UV & MG",
+          "UV Only",
+          "IR Only"
+        ]
+      },
+      {
+        "name": "Counting Speed",
+        "options": [
+          "1000 notes/min",
+          "1200 notes/min",
+          "1500 notes/min",
+          "800 notes/min"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 23328,
+    "mcat_name": "Car Air Purifier",
+    "specifications": []
+  },
+  {
+    "mcat_id": 23392,
+    "mcat_name": "Bill Counter",
+    "specifications": [
+      {
+        "name": "Machine Type",
+        "options": [
+          "Value Counter",
+          "Currency Counter",
+          "Currency Sorter",
+          "Portable Counter"
+        ]
+      },
+      {
+        "name": "Detection Tech",
+        "options": [
+          "UV; MG & IR",
+          "UV & MG",
+          "CIS Sensor",
+          "UV only",
+          "MT & IR"
+        ]
+      },
+      {
+        "name": "Counting Speed",
+        "options": [
+          "1000 notes/min",
+          "1200 notes/min",
+          "800 notes/min",
+          "1500 notes/min",
+          "900 notes/min",
+          "600 notes/min"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 23413,
+    "mcat_name": "Binding Combs",
+    "specifications": [
+      {
+        "name": "Ring Size",
+        "options": [
+          "8 mm",
+          "10 mm",
+          "12 mm",
+          "16 mm",
+          "18 mm",
+          "22 mm",
+          "28 mm",
+          "32 mm",
+          "52 mm"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 23416,
+    "mcat_name": "Binding Strips",
+    "specifications": [
+      {
+        "name": "Size",
+        "options": [
+          "None"
+        ]
+      },
+      {
+        "name": "Usage/Application",
+        "options": [
+          "None"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 24263,
+    "mcat_name": "Cold Laminating Film",
+    "specifications": [
+      {
+        "name": "Surface Finish",
+        "options": [
+          "Matte",
+          "Glossy",
+          "Sparkle",
+          "Clear",
+          "Canvas",
+          "3D"
+        ]
+      },
+      {
+        "name": "Width",
+        "options": [
+          "50 inch",
+          "12 inch",
+          "42 inch",
+          "12.5 inch",
+          "36 inch",
+          "40 inch"
+        ]
+      },
+      {
+        "name": "Length",
+        "options": [
+          "50 m",
+          "40 m",
+          "30 m",
+          "45 m"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 24264,
+    "mcat_name": "Cold Laminating Machine",
+    "specifications": [
+      {
+        "name": "Operation Mode",
+        "options": [
+          "Manual",
+          "Electric",
+          "Automatic"
+        ]
+      },
+      {
+        "name": "Lamination Width",
+        "options": [
+          "63 inch",
+          "24 inch",
+          "25 inch",
+          "32 inch",
+          "39 inch",
+          "40 inch"
+        ]
+      },
+      {
+        "name": "Lamination Type",
+        "options": [
+          "Cold",
+          "Hot and Cold"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 24446,
+    "mcat_name": "Cardboard Shredders",
+    "specifications": [
+      {
+        "name": "Shredding Machine Type",
+        "options": [
+          "Double Shaft",
+          "Strip Cut",
+          "Mini",
+          "Cross Cut",
+          "Micro Cut"
+        ]
+      },
+      {
+        "name": "Usage/Application",
+        "options": [
+          "For Industrial Use",
+          "For Commercial Use",
+          "For Packaging",
+          "For Home"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 24470,
+    "mcat_name": "Cash Boxes",
+    "specifications": [
+      {
+        "name": "Material",
+        "options": [
+          "MDF",
+          "Wooden",
+          "Plastic",
+          "Metal",
+          "Fabric"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 24471,
+    "mcat_name": "Cash Drawer",
+    "specifications": [
+      {
+        "name": "Operation Mode",
+        "options": [
+          "Automatic",
+          "Manual",
+          "Manual & Auto"
+        ]
+      },
+      {
+        "name": "Material",
+        "options": [
+          "Metal",
+          "Plastic",
+          "Stainless Steel"
+        ]
+      },
+      {
+        "name": "Interface",
+        "options": [
+          "RJ11 (Printer)",
+          "USB",
+          "Serial Port"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 24714,
+    "mcat_name": "CD Shredder",
+    "specifications": [
+      {
+        "name": "Shredding Machine Type",
+        "options": [
+          "Cross Cut",
+          "Strip Cut",
+          "Mini",
+          "Micro Cut"
+        ]
+      },
+      {
+        "name": "Why do you need this",
+        "options": [
+          "Business Use",
+          "Reselling",
+          "Home Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 25203,
+    "mcat_name": "Currency Counting Machines",
+    "specifications": [
+      {
+        "name": "Counting Mode",
+        "options": [
+          "Mixed Value",
+          "Basic Counting",
+          "Loose Note",
+          "Bundle Counting"
+        ]
+      },
+      {
+        "name": "Brand",
+        "options": [
+          "Gobbler",
+          "TVS",
+          "Godrej",
+          "Kores",
+          "STOK"
+        ]
+      },
+      {
+        "name": "Warranty",
+        "options": [
+          "1 Year",
+          "2 Year",
+          "6 Months"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 25540,
+    "mcat_name": "Cutting Plotter",
+    "specifications": [
+      {
+        "name": "Brand",
+        "options": [
+          "Skycut",
+          "GCC",
+          "Graphtec",
+          "Roland",
+          "Mimaki",
+          "Saga"
+        ]
+      },
+      {
+        "name": "I am interested in",
+        "options": [
+          "Vinyl Cutting Plotter Machine",
+          "Graphtec Cutting Plotter",
+          "PI Cutting Plotter",
+          "Used Cutting Plotter"
+        ]
+      },
+      {
+        "name": "Machine Width",
+        "options": [
+          "24 inch",
+          "16 inch",
+          "13 inch",
+          "48 inch",
+          "54 inch"
+        ]
+      },
+      {
+        "name": "Application",
+        "options": [
+          "Sticker & Vinyl",
+          "Mobile Skin Cut",
+          "Heat Transfer",
+          "Signage"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 26402,
+    "mcat_name": "Die Cutter",
+    "specifications": [
+      {
+        "name": "Usage/Application",
+        "options": [
+          "None"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 28718,
+    "mcat_name": "Glass Crushers",
+    "specifications": [
+      {
+        "name": "Output Form",
+        "options": [
+          "Powder",
+          "Pieces",
+          "Powder/Granules",
+          "Powder or Cullets"
+        ]
+      },
+      {
+        "name": "Capacity",
+        "options": [
+          "800-1000 kg/hr",
+          "1000 kg/hr",
+          "100 kg/hr",
+          "500 kg/hr",
+          "200 kg/hr",
+          "150 kg/hr"
+        ]
+      },
+      {
+        "name": "Power",
+        "options": [
+          "5 HP",
+          "3 HP",
+          "2 HP",
+          "7.5 HP",
+          "1.5 HP",
+          "10 HP"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 29147,
+    "mcat_name": "Fusing Presses",
+    "specifications": [
+      {
+        "name": "Belt Width",
+        "options": [
+          "450 mm (18 inch)",
+          "500 mm",
+          "600 mm (24 inch)",
+          "1600 mm",
+          "900 mm",
+          "300 mm"
+        ]
+      },
+      {
+        "name": "Operating Mode",
+        "options": [
+          "Manual",
+          "Automatic",
+          "Semi-automatic"
+        ]
+      },
+      {
+        "name": "Brand",
+        "options": [
+          "Hashima",
+          "Fusing Master",
+          "Hoshida",
+          "Lumex",
+          "Royal Gold",
+          "Cheran"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 29281,
+    "mcat_name": "Gas Patio Heater",
+    "specifications": [
+      {
+        "name": "Shape",
+        "options": [
+          "Round",
+          "Square"
+        ]
+      },
+      {
+        "name": "Usage/Application",
+        "options": [
+          "None"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 29294,
+    "mcat_name": "Gas Room Heater",
+    "specifications": [
+      {
+        "name": "Power (Watt)",
+        "options": [
+          "1000 W",
+          "1100 W",
+          "1300 W",
+          "1500 W",
+          "3000 W",
+          "4200 W",
+          "5000 W",
+          "5500 W"
+        ]
+      },
+      {
+        "name": "Why do you need this",
+        "options": [
+          "For Reselling",
+          "For Business Use",
+          "For Personal Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 29840,
+    "mcat_name": "Grooving Machines",
+    "specifications": [
+      {
+        "name": "Capacity",
+        "options": [
+          "upto 2 inch",
+          "More than 12 inch",
+          "10 inch",
+          "8 inch",
+          "4 inch",
+          "12 inch",
+          "6 inch"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 30192,
+    "mcat_name": "Heat Press Machine",
+    "specifications": [
+      {
+        "name": "Machine Type",
+        "options": [
+          "5 in 1",
+          "8 in 1",
+          "Single Mug Press",
+          "Heat Press",
+          "Combo Machine",
+          "Double Mug Press"
+        ]
+      },
+      {
+        "name": "Platen Size",
+        "options": [
+          "12x15 inch",
+          "12x12 inch",
+          "16x24 inch",
+          "12x14 inch",
+          "15x15 inch",
+          "30x45 inch"
+        ]
+      },
+      {
+        "name": "Operation Mode",
+        "options": [
+          "Automatic",
+          "Semi-Automatic",
+          "Manual"
+        ]
+      },
+      {
+        "name": "Usage/Application",
+        "options": [
+          "Resale",
+          "Printing Business",
+          "Factory Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 30206,
+    "mcat_name": "Heat Transfer Equipment",
+    "specifications": [
+      {
+        "name": "Application",
+        "options": [
+          "Food Process Industry",
+          "Power Generation",
+          "Hydraulic and Industrial Process",
+          "Other"
+        ]
+      },
+      {
+        "name": "Medium Used",
+        "options": [
+          "Oil",
+          "Water",
+          "Air",
+          "Other"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 30659,
+    "mcat_name": "Indoor Air Purifier",
+    "specifications": [
+      {
+        "name": "Coverage Area",
+        "options": [
+          "850 sq ft",
+          "1000 sq ft",
+          "600 sq ft",
+          "130 sq ft",
+          "200 sq ft",
+          "280 sq ft"
+        ]
+      },
+      {
+        "name": "Brand",
+        "options": [
+          "Honeywell",
+          "Dyson",
+          "Abelone",
+          "Sharp",
+          "Havells",
+          "Philips"
+        ]
+      },
+      {
+        "name": "Filter Type",
+        "options": [
+          "HEPA",
+          "Pre-filter",
+          "UVC Filter",
+          "Activated Carbon",
+          "ESP Filter",
+          "H13 HEPA"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 30700,
+    "mcat_name": "Industrial Paper Shredders",
+    "specifications": [
+      {
+        "name": "Shredding Machine Type",
+        "options": [
+          "Cross Cut",
+          "Strip Cut"
+        ]
+      },
+      {
+        "name": "Automatic Grade",
+        "options": [
+          "Automatic",
+          "Semi-Automatic",
+          "Manual"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 30723,
+    "mcat_name": "Industrial Shredders",
+    "specifications": [
+      {
+        "name": "Application/Material",
+        "options": [
+          "Municipal Waste",
+          "Plastic Lumps",
+          "Aluminium Wire",
+          "Mixed Metal Scrap",
+          "Metal Turnings",
+          "PET Strips"
+        ]
+      },
+      {
+        "name": "Production Capacity",
+        "options": [
+          "100 kg/hr",
+          "1000 kg/hr",
+          "2000 kg/hr",
+          "100-200 kg/hr",
+          "500 kg/hr",
+          "200-300 kg/hr"
+        ]
+      },
+      {
+        "name": "Shaft Type",
+        "options": [
+          "Double Shaft",
+          "Single Shaft",
+          "Four Shaft"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 30869,
+    "mcat_name": "Infrared Heaters",
+    "specifications": [
+      {
+        "name": "Power",
+        "options": [
+          "1000 W",
+          "2000 W",
+          "500 W",
+          "650 W",
+          "1500 W",
+          "750 W"
+        ]
+      },
+      {
+        "name": "Material",
+        "options": [
+          "Ceramic",
+          "Glass",
+          "Quartz"
+        ]
+      },
+      {
+        "name": "Overall Length",
+        "options": [
+          "245 mm",
+          "950 mm",
+          "122 mm",
+          "120 mm",
+          "500 mm",
+          "275 mm"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 31257,
+    "mcat_name": "Kerosene Heater",
+    "specifications": [
+      {
+        "name": "Brand",
+        "options": [
+          "Paseco",
+          "Heat King",
+          "Toyotomi",
+          "Heat Wave",
+          "Tonison",
+          "Powernic"
+        ]
+      },
+      {
+        "name": "Fuel Tank Capacity",
+        "options": [
+          "5 L",
+          "7 L",
+          "6 L",
+          "10 L",
+          "4.5 L",
+          "2.5 L"
+        ]
+      },
+      {
+        "name": "Heater Type",
+        "options": [
+          "Bukhari",
+          "Wick",
+          "Industrial",
+          "Forced Air"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 31495,
+    "mcat_name": "Lamination Film",
+    "specifications": [
+      {
+        "name": "Thickness",
+        "options": [
+          "125 micron",
+          "80 micron",
+          "100 micron",
+          "350 micron",
+          "90 micron",
+          "250 micron"
+        ]
+      },
+      {
+        "name": "Finish",
+        "options": [
+          "Matte",
+          "Glossy",
+          "Clear",
+          "Sparkle",
+          "3D",
+          "Grained"
+        ]
+      },
+      {
+        "name": "Width",
+        "options": [
+          "12 in",
+          "50 in",
+          "42 in",
+          "36 in",
+          "12.5 in",
+          "40 in"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 33274,
+    "mcat_name": "Money Counter",
+    "specifications": [
+      {
+        "name": "Counting Technology",
+        "options": [
+          "Mixed Note Count",
+          "Note Counting",
+          "Bundle Note Count"
+        ]
+      },
+      {
+        "name": "Mounting Type",
+        "options": [
+          "Tabletop",
+          "Floor Standing",
+          "Handheld"
+        ]
+      },
+      {
+        "name": "Brand",
+        "options": [
+          "Godrej",
+          "Gobbler",
+          "TVS",
+          "Lotus",
+          "Maxsell",
+          "Phoenix"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 33921,
+    "mcat_name": "Perforating Machine",
+    "specifications": [
+      {
+        "name": "Operation Type",
+        "options": [
+          "Manual",
+          "Electric",
+          "Semi-Automatic",
+          "Automatic",
+          "Pneumatic",
+          "Hydraulic"
+        ]
+      },
+      {
+        "name": "Material Processed",
+        "options": [
+          "Cardboard",
+          "Paper",
+          "Film",
+          "Plastic",
+          "Metal",
+          "Other"
+        ]
+      },
+      {
+        "name": "Perforation Type",
+        "options": [
+          "Line Perforation",
+          "Round Hole",
+          "Micro Perforation",
+          "Slot Perforation",
+          "Cross Perforation",
+          "Square Hole"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 34121,
+    "mcat_name": "Outdoor Heaters",
+    "specifications": [
+      {
+        "name": "Heater Type",
+        "options": [
+          "Gas",
+          "Electric"
+        ]
+      },
+      {
+        "name": "Design Type",
+        "options": [
+          "Mushroom",
+          "Pyramid",
+          "Round",
+          "Tower",
+          "Patio",
+          "Glass on 4 sides"
+        ]
+      },
+      {
+        "name": "Material",
+        "options": [
+          "Stainless Steel",
+          "Steel",
+          "Iron",
+          "Powder Coated"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 34503,
+    "mcat_name": "Paper Drilling Machine",
+    "specifications": [
+      {
+        "name": "Automatic Grade",
+        "options": [
+          "Automatic",
+          "Semi-Automatic",
+          "Other"
+        ]
+      },
+      {
+        "name": "Why do you need this",
+        "options": [
+          "For Reselling",
+          "For Business Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 34517,
+    "mcat_name": "Paper Perforators",
+    "specifications": [
+      {
+        "name": "Machine Type",
+        "options": [
+          "Manual",
+          "Semi Automatic",
+          "Automatic",
+          "Full Automatic"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 34520,
+    "mcat_name": "Paper Shredding Machine",
+    "specifications": [
+      {
+        "name": "Shredding Capacity",
+        "options": [
+          "12 sheets",
+          "15 sheets",
+          "10-15 sheets",
+          "25 sheets",
+          "8 sheets",
+          "6 sheets"
+        ]
+      },
+      {
+        "name": "Cut Type",
+        "options": [
+          "Cross Cut",
+          "Strip Cut",
+          "Micro Cut"
+        ]
+      },
+      {
+        "name": "Usage Type",
+        "options": [
+          "Heavy Duty",
+          "Office Use",
+          "Industrial",
+          "Personal/Desktop",
+          "Commercial"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 34526,
+    "mcat_name": "Paper Trimmer",
+    "specifications": [
+      {
+        "name": "Material",
+        "options": [
+          "Plastic",
+          "PVC",
+          "Metal",
+          "Steel"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 34852,
+    "mcat_name": "Punching Machine",
+    "specifications": [
+      {
+        "name": "Operation Mode",
+        "options": [
+          "Manual",
+          "Automatic",
+          "Pneumatic",
+          "Semi-automatic"
+        ]
+      },
+      {
+        "name": "Application",
+        "options": [
+          "Windows/Nets",
+          "Plastic Bags",
+          "Hinge (Kabje)",
+          "Box Making",
+          "Door Frame",
+          "Non-woven Bags"
+        ]
+      },
+      {
+        "name": "Machine Size",
+        "options": [
+          "40 x 56 inch",
+          "22 x 32 inch",
+          "32 x 42 inch",
+          "22 x 30 inch",
+          "22 x 29 inch"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 34912,
+    "mcat_name": "PVC Sheets",
+    "specifications": [
+      {
+        "name": "Thickness",
+        "options": [
+          "1 mm",
+          "2 mm",
+          "8 mm",
+          "18 mm",
+          "3 mm",
+          "5 mm"
+        ]
+      },
+      {
+        "name": "Width",
+        "options": [
+          "5 ft",
+          "3 ft",
+          "54 inch",
+          "4 ft",
+          "60 inch"
+        ]
+      },
+      {
+        "name": "Length",
+        "options": [
+          "5 ft",
+          "6 ft",
+          "7 ft",
+          "8 ft",
+          "10 ft"
+        ]
+      },
+      {
+        "name": "Usage/Application",
+        "options": [
+          "Distribution",
+          "Construction",
+          "Manufacturing",
+          "Resale"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 34940,
+    "mcat_name": "Quartz Heaters",
+    "specifications": [
+      {
+        "name": "Number of Rods",
+        "options": [
+          "2",
+          "1",
+          "3"
+        ]
+      },
+      {
+        "name": "Power",
+        "options": [
+          "800 W",
+          "1500 W",
+          "3000 W",
+          "400 W",
+          "1000 W",
+          "750 W"
+        ]
+      },
+      {
+        "name": "Brand",
+        "options": [
+          "Usha",
+          "Gopi",
+          "Bajaj",
+          "Havells",
+          "Surya",
+          "Maharaja"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 35014,
+    "mcat_name": "Platform Trolley",
+    "specifications": [
+      {
+        "name": "Load Capacity",
+        "options": [
+          "300 kg",
+          "500 kg",
+          "200 kg",
+          "150 kg",
+          "400 kg",
+          "1 Ton"
+        ]
+      },
+      {
+        "name": "Material",
+        "options": [
+          "Mild Steel",
+          "Plastic",
+          "Stainless Steel"
+        ]
+      },
+      {
+        "name": "Platform Size",
+        "options": [
+          "4 x 2.5 ft",
+          "20 x 40 inch",
+          "2.5 x 2 ft",
+          "36 x 24 inch",
+          "3 x 3 ft",
+          "1500 x 750 mm"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 35358,
+    "mcat_name": "Plastic Spools",
+    "specifications": [
+      {
+        "name": "Flange Diameter",
+        "options": [
+          "10 inch (250 mm)",
+          "200 mm (8 inch)",
+          "2 inch",
+          "6 inch",
+          "12 inch (300 mm)",
+          "5 inch"
+        ]
+      },
+      {
+        "name": "Material",
+        "options": [
+          "PP",
+          "ABS",
+          "Recycled Plastic",
+          "Nylon",
+          "PVC",
+          "HIPS"
+        ]
+      },
+      {
+        "name": "Load Capacity",
+        "options": [
+          "1 kg",
+          "20 kg",
+          "10 kg",
+          "2 kg",
+          "3 kg",
+          "5 kg"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 35622,
+    "mcat_name": "Pressing Machine",
+    "specifications": [
+      {
+        "name": "Machine Size",
+        "options": [
+          "6 No.",
+          "8 No.",
+          "5 No.",
+          "4 No.",
+          "10 No.",
+          "3 No."
+        ]
+      },
+      {
+        "name": "Operation Mode",
+        "options": [
+          "Manual",
+          "Hydraulic",
+          "Automatic",
+          "Semi-Automatic"
+        ]
+      },
+      {
+        "name": "Body Material",
+        "options": [
+          "Mild Steel (MS)",
+          "Cast Iron"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 36573,
+    "mcat_name": "Rotary Paper Trimmer",
+    "specifications": [
+      {
+        "name": "Why do you need this",
+        "options": [
+          "For Reselling",
+          "For Business Use",
+          "For Home Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 36894,
+    "mcat_name": "Rotary Trimmer",
+    "specifications": [
+      {
+        "name": "Why do you need this",
+        "options": [
+          "For Reselling",
+          "For Business Use",
+          "For Home Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 37188,
+    "mcat_name": "Shoe Shine Machine",
+    "specifications": [
+      {
+        "name": "Operation Mode",
+        "options": [
+          "Automatic",
+          "Manual"
+        ]
+      },
+      {
+        "name": "Body Material",
+        "options": [
+          "Gold",
+          "Stainless Steel",
+          "Wooden",
+          "Metal"
+        ]
+      },
+      {
+        "name": "Warranty",
+        "options": [
+          "1 Year",
+          "6 Months"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 37635,
+    "mcat_name": "Shredding Machine",
+    "specifications": [
+      {
+        "name": "Processed Material",
+        "options": [
+          "Plastics",
+          "Metal Shavings",
+          "Metal Scrap",
+          "Agro Waste",
+          "Municipal Waste",
+          "E-Waste"
+        ]
+      },
+      {
+        "name": "Shredding Capacity",
+        "options": [
+          "100 kg/hr",
+          "1 ton/hr",
+          "500 kg/hr",
+          "2 ton/hr",
+          "300 kg/hr",
+          "50 kg/hr"
+        ]
+      },
+      {
+        "name": "Motor Power",
+        "options": [
+          "10 HP",
+          "5 HP",
+          "2 HP",
+          "7.5 HP",
+          "15 HP",
+          "20 HP"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 38637,
+    "mcat_name": "Spiral Binding Machine",
+    "specifications": [
+      {
+        "name": "Operation Type",
+        "options": [
+          "Manual",
+          "Electric",
+          "Automatic",
+          "Semi-automatic"
+        ]
+      },
+      {
+        "name": "Punching Capacity",
+        "options": [
+          "15 sheets",
+          "25 sheets",
+          "20 sheets",
+          "30 sheets",
+          "40 sheets",
+          "10 sheets"
+        ]
+      },
+      {
+        "name": "Binding Capacity",
+        "options": [
+          "20 mm",
+          "10 mm",
+          "30 mm",
+          "40 mm",
+          "50 mm",
+          "5 mm"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 38684,
+    "mcat_name": "Stacker Machine",
+    "specifications": [
+      {
+        "name": "Capacity",
+        "options": [
+          "2 Ton",
+          "1 Ton",
+          "1.5 Ton",
+          "500 kg",
+          "3 Ton"
+        ]
+      },
+      {
+        "name": "Lifting Height",
+        "options": [
+          "3 m (10 ft)",
+          "1.6 m (5.2 ft)",
+          "1.5 m (5 ft)",
+          "3.5 m (11.5 ft)",
+          "2 m (6.5 ft)",
+          "4.5 m (15 ft)"
+        ]
+      },
+      {
+        "name": "Operation Type",
+        "options": [
+          "Manual Hydraulic",
+          "Electric",
+          "Semi-Electric",
+          "Ride-on"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 38888,
+    "mcat_name": "Strip Binding Systems",
+    "specifications": [
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 39651,
+    "mcat_name": "Taping Machine",
+    "specifications": [
+      {
+        "name": "Capacity",
+        "options": [
+          "10 CPM",
+          "30 CPM",
+          "60 CPM",
+          "100 CPM"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 41258,
+    "mcat_name": "Wire Binding Systems",
+    "specifications": [
+      {
+        "name": "Machine Type",
+        "options": [
+          "Manual",
+          "Semi Automatic",
+          "Full Automatic"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 41423,
+    "mcat_name": "Wood Chippers",
+    "specifications": [
+      {
+        "name": "Power Source",
+        "options": [
+          "Electric",
+          "Petrol Engine",
+          "Tractor Operated",
+          "Diesel"
+        ]
+      },
+      {
+        "name": "Power",
+        "options": [
+          "15 hp",
+          "18 hp",
+          "5 hp",
+          "14 hp",
+          "10 hp",
+          "3 hp"
+        ]
+      },
+      {
+        "name": "Max Feeding Diameter",
+        "options": [
+          "6 inch",
+          "4 inch",
+          "3 inch",
+          "8 inch",
+          "90 mm",
+          "2.5 inch"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 41461,
+    "mcat_name": "Wood Shredders",
+    "specifications": [
+      {
+        "name": "Power Source",
+        "options": [
+          "Electric",
+          "Petrol",
+          "Tractor Operated",
+          "Diesel Engine"
+        ]
+      },
+      {
+        "name": "Production Capacity",
+        "options": [
+          "1 ton/hr",
+          "500 kg/hr",
+          "2 tons/hr",
+          "300 kg/hr",
+          "3-4 tons/hr",
+          "2-3 tons/hr"
+        ]
+      },
+      {
+        "name": "Power",
+        "options": [
+          "15 HP",
+          "18 HP",
+          "5 HP",
+          "14 HP",
+          "7 HP",
+          "7.5 HP"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 44196,
+    "mcat_name": "Gloss Lamination Film",
+    "specifications": [
+      {
+        "name": "Width",
+        "options": [
+          "13 inch (330 mm)",
+          "12 inch",
+          "50 inch",
+          "42 inch",
+          "40 inch",
+          "12.5 inch"
+        ]
+      },
+      {
+        "name": "Thickness",
+        "options": [
+          "20 micron",
+          "80 micron",
+          "100 micron",
+          "25 micron",
+          "125 micron",
+          "70 micron"
+        ]
+      },
+      {
+        "name": "Lamination Type",
+        "options": [
+          "Thermal",
+          "Cold"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 44313,
+    "mcat_name": "Paper Punching Machine",
+    "specifications": [
+      {
+        "name": "Punch Capacity",
+        "options": [
+          "Up to 40 Sheets",
+          "Up to 150 Sheets",
+          "Up to 25 Sheets",
+          "Up to 70 Sheets",
+          "Up to 300 Sheets"
+        ]
+      },
+      {
+        "name": "Operation Mode",
+        "options": [
+          "Manual",
+          "Electric",
+          "Heavy Duty"
+        ]
+      },
+      {
+        "name": "No. of Holes",
+        "options": [
+          "2 Holes",
+          "1 Hole",
+          "4 Holes",
+          "3 Holes",
+          "Multi-Hole"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 44799,
+    "mcat_name": "Plastic Spirals",
+    "specifications": [
+      {
+        "name": "Diameter",
+        "options": [
+          "12 mm",
+          "20 mm",
+          "10 mm",
+          "8 mm",
+          "18 mm",
+          "22 mm"
+        ]
+      },
+      {
+        "name": "Color",
+        "options": [
+          "Black",
+          "Transparent",
+          "White",
+          "Silver",
+          "Blue"
+        ]
+      },
+      {
+        "name": "Packet Weight",
+        "options": [
+          "800 g",
+          "1 kg",
+          "25 kg"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 46011,
+    "mcat_name": "Room Air Purifier",
+    "specifications": [
+      {
+        "name": "Coverage Area",
+        "options": [
+          "850 sq ft",
+          "1500 sq ft",
+          "235 sq ft",
+          "1000 sq ft",
+          "400 sq ft",
+          "250 sq ft"
+        ]
+      },
+      {
+        "name": "Brand",
+        "options": [
+          "Honeywell",
+          "Dyson",
+          "Havells",
+          "Eureka Forbes",
+          "Carrier",
+          "Philips"
+        ]
+      },
+      {
+        "name": "Filter Type",
+        "options": [
+          "Activated Carbon",
+          "Pre-Filter",
+          "HEPA",
+          "3 in 1 Filter",
+          "HEPA 13",
+          "Electrostatic"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 65556,
+    "mcat_name": "Hole Drilling Machine",
+    "specifications": [
+      {
+        "name": "Automatic Grade",
+        "options": [
+          "Automatic",
+          "Semi-Automatic",
+          "Manual"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 68470,
+    "mcat_name": "Manual Cutter",
+    "specifications": [
+      {
+        "name": "I am interested in",
+        "options": [
+          "Steel Strap Cutter",
+          "Glass Cutter",
+          "Tube Cutters",
+          "Strap Cutter",
+          "Laminate Cutters",
+          "Knife Cutters"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 68846,
+    "mcat_name": "Creasing Machine",
+    "specifications": [
+      {
+        "name": "Creasing Capacity",
+        "options": [
+          "1000",
+          "2000",
+          "3000",
+          "4000",
+          "5000",
+          "6000",
+          "7000",
+          "8000",
+          "9000",
+          "10000"
+        ]
+      },
+      {
+        "name": "I am interested in",
+        "options": [
+          "Creasing Perforating Machine",
+          "Paper Creasing Machine",
+          "Automatic Die Cutting & Creasing Machine",
+          "Paper Bag Creasing Machine"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 73948,
+    "mcat_name": "Electric Room Heater",
+    "specifications": [
+      {
+        "name": "Heater Type",
+        "options": [
+          "Oil Filled (OFR)",
+          "Quartz",
+          "Heat Pillar",
+          "Coil Heater",
+          "Sun Heater",
+          "Fan Heater"
+        ]
+      },
+      {
+        "name": "Power",
+        "options": [
+          "1000 W",
+          "400 W",
+          "1500 W",
+          "800 W",
+          "1200 W",
+          "2000 W"
+        ]
+      },
+      {
+        "name": "Brand",
+        "options": [
+          "Orpat",
+          "Bajaj",
+          "Gopi",
+          "Usha",
+          "Havells",
+          "Belco"
+        ]
+      },
+      {
+        "name": "Usage/Application",
+        "options": [
+          "Resale",
+          "Distribution",
+          "Factory Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 74602,
+    "mcat_name": "Knee Support",
+    "specifications": [
+      {
+        "name": "Size",
+        "options": [
+          "Extra Large",
+          "Large",
+          "Medium",
+          "Small",
+          "Universal",
+          "XXL"
+        ]
+      },
+      {
+        "name": "Support Type",
+        "options": [
+          "Hinged Support",
+          "Offloader",
+          "Simple Support",
+          "Herbal Plaster",
+          "Knee Cap",
+          "Patch"
+        ]
+      },
+      {
+        "name": "Material",
+        "options": [
+          "Neoprene",
+          "Cotton",
+          "Elastic",
+          "Bamboo",
+          "Nylon",
+          "Metal"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 78894,
+    "mcat_name": "Semi Automatic Strapping Machine",
+    "specifications": [
+      {
+        "name": "Machine Grade",
+        "options": [
+          "Heavy Duty",
+          "Standard",
+          "Economy",
+          "Light Duty"
+        ]
+      },
+      {
+        "name": "Country of Origin",
+        "options": [
+          "China",
+          "Taiwan",
+          "India"
+        ]
+      },
+      {
+        "name": "Brand",
+        "options": [
+          "Packway",
+          "Dyna",
+          "King Pack",
+          "Bandma",
+          "Joinpack",
+          "Transpak"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 80208,
+    "mcat_name": "Currency Detector",
+    "specifications": []
+  },
+  {
+    "mcat_id": 85071,
+    "mcat_name": "Hydraulic Hand Stacker",
+    "specifications": [
+      {
+        "name": "Lifting Capacity",
+        "options": [
+          "1 Ton",
+          "5 Ton",
+          "10 Ton",
+          "15 Ton"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 85561,
+    "mcat_name": "Plastic Binding Comb",
+    "specifications": [
+      {
+        "name": "Color",
+        "options": [
+          "White",
+          "Black",
+          "Blue",
+          "Red"
+        ]
+      },
+      {
+        "name": "Why do you need this",
+        "options": [
+          "For Reselling",
+          "For Business Use",
+          "For Personal Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 85569,
+    "mcat_name": "Book Press",
+    "specifications": [
+      {
+        "name": "Capacity",
+        "options": [
+          "10 Ton",
+          "20 Ton",
+          "30 Ton",
+          "40 Ton",
+          "50 Ton",
+          "60 Ton",
+          "70 Ton",
+          "80 Ton",
+          "90 Ton",
+          "100 Ton"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 85635,
+    "mcat_name": "Waste Shredder",
+    "specifications": [
+      {
+        "name": "Material Processed",
+        "options": [
+          "Paddy Straw",
+          "Municipal Waste",
+          "Plastic Waste",
+          "Medical Waste",
+          "Metal Scrap",
+          "Organic Waste"
+        ]
+      },
+      {
+        "name": "Throughput Capacity",
+        "options": [
+          "1 ton/hr",
+          "100 kg/hr",
+          "100-200 kg/hr",
+          "2 ton/hr",
+          "5 ton/hr",
+          "500 kg/hr"
+        ]
+      },
+      {
+        "name": "Shaft Type",
+        "options": [
+          "Double Shaft",
+          "Single Shaft"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 87846,
+    "mcat_name": "Thermal Binding Cover",
+    "specifications": [
+      {
+        "name": "Spine Width",
+        "options": [
+          "3 mm",
+          "6 mm",
+          "1.5 mm",
+          "10 mm",
+          "12 mm",
+          "8 mm"
+        ]
+      },
+      {
+        "name": "Size",
+        "options": [
+          "A4",
+          "Legal",
+          "F/S (Foolscap)",
+          "A3"
+        ]
+      },
+      {
+        "name": "Back Cover Type",
+        "options": [
+          "Paperboard",
+          "Linen Card",
+          "Leatherette",
+          "Glossy Card"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 88122,
+    "mcat_name": "Seal Laminator",
+    "specifications": [
+      {
+        "name": "Max Laminate Size",
+        "options": [
+          "A3",
+          "A4",
+          "13 inch",
+          "12 inch",
+          "ID Card Size"
+        ]
+      },
+      {
+        "name": "Lamination Tech",
+        "options": [
+          "Hot & Cold",
+          "Thermal (Hot only)"
+        ]
+      },
+      {
+        "name": "Number of Rollers",
+        "options": [
+          "4 Rollers",
+          "2 Rollers",
+          "6 Rollers"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 88133,
+    "mcat_name": "Pouch Laminator",
+    "specifications": [
+      {
+        "name": "Max Paper Size",
+        "options": [
+          "A3",
+          "A4",
+          "12 inch",
+          "A5 (ID Card)"
+        ]
+      },
+      {
+        "name": "Lamination Tech",
+        "options": [
+          "Hot & Cold",
+          "Hot Lamination",
+          "Cold Lamination"
+        ]
+      },
+      {
+        "name": "Number of Rollers",
+        "options": [
+          "4 Rollers",
+          "2 Rollers",
+          "6 Rollers"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 88142,
+    "mcat_name": "Hot Laminating Film",
+    "specifications": [
+      {
+        "name": "Finish",
+        "options": [
+          "Gloss",
+          "Matte",
+          "Scuff-Free Matte",
+          "Velvet"
+        ]
+      },
+      {
+        "name": "Thickness",
+        "options": [
+          "75 micron",
+          "125 micron",
+          "42 micron",
+          "32 micron",
+          "250 micron",
+          "100 micron"
+        ]
+      },
+      {
+        "name": "Base Film",
+        "options": [
+          "PET",
+          "BOPP",
+          "Nylon"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 115740,
+    "mcat_name": "Metal Cash Boxes",
+    "specifications": [
+      {
+        "name": "Lock Type",
+        "options": [
+          "Key Lock",
+          "Combination Lock",
+          "Number Lock"
+        ]
+      },
+      {
+        "name": "Size (Inch)",
+        "options": [
+          "10 Inch",
+          "12 Inch",
+          "8 Inch",
+          "6 Inch",
+          "14 Inch"
+        ]
+      },
+      {
+        "name": "Material",
+        "options": [
+          "Mild Steel",
+          "Steel",
+          "Iron",
+          "Metal"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 116099,
+    "mcat_name": "Multifunctional Heat Press",
+    "specifications": [
+      {
+        "name": "Machine Configuration",
+        "options": [
+          "5 in 1",
+          "8 in 1",
+          "Combo",
+          "10 in 1",
+          "Multifunctional",
+          "6 in 1"
+        ]
+      },
+      {
+        "name": "Platen Size",
+        "options": [
+          "12 x 15 inch",
+          "15 x 15 inch",
+          "16 x 20 inch",
+          "16 x 24 inch"
+        ]
+      },
+      {
+        "name": "Production Capacity",
+        "options": [
+          "100 prints/hr",
+          "50 prints/hr",
+          "300 prints/hr",
+          "20 prints/hr"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 122454,
+    "mcat_name": "Notebook Making Machines",
+    "specifications": [
+      {
+        "name": "Automation Grade",
+        "options": [
+          "Fully Automatic",
+          "Semi-Automatic",
+          "Manual",
+          "Motorized"
+        ]
+      },
+      {
+        "name": "Machine Components",
+        "options": [
+          "Cut Stitch Press",
+          "Cut Stitch Square",
+          "4-in-1 System",
+          "Cut & Stitch",
+          "Stitching Only",
+          "Cutting Only"
+        ]
+      },
+      {
+        "name": "Cutting Machine Size",
+        "options": [
+          "32 inch",
+          "20 inch",
+          "26 inch",
+          "32-36 inch",
+          "33 inch",
+          "36 inch"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 123953,
+    "mcat_name": "Heavy Duty Cutting Machine",
+    "specifications": [
+      {
+        "name": "Blade Diameter",
+        "options": [
+          "32 inch",
+          "14 inch",
+          "12 inch",
+          "36 inch",
+          "24 inch",
+          "26 inch"
+        ]
+      },
+      {
+        "name": "Main Motor Power",
+        "options": [
+          "40 HP",
+          "3 HP",
+          "2 HP",
+          "5 HP",
+          "1.5 HP",
+          "30 HP"
+        ]
+      },
+      {
+        "name": "Operation Mode",
+        "options": [
+          "Manual",
+          "Motorized",
+          "Automatic",
+          "Semi-automatic",
+          "Hydraulic"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 126156,
+    "mcat_name": "Squaring Machine",
+    "specifications": [
+      {
+        "name": "Automatic Grade",
+        "options": [
+          "Automatic",
+          "Semi-Automatic",
+          "Manual"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 129564,
+    "mcat_name": "Wire Spool",
+    "specifications": [
+      {
+        "name": "Material",
+        "options": [
+          "Mild Steel",
+          "Stainless Steel",
+          "Plastic",
+          "Wood",
+          "Aluminium",
+          "Cast Iron"
+        ]
+      },
+      {
+        "name": "Usage/Application",
+        "options": [
+          "None"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 132266,
+    "mcat_name": "Commercial Reverse Osmosis System",
+    "specifications": [
+      {
+        "name": "Capacity",
+        "options": [
+          "1000 LPH",
+          "250 LPH",
+          "500 LPH",
+          "2000 LPH",
+          "100 LPH",
+          "5000 LPH"
+        ]
+      },
+      {
+        "name": "Body Material",
+        "options": [
+          "Stainless Steel",
+          "FRP"
+        ]
+      },
+      {
+        "name": "Automation Grade",
+        "options": [
+          "Automatic",
+          "Fully Automatic",
+          "Semi-automatic"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 132268,
+    "mcat_name": "Industrial Reverse Osmosis Plant",
+    "specifications": [
+      {
+        "name": "Capacity",
+        "options": [
+          "1000 lph",
+          "2000 lph",
+          "500 lph",
+          "250 lph",
+          "10000 lph",
+          "5000 lph"
+        ]
+      },
+      {
+        "name": "Material",
+        "options": [
+          "Stainless Steel",
+          "FRP",
+          "SS 304",
+          "CPVC",
+          "Mild Steel (MS)"
+        ]
+      },
+      {
+        "name": "Brand",
+        "options": [
+          "Lubi",
+          "CRI",
+          "Kirloskar",
+          "Dow",
+          "Carrier"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 132873,
+    "mcat_name": "Edge Squaring Machine",
+    "specifications": [
+      {
+        "name": "Capacity(Piece/Hr)",
+        "options": [
+          "500",
+          "1000",
+          "1500",
+          "2000",
+          "2500",
+          "3000",
+          "3500",
+          "4000",
+          "4500",
+          "5000"
+        ]
+      },
+      {
+        "name": "Automatic Grade",
+        "options": [
+          "Automatic",
+          "Manual",
+          "Semi Automatic"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 132951,
+    "mcat_name": "T-Shirt Printing Machine",
+    "specifications": [
+      {
+        "name": "Number of Print Heads",
+        "options": [
+          "2 Heads",
+          "1 Head",
+          "4 Heads"
+        ]
+      },
+      {
+        "name": "Print Width",
+        "options": [
+          "12 inch (300 mm)",
+          "24 inch (600 mm)"
+        ]
+      },
+      {
+        "name": "Print Size",
+        "options": [
+          "A3",
+          "A4",
+          "A3+"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 133100,
+    "mcat_name": "ID Card Maker",
+    "specifications": [
+      {
+        "name": "Print Capability",
+        "options": [
+          "Single Sided",
+          "Double Sided"
+        ]
+      },
+      {
+        "name": "Printing Tech",
+        "options": [
+          "Direct-to-Card",
+          "Retransfer",
+          "Inkjet"
+        ]
+      },
+      {
+        "name": "Connectivity",
+        "options": [
+          "USB",
+          "Ethernet",
+          "Wi-Fi"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 136856,
+    "mcat_name": "Hydraulic Scrap Baling Press",
+    "specifications": [
+      {
+        "name": "Processed Material",
+        "options": [
+          "Metal Scrap",
+          "Aluminum Scrap",
+          "Plastic Scrap",
+          "PET Bottle",
+          "Cardboard",
+          "Metal Turning"
+        ]
+      },
+      {
+        "name": "Bale Weight",
+        "options": [
+          "50 kg",
+          "100 kg",
+          "150 kg",
+          "200 kg",
+          "25 kg",
+          "400 kg"
+        ]
+      },
+      {
+        "name": "Action Type",
+        "options": [
+          "Double Action",
+          "Triple Action",
+          "Single Action"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 136882,
+    "mcat_name": "Sheet Pasting Machine",
+    "specifications": [
+      {
+        "name": "Capacity",
+        "options": [
+          "1000 Piece/Hour",
+          "2000 Piece/Hour",
+          "3000 Piece/Hour",
+          "4000 Piece/Hour"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 136978,
+    "mcat_name": "Double Loop Wire",
+    "specifications": [
+      {
+        "name": "Size",
+        "options": [
+          "Text"
+        ]
+      },
+      {
+        "name": "Why do you need this",
+        "options": [
+          "For Reselling",
+          "For Business Use",
+          "For Personal Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 139194,
+    "mcat_name": "Wood Crusher",
+    "specifications": [
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 139518,
+    "mcat_name": "Bookbinding Hot Melt Glue",
+    "specifications": [
+      {
+        "name": "Application",
+        "options": [
+          "Spine Gluing",
+          "Side Gluing",
+          "Casing-in",
+          "Hinge Gluing"
+        ]
+      },
+      {
+        "name": "Flexibility",
+        "options": [
+          "High Flexibility",
+          "Medium Flexibility",
+          "Standard"
+        ]
+      },
+      {
+        "name": "Color",
+        "options": [
+          "White",
+          "Natural",
+          "Yellow"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 139847,
+    "mcat_name": "Label Cutting Machine",
+    "specifications": [
+      {
+        "name": "Cutting Capacity",
+        "options": [
+          "100 pcs/min",
+          "125 pcs/min",
+          "150 pcs/min",
+          "175 pcs/min",
+          "200 pcs/min",
+          "250 pcs/min"
+        ]
+      },
+      {
+        "name": "Type of Label Cutting Machine",
+        "options": [
+          "Ultrasonic Label Cutting Machine",
+          "PVC Label Cutting machine",
+          "Half Cut Sticker Label Cutting Machine",
+          "Rotary Label Die Cutting Machine"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 142246,
+    "mcat_name": "Album Cutting Machine",
+    "specifications": [
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 142247,
+    "mcat_name": "Digital Cutting Machine",
+    "specifications": [
+      {
+        "name": "Cutting Width",
+        "options": [
+          "24 inch",
+          "18 inch",
+          "42 inch",
+          "14 inch",
+          "36 inch",
+          "60 inch"
+        ]
+      },
+      {
+        "name": "Compatible Mat'l",
+        "options": [
+          "Vinyl",
+          "Sticker Sheet",
+          "Cardstock",
+          "Fabric",
+          "Reflective Sheet",
+          "Sunboard"
+        ]
+      },
+      {
+        "name": "Control System",
+        "options": [
+          "PC Software Based",
+          "Standalone (LCD)",
+          "USB Direct Print",
+          "Mobile App"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 142387,
+    "mcat_name": "Foil Printing Machine",
+    "specifications": [
+      {
+        "name": "Industry Application",
+        "options": [
+          "Pharma Industry",
+          "Foil Printing",
+          "Bottle Printing",
+          "Textile Industry",
+          "LED Bulb Printing",
+          "Optical Boxes"
+        ]
+      },
+      {
+        "name": "Machine & Web Size",
+        "options": [
+          "20 inch",
+          "60 inch",
+          "66 inch",
+          "62 inch",
+          "22 inch",
+          "14 inch"
+        ]
+      },
+      {
+        "name": "Operation Mode",
+        "options": [
+          "Fully Automatic",
+          "Semi-Automatic",
+          "Manual",
+          "Pneumatic"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 142435,
+    "mcat_name": "Lamination Packaging Equipment",
+    "specifications": [
+      {
+        "name": "Application",
+        "options": [
+          "Flexible Packaging",
+          "Food Packaging",
+          "Pharma Packaging",
+          "Pouch Making"
+        ]
+      },
+      {
+        "name": "Lamination Tech",
+        "options": [
+          "Solventless",
+          "Solvent-based",
+          "Extrusion"
+        ]
+      },
+      {
+        "name": "No. of Layers",
+        "options": [
+          "2 Layer (Duplex)",
+          "3 Layer (Triplex)",
+          "Multi-layer"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 142686,
+    "mcat_name": "Thermal Lamination Machine",
+    "specifications": [
+      {
+        "name": "Machine Size (Width)",
+        "options": [
+          "32 inch",
+          "14 inch",
+          "24 inch",
+          "26 inch",
+          "13 inch",
+          "18 inch"
+        ]
+      },
+      {
+        "name": "Lamination Type",
+        "options": [
+          "Hot",
+          "Hot & Cold"
+        ]
+      },
+      {
+        "name": "Feeding System",
+        "options": [
+          "Roll to Roll",
+          "Sheet to Roll"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 142838,
+    "mcat_name": "Pocket  Weather Instruments",
+    "specifications": []
+  },
+  {
+    "mcat_id": 143105,
+    "mcat_name": "Single Sided Lamination Machine",
+    "specifications": [
+      {
+        "name": "Lamination Width",
+        "options": [
+          "24 inch",
+          "18 inch",
+          "32 inch",
+          "13 inch",
+          "42 inch",
+          "26 inch"
+        ]
+      },
+      {
+        "name": "Feeding System",
+        "options": [
+          "Automatic",
+          "Manual",
+          "Semi-Automatic"
+        ]
+      },
+      {
+        "name": "Lamination Tech",
+        "options": [
+          "Thermal (Hot)",
+          "Hot & Cold",
+          "Cold (Pressure)"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 143138,
+    "mcat_name": "Post Press Machine",
+    "specifications": [
+      {
+        "name": "Usage/Application",
+        "options": [
+          "None"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 146214,
+    "mcat_name": "Hot Air Blower",
+    "specifications": [
+      {
+        "name": "Heater Capacity",
+        "options": [
+          "3 kW",
+          "9 kW",
+          "5 kW",
+          "12 kW",
+          "2 kW",
+          "6 kW"
+        ]
+      },
+      {
+        "name": "Motor Power",
+        "options": [
+          "1 HP",
+          "2 HP",
+          "5 HP",
+          "3 HP",
+          "10 HP",
+          "0.5 HP"
+        ]
+      },
+      {
+        "name": "Operating Temperature",
+        "options": [
+          "60-70 °C",
+          "60 °C",
+          "55 °C",
+          "40-50 °C",
+          "40-45 °C",
+          "35-40 °C"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 147020,
+    "mcat_name": "Garden Shredder",
+    "specifications": [
+      {
+        "name": "Power",
+        "options": [
+          "1 HP",
+          "2 HP",
+          "3 HP",
+          "5 HP"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 147370,
+    "mcat_name": "Creasing Perforating Machine",
+    "specifications": [
+      {
+        "name": "Operation Type",
+        "options": [
+          "Manual",
+          "Electric",
+          "Semi-Automatic",
+          "Automatic",
+          "Pneumatic",
+          "Hydraulic"
+        ]
+      },
+      {
+        "name": "Maximum Sheet Size",
+        "options": [
+          "A3",
+          "SRA3",
+          "A2",
+          "12x18 inch",
+          "13x19 inch",
+          "A1"
+        ]
+      },
+      {
+        "name": "Application",
+        "options": [
+          "Paper",
+          "Cardboard",
+          "Corrugated Board",
+          "PVC Sheet",
+          "Foam Board",
+          "Vinyl"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 147598,
+    "mcat_name": "Comb Binding Machine",
+    "specifications": [
+      {
+        "name": "Capacity",
+        "options": [
+          "15 sheets",
+          "20 sheets",
+          "25 sheets",
+          "30 sheets",
+          "35 sheets",
+          "40 sheets",
+          "45 sheets",
+          "50 sheets"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 149081,
+    "mcat_name": "Paper Lamination Machine",
+    "specifications": [
+      {
+        "name": "Machine Size",
+        "options": [
+          "32 inch",
+          "24 inch",
+          "30 inch",
+          "42 inch",
+          "36 inch",
+          "14 inch"
+        ]
+      },
+      {
+        "name": "Lamination Technology",
+        "options": [
+          "Cold (Gum Based)",
+          "Thermal",
+          "Thermal & Cold",
+          "Water-based"
+        ]
+      },
+      {
+        "name": "Feeding Type",
+        "options": [
+          "Roll to Roll",
+          "Sheet to Roll",
+          "Sheet-fed"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 149084,
+    "mcat_name": "Paper Sheet Cutting Machine",
+    "specifications": [
+      {
+        "name": "Cutting Width",
+        "options": [
+          "32 inch",
+          "42 inch",
+          "36 inch",
+          "18 inch",
+          "24 inch",
+          "52 inch"
+        ]
+      },
+      {
+        "name": "Operation Mode",
+        "options": [
+          "Manual",
+          "Automatic",
+          "Semi-Automatic",
+          "Motorized"
+        ]
+      },
+      {
+        "name": "Compatible Paper Size",
+        "options": [
+          "A4",
+          "A3",
+          "B2",
+          "A1",
+          "A2",
+          "A0"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 149678,
+    "mcat_name": "Glue Binding Machine",
+    "specifications": [
+      {
+        "name": "Book Binding Speed",
+        "options": [
+          "100 books/hr",
+          "200 books/hr",
+          "250 books/hr",
+          "500 books/hr",
+          "600 books/hr",
+          "650 books/hr"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 149798,
+    "mcat_name": "Electronic Locker Safe",
+    "specifications": [
+      {
+        "name": "Lock Type",
+        "options": [
+          "Digital Keypad",
+          "Biometric Lock",
+          "RFID Card Lock",
+          "Key Lock (Override)"
+        ]
+      },
+      {
+        "name": "Capacity (L)",
+        "options": [
+          "25 L",
+          "20 L",
+          "30 L",
+          "40 L",
+          "15 L"
+        ]
+      },
+      {
+        "name": "Material",
+        "options": [
+          "Mild Steel",
+          "Steel",
+          "Iron",
+          "Stainless Steel"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 151466,
+    "mcat_name": "Card Fusing Machine",
+    "specifications": [
+      {
+        "name": "Automatic Grade",
+        "options": [
+          "Automatic",
+          "Semi-Automatic"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 152504,
+    "mcat_name": "Photo Lamination Film",
+    "specifications": [
+      {
+        "name": "Finish",
+        "options": [
+          "Glossy",
+          "Matte",
+          "Sparkle",
+          "Satin",
+          "Textured",
+          "3D"
+        ]
+      },
+      {
+        "name": "Lamination Type",
+        "options": [
+          "Cold (Self Adh.)",
+          "Thermal"
+        ]
+      },
+      {
+        "name": "Thickness",
+        "options": [
+          "80 micron",
+          "125 micron",
+          "75 micron",
+          "175 micron",
+          "250 micron",
+          "60 micron"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 152876,
+    "mcat_name": "Fake Note Detector Machine",
+    "specifications": [
+      {
+        "name": "Detection Method",
+        "options": [
+          "UV Light",
+          "IR Scanning",
+          "Magnetic Ink"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 153570,
+    "mcat_name": "Sticker Half Cutting Machine",
+    "specifications": [
+      {
+        "name": "Functions/Application",
+        "options": [
+          "Half/Perf/Crease",
+          "Half Cutting",
+          "Half & Full Cut",
+          "Sticker & Vinyl",
+          "Half/Full/Crease",
+          "Cutting & Crease"
+        ]
+      },
+      {
+        "name": "Automation Grade",
+        "options": [
+          "Automatic",
+          "Manual",
+          "Auto Feeder"
+        ]
+      },
+      {
+        "name": "Maximum Sheet Size",
+        "options": [
+          "13x19 inch",
+          "12x18 inch",
+          "A3",
+          "A4",
+          "15x20 inch",
+          "28x40 inch"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 153623,
+    "mcat_name": "Sawdust Making Machine",
+    "specifications": [
+      {
+        "name": "Production Capacity",
+        "options": [
+          "500 kg/hr",
+          "1000 kg/hr",
+          "2000 kg/hr",
+          "300 - 400 kg/hr",
+          "500 - 600 kg/hr",
+          "250 - 300 kg/hr"
+        ]
+      },
+      {
+        "name": "Motor Power",
+        "options": [
+          "15 HP",
+          "30 HP",
+          "10 HP",
+          "50 HP",
+          "20 HP",
+          "40 HP"
+        ]
+      },
+      {
+        "name": "Max Feed Diameter",
+        "options": [
+          "4 inches",
+          "1 - 2 inches",
+          "10 inches",
+          "5 - 6 inches",
+          "6 inches",
+          "12 inches"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 154305,
+    "mcat_name": "Reel to Sheet Cutting Machine",
+    "specifications": [
+      {
+        "name": "Machine Size (in inches)",
+        "options": [
+          "10",
+          "15",
+          "22",
+          "28",
+          "32",
+          "42",
+          "44",
+          "52",
+          "54",
+          "62",
+          "64",
+          "72",
+          "74"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 156306,
+    "mcat_name": "Vinyl Cutting Plotter Machine",
+    "specifications": [
+      {
+        "name": "Brand",
+        "options": [
+          "Skycut",
+          "Graphtec",
+          "GCC",
+          "Silhouette",
+          "Mimaki",
+          "True Cut"
+        ]
+      },
+      {
+        "name": "Max Cutting Width",
+        "options": [
+          "24 inch (2 feet)",
+          "48 inch (4 feet)",
+          "52 inch",
+          "17 inch",
+          "16 inch",
+          "12 inch"
+        ]
+      },
+      {
+        "name": "Application",
+        "options": [
+          "Mobile Skins",
+          "Sticker Cutting",
+          "Vinyl Cutting",
+          "Radium Cutting",
+          "Sticker & Radium",
+          "LED Mirror Work"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 156502,
+    "mcat_name": "Eyelet Punch Machine",
+    "specifications": [
+      {
+        "name": "Stroke Capacity(Stroke/Hour)",
+        "options": [
+          "1000",
+          "2000",
+          "3000",
+          "4000",
+          "5000",
+          "6000",
+          "7000",
+          "8000",
+          "9000",
+          "10000"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 157712,
+    "mcat_name": "Currency Note Banding Machine",
+    "specifications": []
+  },
+  {
+    "mcat_id": 157740,
+    "mcat_name": "Wire Stitching Machine",
+    "specifications": [
+      {
+        "name": "Automatic Grade",
+        "options": [
+          "Automatic",
+          "Semi-Automatic",
+          "Manual"
+        ]
+      },
+      {
+        "name": "Design",
+        "options": [
+          "Standard",
+          "Customized"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 157969,
+    "mcat_name": "Metal Shoes Rack",
+    "specifications": [
+      {
+        "name": "Number of Shelves",
+        "options": [
+          "5",
+          "4",
+          "3",
+          "2",
+          "6"
+        ]
+      },
+      {
+        "name": "Width",
+        "options": [
+          "26 in",
+          "24 in (2 ft)",
+          "36 in (3 ft)",
+          "25 in",
+          "14 in",
+          "28 in"
+        ]
+      },
+      {
+        "name": "Finish",
+        "options": [
+          "Powder Coated",
+          "Paint Coated"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 158223,
+    "mcat_name": "Foldable Platform Trolley",
+    "specifications": [
+      {
+        "name": "Load Capacity",
+        "options": [
+          "150 kg",
+          "300 kg",
+          "200 kg",
+          "400 kg",
+          "500 kg",
+          "600 kg"
+        ]
+      },
+      {
+        "name": "Base Material",
+        "options": [
+          "Mild Steel (MS)",
+          "Plastic",
+          "Stainless Steel",
+          "Metal",
+          "Fiber"
+        ]
+      },
+      {
+        "name": "Platform Size",
+        "options": [
+          "3 x 2 ft",
+          "1.75 x 2.25 ft",
+          "2.5 x 2 ft",
+          "4 x 2.5 ft",
+          "2 x 1.5 ft"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 158533,
+    "mcat_name": "Round Corner Cutting Machine",
+    "specifications": [
+      {
+        "name": "Automation Grade",
+        "options": [
+          "Automatic",
+          "Semi Automatic",
+          "Manual"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 158682,
+    "mcat_name": "Single Clamp Perfect Binding Machine",
+    "specifications": [
+      {
+        "name": "Production Capacity",
+        "options": [
+          "100 books/hr",
+          "200 books/hr",
+          "300 books/hr",
+          "500 books/hr",
+          "800 books/hr",
+          "1000 books/hr"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 159766,
+    "mcat_name": "Roll To Roll Lamination Machine",
+    "specifications": [
+      {
+        "name": "Lamination Width",
+        "options": [
+          "32 inch",
+          "24 inch",
+          "14 inch",
+          "60 inch (5 ft)",
+          "30 inch",
+          "18 inch"
+        ]
+      },
+      {
+        "name": "Lamination Mode",
+        "options": [
+          "Thermal",
+          "Hot and Cold",
+          "Cold"
+        ]
+      },
+      {
+        "name": "Automation Grade",
+        "options": [
+          "Automatic",
+          "Manual",
+          "Electric",
+          "Semi-Automatic"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 159770,
+    "mcat_name": "Sticker Cutting Machine",
+    "specifications": [
+      {
+        "name": "Machine Size (Width)",
+        "options": [
+          "24 inch (2 ft)",
+          "48 inch (4 ft)",
+          "30 inch",
+          "13 inch",
+          "14 inch",
+          "18 inch"
+        ]
+      },
+      {
+        "name": "Machine Functions",
+        "options": [
+          "Half Cutting",
+          "Full Cutting",
+          "Creasing",
+          "Contour Cutting",
+          "Perforation",
+          "Half & Full Cut"
+        ]
+      },
+      {
+        "name": "Application",
+        "options": [
+          "Automobile",
+          "Printing Press",
+          "Any Shape"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 159919,
+    "mcat_name": "Thermal Laminating Film",
+    "specifications": [
+      {
+        "name": "Finish",
+        "options": [
+          "Glossy",
+          "Matte",
+          "Velvet",
+          "Sand",
+          "3D",
+          "Golden"
+        ]
+      },
+      {
+        "name": "Roll Width",
+        "options": [
+          "13 inch (330 mm)",
+          "12 inch",
+          "18 inch",
+          "445 mm",
+          "14.5 inch",
+          "150 mm"
+        ]
+      },
+      {
+        "name": "Thickness",
+        "options": [
+          "20 micron",
+          "27 micron",
+          "25 micron",
+          "24 micron",
+          "75 micron",
+          "80 micron"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 160173,
+    "mcat_name": "PET Bottle Shredder",
+    "specifications": [
+      {
+        "name": "Shred Capacity",
+        "options": [
+          "500 kg/hr",
+          "300 kg/hr",
+          "1000 kg/hr",
+          "200 kg/hr",
+          "1500 kg/hr"
+        ]
+      },
+      {
+        "name": "Automation Grade",
+        "options": [
+          "Automatic",
+          "Semi-Automatic",
+          "Manual"
+        ]
+      },
+      {
+        "name": "Output Size",
+        "options": [
+          "10-15 mm",
+          "8-10 mm",
+          "20-25 mm",
+          "25-30 mm",
+          "Under 10 mm"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 160379,
+    "mcat_name": "Metal Shredder Machine",
+    "specifications": [
+      {
+        "name": "Shred Capacity",
+        "options": [
+          "1 ton/hr",
+          "500 kg/hr",
+          "2 ton/hr",
+          "5 ton/hr",
+          "300 kg/hr",
+          "10 ton/hr"
+        ]
+      },
+      {
+        "name": "Shaft Type",
+        "options": [
+          "Double Shaft",
+          "Single Shaft",
+          "Quad Shaft"
+        ]
+      },
+      {
+        "name": "Blade Material",
+        "options": [
+          "D2 Steel",
+          "Alloy Steel",
+          "High Carbon Chromium",
+          "Die Steel",
+          "EN9 Steel"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 161220,
+    "mcat_name": "Programmable Paper Cutting Machines",
+    "specifications": [
+      {
+        "name": "Cutting Width",
+        "options": [
+          "36 inch",
+          "32 inch",
+          "42 inch",
+          "26 inch",
+          "45 inch",
+          "18.5 inch"
+        ]
+      },
+      {
+        "name": "Stacking Height",
+        "options": [
+          "4.5 inch",
+          "3 inch",
+          "6 inch",
+          "2.5 inch",
+          "5 inch",
+          "4 inch"
+        ]
+      },
+      {
+        "name": "Clamping System",
+        "options": [
+          "Hydraulic",
+          "Electric",
+          "Manual"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 162497,
+    "mcat_name": "Agricultural Shredder",
+    "specifications": [
+      {
+        "name": "Power Source",
+        "options": [
+          "Tractor Operated",
+          "Electrical",
+          "Petrol Engine"
+        ]
+      },
+      {
+        "name": "Required Power",
+        "options": [
+          "10 HP",
+          "3 HP",
+          "5 HP",
+          "55 HP",
+          "42 HP",
+          "45 HP"
+        ]
+      },
+      {
+        "name": "Production Capacity",
+        "options": [
+          "1000 kg/hr",
+          "500 kg/hr",
+          "400 kg/hr",
+          "300 kg/hr",
+          "500-600 kg/hr",
+          "200 kg/hr"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 163100,
+    "mcat_name": "Shrink Tunnel Packaging Machine",
+    "specifications": [
+      {
+        "name": "Machine Type",
+        "options": [
+          "Semi-Automatic",
+          "Automatic",
+          "Tabletop",
+          "Conveyor",
+          "Steam Tunnel",
+          "Web Sealer"
+        ]
+      },
+      {
+        "name": "Tunnel Width",
+        "options": [
+          "12 inch",
+          "8 inch",
+          "18 inch",
+          "16 inch",
+          "10 inch",
+          "6 inch"
+        ]
+      },
+      {
+        "name": "Tunnel Height",
+        "options": [
+          "8 inch",
+          "12 inch",
+          "6 inch",
+          "10 inch"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 163722,
+    "mcat_name": "Paper Cover Making Machine",
+    "specifications": [
+      {
+        "name": "Capacity",
+        "options": [
+          "upto 1000 kg/hr",
+          "2000 kg/hr",
+          "4000 kg/hr",
+          "5000 kg/hr",
+          "10000 kg/hr",
+          "20000 kg/hr",
+          "More than 20000 kg/hr"
+        ]
+      },
+      {
+        "name": "Automatic Grade",
+        "options": [
+          "Automatic",
+          "Semi-Automatic"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 163735,
+    "mcat_name": "Telescopic Ladder",
+    "specifications": [
+      {
+        "name": "Ladder Type",
+        "options": [
+          "Telescopic",
+          "Foldable",
+          "A-Type",
+          "Single Side",
+          "Double Side"
+        ]
+      },
+      {
+        "name": "Extension Height",
+        "options": [
+          "20 ft",
+          "12 ft",
+          "23 ft",
+          "10 ft",
+          "12.5 ft (3.8 m)",
+          "15 ft"
+        ]
+      },
+      {
+        "name": "Material",
+        "options": [
+          "Aluminium",
+          "FRP",
+          "Steel"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 164472,
+    "mcat_name": "Wiro Punching Machine",
+    "specifications": [
+      {
+        "name": "Automatic Grade",
+        "options": [
+          "Manual",
+          "Semi Automatic",
+          "Full Automatic"
+        ]
+      },
+      {
+        "name": "Condition",
+        "options": [
+          "New",
+          "Second hand"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 165059,
+    "mcat_name": "Photo Lamination Machines",
+    "specifications": [
+      {
+        "name": "Lamination Width",
+        "options": [
+          "12 inch",
+          "24 inch",
+          "18 inch",
+          "13 inch",
+          "30 inch",
+          "36 inch"
+        ]
+      },
+      {
+        "name": "Lamination Tech",
+        "options": [
+          "Hot & Cold",
+          "Cold Lamination",
+          "Thermal Lamination"
+        ]
+      },
+      {
+        "name": "Feeding System",
+        "options": [
+          "Roll to Roll",
+          "Sheet Fed",
+          "Roll to Sheet"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 166109,
+    "mcat_name": "Paper Creasing Machine",
+    "specifications": [
+      {
+        "name": "Creasing Capacity",
+        "options": [
+          "upto 500 Sheets/hr",
+          "1000 Sheets/hr",
+          "2000 Sheets/hr",
+          "5000 Sheets/hr",
+          "More than 5000 Sheets/hr"
+        ]
+      },
+      {
+        "name": "Loading capacity",
+        "options": [
+          "upto 500 Sheets/hr",
+          "1000 Sheets/hr",
+          "2000 Sheets/hr",
+          "5000 Sheets/hr",
+          "More than 5000 Sheets/hr"
+        ]
+      },
+      {
+        "name": "Automatic Grade",
+        "options": [
+          "Automatic",
+          "Semi-Automatic"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 166405,
+    "mcat_name": "ID Card Cutter",
+    "specifications": [
+      {
+        "name": "Punching Size",
+        "options": [
+          "54 x 86 mm",
+          "50 x 50 mm",
+          "70 x 100 mm",
+          "48.5 x 70 mm",
+          "130 x 90 mm",
+          "200 x 335 mm"
+        ]
+      },
+      {
+        "name": "Machine Grade",
+        "options": [
+          "Heavy Duty",
+          "Standard",
+          "Die Cutter",
+          "Local"
+        ]
+      },
+      {
+        "name": "Operation Type",
+        "options": [
+          "Manual",
+          "Automatic",
+          "Electric",
+          "Semi-automatic"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 166782,
+    "mcat_name": "Medical Waste Shredder",
+    "specifications": [
+      {
+        "name": "Shred Capacity",
+        "options": [
+          "50 kg/hr",
+          "100 kg/hr",
+          "25 kg/hr",
+          "150 kg/hr",
+          "200 kg/hr"
+        ]
+      },
+      {
+        "name": "Body Material",
+        "options": [
+          "Stainless Steel",
+          "SS 304",
+          "Mild Steel",
+          "SS 316"
+        ]
+      },
+      {
+        "name": "Application",
+        "options": [
+          "Mixed Medical Waste",
+          "Syringes; Needles",
+          "IV Sets; Bottles",
+          "Sharps Waste",
+          "Gloves; Masks"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 167405,
+    "mcat_name": "Heavy Duty Trolley",
+    "specifications": [
+      {
+        "name": "Load Capacity",
+        "options": [
+          "500 kg",
+          "1000 kg (1 Ton)",
+          "300 kg",
+          "200 kg",
+          "2000 kg (2 Ton)",
+          "600 kg"
+        ]
+      },
+      {
+        "name": "Length",
+        "options": [
+          "3 ft",
+          "4 ft",
+          "5 ft",
+          "6 ft",
+          "10 ft",
+          "8 ft"
+        ]
+      },
+      {
+        "name": "Width",
+        "options": [
+          "2 ft",
+          "3 ft",
+          "4 ft",
+          "2.5 ft"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 167744,
+    "mcat_name": "Nipping Press",
+    "specifications": [
+      {
+        "name": "Capacity",
+        "options": [
+          "None"
+        ]
+      },
+      {
+        "name": "Automatic Grade",
+        "options": [
+          "Automatic",
+          "Manual",
+          "Semi Automatic"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 172076,
+    "mcat_name": "Pocket Weather Meter",
+    "specifications": [
+      {
+        "name": "Usage/Application",
+        "options": [
+          "Text"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 173240,
+    "mcat_name": "Paper Shredder Rental",
+    "specifications": [
+      {
+        "name": "Usage/Application",
+        "options": [
+          "Office Use",
+          "Industrial",
+          "Commercial",
+          "Other"
+        ]
+      },
+      {
+        "name": "Cutting Style",
+        "options": [
+          "Strip Cut",
+          "Cross Cut",
+          "Grinders",
+          "Other"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 174622,
+    "mcat_name": "Solid Waste Composting",
+    "specifications": [
+      {
+        "name": "Type Of Waste",
+        "options": [
+          "Biodegradable",
+          "Non-Biodegradable"
+        ]
+      },
+      {
+        "name": "Frequency",
+        "options": [
+          "Monthly",
+          "Bi-Yearly",
+          "Yearly",
+          "Other"
+        ]
+      },
+      {
+        "name": "Service Location",
+        "options": [
+          "Residential",
+          "Commercial",
+          "Industrial"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 174933,
+    "mcat_name": "Organic Waste Composter",
+    "specifications": [
+      {
+        "name": "Processing Capacity",
+        "options": [
+          "100 kg",
+          "50 kg",
+          "500 kg",
+          "25 kg",
+          "200 kg",
+          "5000 kg"
+        ]
+      },
+      {
+        "name": "Automation Grade",
+        "options": [
+          "Fully Automatic",
+          "Semi-Automatic",
+          "Manual"
+        ]
+      },
+      {
+        "name": "Material",
+        "options": [
+          "Stainless Steel",
+          "SS 304",
+          "Mild Steel",
+          "Rubber/PVC",
+          "Plastic"
+        ]
+      },
+      {
+        "name": "I am interested in",
+        "options": [
+          "Food Waste Composting Machine",
+          "Compost Equipment"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 177146,
+    "mcat_name": "Note Sorting Machine",
+    "specifications": [
+      {
+        "name": "Machine Type",
+        "options": [
+          "Mix Value Counter",
+          "Note Sorting",
+          "Note Counting",
+          "Heavy-Duty"
+        ]
+      },
+      {
+        "name": "Pocket Configuration",
+        "options": [
+          "1+1 Pocket",
+          "2+1 Pocket",
+          "Single Pocket"
+        ]
+      },
+      {
+        "name": "Key Features",
+        "options": [
+          "Fake Note Detect",
+          "Value Counting",
+          "Fitness Sorting",
+          "Multi-Currency",
+          "Serial No Reading"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 177582,
+    "mcat_name": "Automatic Die Cutting & Creasing Machine",
+    "specifications": [
+      {
+        "name": "Preferred Brand",
+        "options": [
+          "Text"
+        ]
+      },
+      {
+        "name": "Why do you need this",
+        "options": [
+          "For Reselling",
+          "For Business Use"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 177658,
+    "mcat_name": "Automatic Rigid Box Making Machine",
+    "specifications": [
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 178289,
+    "mcat_name": "Book Binding Wire",
+    "specifications": [
+      {
+        "name": "Ring Size",
+        "options": [
+          "10 mm",
+          "12 mm",
+          "22 mm",
+          "25 mm"
+        ]
+      },
+      {
+        "name": "Type of Requirement",
+        "options": [
+          "Monthly",
+          "Sample Only",
+          "Quarterly / Half Yearly / Annual"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 178348,
+    "mcat_name": "Holographic Lamination Film",
+    "specifications": [
+      {
+        "name": "Thickness",
+        "options": [
+          "24 micron",
+          "20 micron",
+          "30 micron",
+          "12 micron",
+          "50 micron"
+        ]
+      },
+      {
+        "name": "Holographic Ptrn",
+        "options": [
+          "Plain (Transparent)",
+          "Pillars of Light",
+          "Cracked Ice",
+          "Rainbow Sheen",
+          "Glitter / Sparkle",
+          "Custom Design"
+        ]
+      },
+      {
+        "name": "Lamination Type",
+        "options": [
+          "Thermal",
+          "Cold (Self Adh.)"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 178828,
+    "mcat_name": "Desktop Shredder",
+    "specifications": [
+      {
+        "name": "Shredding Machine Type",
+        "options": [
+          "Cross-Cut",
+          "Strip-Cut",
+          "Mini",
+          "Micro Cut"
+        ]
+      },
+      {
+        "name": "Why do you need this",
+        "options": [
+          "For Reselling",
+          "For Business Use",
+          "For Home Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 178829,
+    "mcat_name": "Strip Cut Shredder",
+    "specifications": [
+      {
+        "name": "Sheet Capacity",
+        "options": [
+          "6 Sheets",
+          "7 Sheets",
+          "8 Sheets",
+          "16 Sheets",
+          "20 Sheets",
+          "26 Sheets",
+          "35 Sheets"
+        ]
+      },
+      {
+        "name": "Shredding Machine Type",
+        "options": [
+          "Cross-Cut",
+          "Strip-Cut",
+          "Mini",
+          "Micro Cut"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 178831,
+    "mcat_name": "Heavy Duty Paper Shredder",
+    "specifications": [
+      {
+        "name": "Shredding Machine Type",
+        "options": [
+          "Cross-Cut",
+          "Strip-Cut",
+          "Mini",
+          "Micro Cut",
+          "Easy Cut"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 179098,
+    "mcat_name": "Bundle Note Counting Machines",
+    "specifications": [
+      {
+        "name": "Brand",
+        "options": [
+          "Godrej",
+          "Gobbler",
+          "Jectra",
+          "Kores",
+          "Swift",
+          "Lotus"
+        ]
+      },
+      {
+        "name": "Form Factor",
+        "options": [
+          "Floor Standing",
+          "Desktop",
+          "Handy/Portable"
+        ]
+      },
+      {
+        "name": "Warranty",
+        "options": [
+          "1 year",
+          "2 year"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 179099,
+    "mcat_name": "Loose Note Counting Machines",
+    "specifications": [
+      {
+        "name": "Machine Type",
+        "options": [
+          "Piece Counting",
+          "Mix Note Counting"
+        ]
+      },
+      {
+        "name": "Brand",
+        "options": [
+          "Gobbler",
+          "Godrej",
+          "Kores",
+          "Maxsell",
+          "Methodex",
+          "Phonix"
+        ]
+      },
+      {
+        "name": "Fake Note Detection",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 179951,
+    "mcat_name": "Micro Cut Paper Shredder",
+    "specifications": [
+      {
+        "name": "Sheet Capacity",
+        "options": [
+          "6",
+          "8",
+          "10",
+          "12",
+          "13",
+          "16",
+          "17"
+        ]
+      },
+      {
+        "name": "Shredding Machine Type",
+        "options": [
+          "Cross-Cut",
+          "Strip-Cut",
+          "Mini",
+          "Micro Cut"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 179952,
+    "mcat_name": "Medium Duty Shredder",
+    "specifications": [
+      {
+        "name": "Shredding Machine Type",
+        "options": [
+          "Cross-Cut",
+          "Strip-Cut",
+          "Mini",
+          "Micro Cut"
+        ]
+      },
+      {
+        "name": "Why do you need this",
+        "options": [
+          "For Reselling",
+          "For Business Use",
+          "For Home Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 181079,
+    "mcat_name": "Thread Book Sewing Machine",
+    "specifications": [
+      {
+        "name": "Why Do You Need This",
+        "options": [
+          "For Reselling",
+          "For Industrial Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 181987,
+    "mcat_name": "Safety Locker",
+    "specifications": [
+      {
+        "name": "Height",
+        "options": [
+          "61 inch",
+          "49 inch",
+          "30 inch",
+          "24 inch",
+          "12 inch"
+        ]
+      },
+      {
+        "name": "Model Name",
+        "options": [
+          "Defender",
+          "Defender Prime"
+        ]
+      },
+      {
+        "name": "Number of Doors",
+        "options": [
+          "Single Door",
+          "Double Door"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 182591,
+    "mcat_name": "Spiral Punching Machine",
+    "specifications": [
+      {
+        "name": "Punching Capacity",
+        "options": [
+          "25 Sheets",
+          "15 Sheets",
+          "20 Sheets",
+          "30 Sheets",
+          "10 Sheets",
+          "50 Sheets"
+        ]
+      },
+      {
+        "name": "Max Punching Width",
+        "options": [
+          "A4",
+          "A3",
+          "F/S (Foolscap)",
+          "12 inch",
+          "14 inch"
+        ]
+      },
+      {
+        "name": "Operation Mode",
+        "options": [
+          "Manual",
+          "Electric"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 184133,
+    "mcat_name": "Godrej Currency Counting Machines",
+    "specifications": [
+      {
+        "name": "Machine Type",
+        "options": [
+          "Bundle Counting",
+          "Loose Note Cntr",
+          "Mix Counting",
+          "Heavy Duty"
+        ]
+      },
+      {
+        "name": "Model Name",
+        "options": [
+          "Swift Turbo",
+          "Crusader Lite",
+          "Swift",
+          "Countmatic",
+          "Pro-sector Light",
+          "Crusader"
+        ]
+      },
+      {
+        "name": "Mounting Type",
+        "options": [
+          "Table Top",
+          "Floor Standing"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 184267,
+    "mcat_name": "RO UV Water Purifier",
+    "specifications": [
+      {
+        "name": "Purification Technology",
+        "options": [
+          "RO + UV",
+          "RO",
+          "UV",
+          "RO + UV + MTDS",
+          "RO + UV + Ozone",
+          "RO + UV + UF"
+        ]
+      },
+      {
+        "name": "Purification Capacity",
+        "options": [
+          "50 LPH",
+          "100 LPH",
+          "20 LPH",
+          "25 LPH",
+          "500 LPH",
+          "80 LPH"
+        ]
+      },
+      {
+        "name": "Storage Capacity",
+        "options": [
+          "12 L",
+          "7 L",
+          "50 L",
+          "120 L",
+          "80 L",
+          "9 L"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 184786,
+    "mcat_name": "Wiro Binding Machine",
+    "specifications": [
+      {
+        "name": "Size",
+        "options": [
+          "A3",
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "B3",
+          "B4",
+          "B5",
+          "B6",
+          "B7"
+        ]
+      },
+      {
+        "name": "Why do you need this",
+        "options": [
+          "Business Use",
+          "Reselling",
+          "Home Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 185114,
+    "mcat_name": "Bank Locker",
+    "specifications": [
+      {
+        "name": "No. of Lockers",
+        "options": [
+          "10",
+          "20",
+          "15",
+          "30",
+          "45",
+          "75"
+        ]
+      },
+      {
+        "name": "Locker Size Class",
+        "options": [
+          "Small (Class A)",
+          "Medium (Class B)",
+          "Large (Class C)",
+          "Extra Large (Class D)"
+        ]
+      },
+      {
+        "name": "Lock Type",
+        "options": [
+          "Dual Key Control",
+          "Digital Dual Key",
+          "Key + Biometric"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 185736,
+    "mcat_name": "RO Machines",
+    "specifications": [
+      {
+        "name": "Purification Capacity",
+        "options": [
+          "1000 LPH",
+          "250 LPH",
+          "500 LPH",
+          "2000 LPH",
+          "100 LPH",
+          "5000 LPH"
+        ]
+      },
+      {
+        "name": "Frame Material",
+        "options": [
+          "Stainless Steel",
+          "FRP"
+        ]
+      },
+      {
+        "name": "Automation Grade",
+        "options": [
+          "Automatic",
+          "Fully Automatic",
+          "Semi-Automatic"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 186006,
+    "mcat_name": "RO UV UF Water Purifier",
+    "specifications": [
+      {
+        "name": "Purification Tech",
+        "options": [
+          "RO + UV + UF",
+          "RO + UV",
+          "RO + UV + UF + TDS",
+          "RO + Alkaline",
+          "RO",
+          "RO + UF"
+        ]
+      },
+      {
+        "name": "Purification Capacity",
+        "options": [
+          "50 LPH",
+          "25 LPH",
+          "100 LPH",
+          "15 LPH",
+          "200 LPH",
+          "300 LPH"
+        ]
+      },
+      {
+        "name": "Storage Capacity",
+        "options": [
+          "25 L",
+          "50 L",
+          "10 L",
+          "15 L",
+          "100 L",
+          "200 L"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 186007,
+    "mcat_name": "UF Water Purifier",
+    "specifications": [
+      {
+        "name": "Purification Technology",
+        "options": [
+          "UF",
+          "UF + UV",
+          "UF + RO",
+          "UF + Sediment",
+          "UF + Activated Carbon"
+        ]
+      },
+      {
+        "name": "Purification Capacity",
+        "options": [
+          "15 LPH",
+          "25 LPH",
+          "50 LPH",
+          "100 LPH",
+          "250 LPH",
+          "500 LPH"
+        ]
+      },
+      {
+        "name": "Application",
+        "options": [
+          "Domestic",
+          "Commercial",
+          "Industrial",
+          "Office",
+          "School"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 186886,
+    "mcat_name": "Matt Lamination Film",
+    "specifications": [
+      {
+        "name": "Lamination Type",
+        "options": [
+          "Cold",
+          "Thermal"
+        ]
+      },
+      {
+        "name": "Roll Width",
+        "options": [
+          "13 inch",
+          "12 inch",
+          "42 inch",
+          "50 inch",
+          "24 inch",
+          "18 inch"
+        ]
+      },
+      {
+        "name": "Thickness",
+        "options": [
+          "27 micron",
+          "20 micron",
+          "12 micron",
+          "30 micron",
+          "90 micron",
+          "80 micron"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 187050,
+    "mcat_name": "Hydraulic Paper Cutting Machine",
+    "specifications": [
+      {
+        "name": "Cutting Width",
+        "options": [
+          "36 inch",
+          "42 inch",
+          "32 inch",
+          "45 inch",
+          "52 inch",
+          "60 inch"
+        ]
+      },
+      {
+        "name": "Stacking Height",
+        "options": [
+          "6 inch",
+          "4.5 inch",
+          "5 inch",
+          "4 inch",
+          "6.5 inch"
+        ]
+      },
+      {
+        "name": "Motor Power",
+        "options": [
+          "3 HP",
+          "5 HP",
+          "2 HP",
+          "7.5 HP",
+          "4 HP",
+          "1.5 HP"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 188162,
+    "mcat_name": "Food Waste Composting Machine",
+    "specifications": [
+      {
+        "name": "Daily Capacity",
+        "options": [
+          "50 kg/day",
+          "100 kg/day",
+          "25 kg/day",
+          "500 kg/day",
+          "1000 kg/day",
+          "200 kg/day"
+        ]
+      },
+      {
+        "name": "Automation Grade",
+        "options": [
+          "Fully Automatic",
+          "Semi-Automatic",
+          "Manual"
+        ]
+      },
+      {
+        "name": "Material",
+        "options": [
+          "Stainless Steel",
+          "Mild Steel (MS)",
+          "SS 304",
+          "SS 202"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 188933,
+    "mcat_name": "Steel Security Safe",
+    "specifications": [
+      {
+        "name": "Height",
+        "options": [
+          "4 ft",
+          "5 ft",
+          "3 ft",
+          "3.5 ft",
+          "6 ft",
+          "2.5 ft"
+        ]
+      },
+      {
+        "name": "Weight",
+        "options": [
+          "1000 kg (1 Ton)",
+          "1400 kg",
+          "2000 kg (2 Ton)",
+          "1500 kg",
+          "350 kg",
+          "800-900 kg"
+        ]
+      },
+      {
+        "name": "Door Type",
+        "options": [
+          "Single Door",
+          "Double Door"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 190120,
+    "mcat_name": "Automatic Lamination Machine",
+    "specifications": [
+      {
+        "name": "Lamination Width",
+        "options": [
+          "63 inch",
+          "30 inch",
+          "32 inch",
+          "60 inch (5 ft)",
+          "24 inch",
+          "25 inch"
+        ]
+      },
+      {
+        "name": "Lamination Type",
+        "options": [
+          "Thermal (Hot)",
+          "Hot and Cold",
+          "Cold"
+        ]
+      },
+      {
+        "name": "Compatible Paper Size",
+        "options": [
+          "A3",
+          "12 x 18 inch",
+          "A4",
+          "13 x 19 inch"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 190858,
+    "mcat_name": "Flat Bed Die Cut Punching Machine",
+    "specifications": [
+      {
+        "name": "Machine Size",
+        "options": [
+          "28 x 40 inch",
+          "22 x 32 inch",
+          "32 x 42 inch",
+          "40 x 56 inch",
+          "18 x 24 inch",
+          "52 x 72 inch"
+        ]
+      },
+      {
+        "name": "Operation Mode",
+        "options": [
+          "Semi-automatic",
+          "Manual",
+          "Automatic"
+        ]
+      },
+      {
+        "name": "Application",
+        "options": [
+          "Die Cutting",
+          "Creasing",
+          "Sticker Half Cut",
+          "Embossing",
+          "Box Making"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 192462,
+    "mcat_name": "Hardcover Making Machine",
+    "specifications": [
+      {
+        "name": "Automatic Grade",
+        "options": [
+          "Automatic",
+          "Semi-Automatic"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 203783,
+    "mcat_name": "Kores Counting Machines",
+    "specifications": [
+      {
+        "name": "Counting Mode",
+        "options": [
+          "Mixed Value Count",
+          "Value Counting",
+          "Piece Counting",
+          "Sort Function",
+          "Multi-Currency"
+        ]
+      },
+      {
+        "name": "Fake Note Tech",
+        "options": [
+          "UV; MG & IR",
+          "Advanced CIS",
+          "UV & MG"
+        ]
+      },
+      {
+        "name": "Key Functions",
+        "options": [
+          "Batch & Add Mode",
+          "Denom Breakdown",
+          "External Display",
+          "Heavy Duty Usage"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 206045,
+    "mcat_name": "Saga Cutting Plotter",
+    "specifications": [
+      {
+        "name": "Classification",
+        "options": [
+          "Single blade Cutter",
+          "Double blade Cutter",
+          "Flat Knife Cutter"
+        ]
+      },
+      {
+        "name": "Blade Material",
+        "options": [
+          "None"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 206872,
+    "mcat_name": "Kores Paper Shredding Machine",
+    "specifications": [
+      {
+        "name": "Shredding Machine Type",
+        "options": [
+          "Cross-cut",
+          "Strip-cut",
+          "Micro-cut"
+        ]
+      },
+      {
+        "name": "Why do you need this",
+        "options": [
+          "For Reselling",
+          "For Business Use"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 215081,
+    "mcat_name": "Fellowes Paper Shredding Machine",
+    "specifications": [
+      {
+        "name": "Shredding Machine Type",
+        "options": [
+          "Cross Cut",
+          "Strip Cut",
+          "Mini",
+          "Micro Cut",
+          "High Security"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 215082,
+    "mcat_name": "GBC Paper Shredding Machine",
+    "specifications": [
+      {
+        "name": "Shredding Machine Type",
+        "options": [
+          "Strip-cut",
+          "Cross-cut",
+          "Super Cross-cut",
+          "Micro-cut",
+          "High Security"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 215086,
+    "mcat_name": "Avanti Paper Shredding Machine",
+    "specifications": [
+      {
+        "name": "Shredding Machine Type",
+        "options": [
+          "Strip Cut",
+          "Micro Cut",
+          "Cross Cut"
+        ]
+      },
+      {
+        "name": "Shred Capacity",
+        "options": [
+          "6 Sheets",
+          "8 Sheets",
+          "12 Sheets",
+          "15 Sheets",
+          "18 Sheets",
+          "20 Sheets",
+          "25 Sheets",
+          "28 Sheets",
+          "30 Sheets",
+          "40 Sheets",
+          "50 Sheets",
+          "70 Sheets",
+          "100 Sheets",
+          "125 Sheets",
+          "150 Sheets"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 215157,
+    "mcat_name": "Antiva Paper Shredders",
+    "specifications": [
+      {
+        "name": "Shredding Machine Type",
+        "options": [
+          "Personal & Small Office",
+          "Micro Cut",
+          "Office and Desk Side Office",
+          "Professional",
+          "Commercial",
+          "Departmental",
+          "Heavy Duty"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 215158,
+    "mcat_name": "Pilot Paper Shredders",
+    "specifications": [
+      {
+        "name": "Shredding Machine Type",
+        "options": [
+          "Cross-Cut",
+          "Strip-Cut",
+          "Mini",
+          "Micro Cut"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 221665,
+    "mcat_name": "Godrej Safety Locker",
+    "specifications": [
+      {
+        "name": "Height",
+        "options": [
+          "61 inch",
+          "41 inch",
+          "49 inch",
+          "24 inch",
+          "30 inch"
+        ]
+      },
+      {
+        "name": "Model",
+        "options": [
+          "Defender",
+          "Defender Prime",
+          "Centiguard",
+          "Citadel"
+        ]
+      },
+      {
+        "name": "Door Type",
+        "options": [
+          "Single Door",
+          "Double Door"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 224426,
+    "mcat_name": "HEPA Air Purifier",
+    "specifications": [
+      {
+        "name": "Coverage Area",
+        "options": [
+          "450 sq ft",
+          "300 sq ft",
+          "600 sq ft",
+          "250 sq ft",
+          "800 sq ft",
+          "1000 sq ft"
+        ]
+      },
+      {
+        "name": "CADR (m3/hr)",
+        "options": [
+          "250 m³/hr",
+          "400 m³/hr",
+          "320 m³/hr",
+          "500 m³/hr",
+          "600 m³/hr",
+          "150 m³/hr"
+        ]
+      },
+      {
+        "name": "Filter Combination",
+        "options": [
+          "Pre+HEPA+Carbon",
+          "HEPA + Carbon",
+          "HEPA H13 Grade",
+          "HEPA + UV-C",
+          "HEPA + Pre-filter",
+          "HEPA H14 Grade"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 235607,
+    "mcat_name": "Organic Waste Shredding Machine",
+    "specifications": [
+      {
+        "name": "Processed Material",
+        "options": [
+          "Food/Kitchen Waste",
+          "Garden/Green Waste",
+          "Agricultural Waste",
+          "Coconut Husks",
+          "Market Yard Waste"
+        ]
+      },
+      {
+        "name": "Shred Capacity",
+        "options": [
+          "100 kg/hr",
+          "250 kg/hr",
+          "50 kg/hr",
+          "500 kg/hr",
+          "1 ton/hr"
+        ]
+      },
+      {
+        "name": "Motor Power",
+        "options": [
+          "5 HP",
+          "3 HP",
+          "7.5 HP",
+          "10 HP",
+          "2 HP"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 445883,
+    "mcat_name": "E Waste Shredder",
+    "specifications": [
+      {
+        "name": "Shred Capacity",
+        "options": [
+          "300 kg/hr",
+          "500 kg/hr",
+          "200 kg/hr",
+          "100 kg/hr",
+          "1 ton/hr"
+        ]
+      },
+      {
+        "name": "Shaft Type",
+        "options": [
+          "Double Shaft",
+          "Single Shaft",
+          "Quad Shaft"
+        ]
+      },
+      {
+        "name": "Processed Material",
+        "options": [
+          "Mixed E-waste",
+          "PCBs",
+          "Hard Drives",
+          "Cables & Wires",
+          "Small Appliances"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "mcat_id": 658474,
+    "mcat_name": "Glass Bottle Crusher",
+    "specifications": [
+      {
+        "name": "Capacity",
+        "options": [
+          "100 kg/hr",
+          "500 kg/hr",
+          "1000 kg/hr",
+          "200 kg/hr",
+          "150 kg/hr",
+          "50 kg/hr"
+        ]
+      },
+      {
+        "name": "Power",
+        "options": [
+          "5 HP",
+          "3 HP",
+          "2 HP",
+          "1.5 HP",
+          "7.5 HP",
+          "30 HP"
+        ]
+      },
+      {
+        "name": "Output Form",
+        "options": [
+          "Powder",
+          "Pieces",
+          "Powder & Dana",
+          "Cullet",
+          "Crystals",
+          "Fine Powder"
+        ]
+      },
+      {
+        "name": "Finance/Loan Requirement",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  }
+]

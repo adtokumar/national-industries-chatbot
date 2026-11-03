@@ -1,0 +1,20 @@
+{
+  "name": "national-industries-chatbot",
+  "version": "1.0.0",
+  "description": "Conversational AI Sales Assistant for National Industries (Namibind)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "cli": "node cli.js",
+    "test": "node tests/test_chatbot.js"
+  },
+  "keywords": [
+    "indiamart",
+    "chatbot",
+    "namibind",
+    "national-industries",
+    "sales-agent"
+  ],
+  "author": "National Industries",
+  "license": "ISC"
+}

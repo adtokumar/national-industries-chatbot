@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: namibind-sales-chatbot
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: echo "Zero-dependency server ready"
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 3000

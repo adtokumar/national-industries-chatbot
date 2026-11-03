@@ -1,0 +1,398 @@
+/**
+ * Automated Verification & Evaluation Suite for National Industries ChatBot
+ */
+
+const assert = require('assert');
+const ChatbotEngine = require('../chatbot_engine');
+
+async function runTestSuite() {
+  console.log('====================================================');
+  console.log('🧪 Starting National Industries ChatBot Test Suite');
+  console.log('====================================================\n');
+
+  const engine = new ChatbotEngine(__dirname + '/..');
+  let passed = 0;
+  let total = 0;
+
+  function test(name, fn) {
+    total++;
+    try {
+      fn();
+      console.log(`✅ PASS: ${name}`);
+      passed++;
+    } catch (err) {
+      console.error(`❌ FAIL: ${name}`);
+      console.error(err);
+    }
+  }
+
+  async function testAsync(name, fn) {
+    total++;
+    try {
+      await fn();
+      console.log(`✅ PASS: ${name}`);
+      passed++;
+    } catch (err) {
+      console.error(`❌ FAIL: ${name}`);
+      console.error(err);
+    }
+  }
+
+  // TEST 1: Initialization & Data integrity
+  test('Data Sources Loaded Correctly', () => {
+    assert.strictEqual(engine.productCards.length, 39, 'Should load 39 product cards');
+    assert.strictEqual(engine.categoryFallbacks.length, 205, 'Should load 205 fallback categories');
+    assert.strictEqual(engine.catalogProducts.length, 569, 'Should load 569 catalog products');
+    assert.strictEqual(engine.businessCard.name, 'National Industries', 'Should parse business card');
+    assert.strictEqual(engine.businessCard.brand, 'Namibind', 'Should identify Namibind brand');
+  });
+
+  // TEST 2: Product Card Matching & Variant Options
+  await testAsync('Product Card Matching (Paper Shredder) & Specification Prompting', async () => {
+    const sId = 't_shredder_' + Date.now();
+    const res1 = await engine.processMessage(sId, 'I need a paper shredder');
+
+    assert.strictEqual(res1.stage, 'COLLECTING_SPECS');
+    assert.strictEqual(res1.context.type, 'product_card');
+    assert.strictEqual(res1.context.name, 'Paper Shredder');
+    assert(res1.chips.length > 0, 'Should offer quick options for sheet capacity');
+    assert(res1.text.includes('sheet capacity'), 'Should ask sheet capacity question');
+  });
+
+  // TEST 3: Quantity Exists Rule (Must Ask Quantity)
+  await testAsync('Quantity Rule: Asks for Quantity when selling_unit exists (Currency Counting Machine)', async () => {
+    const sId = 't_qty_ask_' + Date.now();
+    // Start currency counting machine flow
+    const resStart = await engine.processMessage(sId, 'I need a currency counting machine');
+    assert.strictEqual(resStart.stage, 'COLLECTING_SPECS');
+
+    // Answer form factor
+    await engine.processMessage(sId, 'Desktop');
+    // Answer machine type
+    const resQtyPrompt = await engine.processMessage(sId, 'Loose Note Counting');
+
+    // Should prompt for quantity in pieces
+    assert.strictEqual(resQtyPrompt.stage, 'COLLECTING_QUANTITY');
+    assert(resQtyPrompt.text.includes('pieces'), 'Should ask how many pieces');
+
+    // Supply quantity
+    const resQualified = await engine.processMessage(sId, '3 pieces');
+    assert.strictEqual(resQualified.stage, 'QUALIFIED');
+    assert.strictEqual(resQualified.quantity, '3 pieces');
+  });
+
+  // TEST 4: Quantity NOT Exists Rule (Must SKIP Quantity)
+  await testAsync('Quantity Rule: Skips Quantity when selling_unit does NOT exist (Book Pressing Machine)', async () => {
+    const sId = 't_qty_skip_' + Date.now();
+    // Book Pressing Machine has selling_unit: undefined
+    const res = await engine.processMessage(sId, 'I want Book Pressing Machine');
+
+    // Should NOT be stuck in COLLECTING_QUANTITY
+    assert.notStrictEqual(res.stage, 'COLLECTING_QUANTITY');
+    assert.strictEqual(res.stage, 'QUALIFIED');
+    assert.strictEqual(res.quantity, null, 'Quantity should be null (skipped)');
+    assert(res.text.includes('Book Pressing Machine'));
+  });
+
+  // TEST 5: Category Fallback Matching (Hot Melt Adhesives)
+  await testAsync('Category Fallback Matching & Spec Questions (Hot Melt Adhesives)', async () => {
+    const sId = 't_fallback_' + Date.now();
+    const res = await engine.processMessage(sId, 'Looking for Hot Melt Adhesives');
+
+    assert.strictEqual(res.context.type, 'category_fallback');
+    assert.strictEqual(res.context.name, 'Hot Melt Adhesives');
+    assert.strictEqual(res.stage, 'COLLECTING_SPECS');
+    assert(res.chips.includes('Transparent') || res.chips.includes('Yellow'), 'Should offer fallback spec options');
+  });
+
+  // TEST 6: Primary Guardrail - Freight Policy
+  await testAsync('Primary Guardrail: Freight charges are quote-specific (No universal free delivery)', async () => {
+    const sId = 't_freight_' + Date.now();
+    const res = await engine.processMessage(sId, 'Can you give free delivery to Chennai? What are shipping charges?');
+
+    assert(res.text.toLowerCase().includes('freight charges are quote-specific') || res.text.toLowerCase().includes('shipping'));
+    assert(res.text.toLowerCase().includes('not offer universal free delivery') || res.text.toLowerCase().includes('logistics team'));
+    assert(res.guardrailsTriggered.some(g => g.toLowerCase().includes('freight')));
+  });
+
+  // TEST 7: Primary Guardrail - GST Policy
+  await testAsync('Primary Guardrail: GST is item-specific (No global inclusion commitment)', async () => {
+    const sId = 't_gst_' + Date.now();
+    const res = await engine.processMessage(sId, 'Is 18% GST already included in the price?');
+
+    assert(res.text.toLowerCase().includes('gst terms are item-specific') || res.text.toLowerCase().includes('gst'));
+    assert(res.text.includes('07ADFPC0400Q1ZV'), 'Should mention verified GSTIN');
+    assert(res.guardrailsTriggered.some(g => g.toLowerCase().includes('gst')));
+  });
+
+  // TEST 8: Primary Guardrail - Stock Availability & Lead Time
+  await testAsync('Primary Guardrail: Stock availability by machinery type (No global promises)', async () => {
+    const sId = 't_stock_' + Date.now();
+    const res = await engine.processMessage(sId, 'Do you have ready stock available for immediate dispatch?');
+
+    assert(res.text.toLowerCase().includes('paper shredders are generally available in ready stock') || res.text.toLowerCase().includes('lead time'));
+    assert(res.text.toLowerCase().includes('5–6') || res.text.toLowerCase().includes('against order'));
+  });
+
+  // TEST 9: Strict Guardrail - Do Not Share Price Anywhere
+  await testAsync('Strict Guardrail: Do not share price anywhere (Quote-based pricing only)', async () => {
+    const sId = 't_price_' + Date.now();
+    const res = await engine.processMessage(sId, 'Can you give 50% discount on final wholesale price?');
+
+    assert(!res.text.includes('₹') && !res.text.toLowerCase().includes('rs.'), 'Must not share numeric prices');
+    assert(res.text.toLowerCase().includes('quotation') || res.text.toLowerCase().includes('pricing is shared'));
+  });
+
+  // TEST 10: Business Card Info & Address
+  await testAsync('Business Card: Verified identity and address', async () => {
+    const sId = 't_identity_' + Date.now();
+    const res = await engine.processMessage(sId, 'Where is your factory located and who is the CEO?');
+
+    assert(res.text.includes('Ashok Kumar Chowdhury'), 'CEO name should be Ashok Kumar Chowdhury');
+    assert(res.text.includes('Sultanpur'), 'Address should mention Sultanpur, New Delhi');
+    assert(res.text.includes('7942534248'), 'Phone number should be present');
+  });
+
+  // TEST 11: Catalog Product Search & Namibind URL (No prices shared)
+  await testAsync('Catalog Integration: Links to namibind.co.in without sharing prices', async () => {
+    const sId = 't_catalog_' + Date.now();
+    const res = await engine.processMessage(sId, 'Electric Motor Hammer Mill Wood Crusher Machine');
+
+    // Spec collection starts — products are intentionally omitted once an enquiry begins
+    assert(!res.text.includes('₹') && !res.text.toLowerCase().includes('6,90,000'), 'Must not share price numbers');
+    // Verify catalog data itself contains namibind.co.in URLs
+    const catalogProducts = engine.searchCatalogProducts('Wood Crusher', 3);
+    assert(catalogProducts.length > 0, 'Should find products in catalog data');
+    assert(catalogProducts[0].product_url && catalogProducts[0].product_url.includes('namibind.co.in'), 'Product URL must point to namibind.co.in');
+  });
+
+  // TEST 12: In-flight price query during spec collection (No price shared)
+  await testAsync('Mid-conversation handling: Pricing inquiry during spec collection', async () => {
+    const sId = 't_mid_price_' + Date.now();
+    await engine.processMessage(sId, 'I want a Currency Counting Machine');
+    const res = await engine.processMessage(sId, 'What is the price of this machine?');
+
+    assert(!res.text.includes('₹') && !res.text.toLowerCase().includes('rs.'), 'Must not quote numbers');
+    assert(res.text.includes('quotation') || res.text.includes('Pricing is determined'));
+    assert.strictEqual(res.stage, 'COLLECTING_SPECS');
+  });
+
+  // TEST 13: In-flight freight query during spec collection
+  await testAsync('Mid-conversation handling: Freight inquiry during spec collection', async () => {
+    const sId = 't_mid_freight_' + Date.now();
+    await engine.processMessage(sId, 'I need a paper shredder');
+    const res = await engine.processMessage(sId, 'What are the delivery charges to Pune?');
+
+    assert(res.text.includes('Freight charges are quote-specific'));
+    assert(res.text.includes('sheet capacity'));
+    assert.strictEqual(res.stage, 'COLLECTING_SPECS');
+  });
+
+  // TEST 14: Disambiguation between distinct binding machine categories
+  await testAsync('Category Disambiguation: Spiral vs Wiro vs Glue Binding', async () => {
+    const sId1 = 't_spiral_' + Date.now();
+    const resSpiral = await engine.processMessage(sId1, 'Spiral Binding Machine');
+    assert.strictEqual(resSpiral.context.name, 'Spiral Binding Machine');
+
+    const sId2 = 't_wiro_' + Date.now();
+    const resWiro = await engine.processMessage(sId2, 'Wiro Binding Machine');
+    assert.strictEqual(resWiro.context.name, 'Wiro Binding Machine');
+
+    const sId3 = 't_glue_' + Date.now();
+    const resGlue = await engine.processMessage(sId3, 'Glue Binding Machine');
+    assert.strictEqual(resGlue.context.name, 'Glue Binding Machine');
+  });
+
+  // TEST 15: Lead escalation payload verification
+  await testAsync('Lead Escalation: Summary payload includes seller contact and specs', async () => {
+    const sId = 't_escalate_' + Date.now();
+    await engine.processMessage(sId, 'I want a Currency Counting Machine');
+    await engine.processMessage(sId, 'Desktop');
+    await engine.processMessage(sId, 'Loose Note Counting');
+    const res = await engine.processMessage(sId, '5 pieces');
+
+    assert.strictEqual(res.stage, 'QUALIFIED');
+    assert(res.leadSummary, 'leadSummary must be populated');
+    assert.strictEqual(res.leadSummary.category, 'Currency Counting Machine');
+    assert.strictEqual(res.leadSummary.quantity, '5 pieces');
+    assert.strictEqual(res.leadSummary.specs.form_factor, 'Desktop');
+    assert(res.text.includes('Summary of your requirement'));
+    assert(res.text.includes('quotation'));
+    assert(res.leadSummary.sellerContact.includes('7942534248'));
+    assert(res.products && res.products.length > 0, 'Must include recommended products for enquired category on summary');
+    assert(res.products[0].url.includes('namibind.co.in'), 'Product URL must link to namibind.co.in');
+  });
+
+  // TEST 16: Other Options navigation
+  await testAsync('Navigation: "Other Options" chip displays policy & company contact options', async () => {
+    const sId = 't_options_' + Date.now();
+    const resInit = await engine.processMessage(sId, '');
+    assert(resInit.chips.includes('Other Options'), 'Initial chips must include "Other Options"');
+    assert(!resInit.chips.includes('Shipping & Freight Policy'), 'Initial chips must not directly show Shipping policy');
+    assert(!resInit.chips.includes('Company Location & Contact'), 'Initial chips must not directly show Contact');
+
+    const resOther = await engine.processMessage(sId, 'Other Options');
+    assert(resOther.chips.includes('Shipping & Freight Policy'), 'Other options must include Shipping & Freight Policy');
+    assert(resOther.chips.includes('Company Location & Contact'), 'Other options must include Company Location & Contact');
+
+    const resFreight = await engine.processMessage(sId, 'Shipping & Freight Policy');
+    assert(resFreight.text.toLowerCase().includes('freight charges are quote-specific'));
+
+    const resContact = await engine.processMessage(sId, 'Company Location & Contact');
+    assert(resContact.text.includes('7942534248'));
+    assert(!resContact.text.includes('Ashok Kumar Chowdhury'), 'Contact output must not include CEO name');
+    assert(!resContact.text.includes('Sultanpur'), 'Contact output must not include address');
+    assert(!resContact.chips.includes('Contact Sales'), 'Contact output chips must not self-reference Contact Sales');
+    assert(resContact.text.includes('tel:7942534248'), 'Must include clickable phone link');
+  });
+
+  // TEST 17: Explore Products & Get a Quote navigation
+  await testAsync('Navigation: "Explore Products" & "Get a Quote" return category menu without random products', async () => {
+    const sId = 't_explore_' + Date.now();
+    const resExplore = await engine.processMessage(sId, 'Explore Products');
+    assert(resExplore.chips.includes('Paper Shredder Machine'));
+    assert(resExplore.chips.includes('Other Options'));
+    assert(!resExplore.products, 'Must not return random catalog products on Explore Products');
+
+    const resQuote = await engine.processMessage(sId, 'Get a Quote');
+    assert(resQuote.chips.includes('Currency Counting Machine'));
+    assert(!resQuote.products, 'Must not return random catalog products on Get a Quote');
+
+    const resSales = await engine.processMessage(sId, 'Contact Sales');
+    assert(resSales.text.includes('7942534248'));
+  });
+
+  // TEST 18: General enquiry intent (e.g. "what all do you sell?")
+  await testAsync('Enquiry Intent: "what all do you sell?" shares only specific categories to select from', async () => {
+    const sId = 't_sell_' + Date.now();
+    const res = await engine.processMessage(sId, 'what all do you sell?');
+    assert(res.text.includes('Paper Shredding Machines'), 'Must list core categories');
+    assert(res.text.includes('Currency Counting Machines'), 'Must list core categories');
+    assert(res.chips.includes('Paper Shredder Machine'), 'Must offer category chips');
+    assert(res.chips.includes('Other Options'), 'Must offer Other Options chip');
+    assert(!res.products || res.products.length === 0, 'Must not return random catalog products');
+    assert(!res.text.includes('Cold Lamination Machine 1600mm'), 'Must not display a single random model');
+  });
+
+  // TEST 19: Conversation logging for analysis
+  await testAsync('Logging: User interactions and responses are logged to disk for analysis', async () => {
+    const sId = 't_log_' + Date.now();
+    await engine.processMessage(sId, 'I need a paper shredder');
+    await engine.processMessage(sId, '25 sheets');
+
+    const logs = engine.getConversationLogs(10);
+    assert(logs.length >= 2, 'Must have at least 2 log entries');
+    const userLog = logs.find(l => l.sessionId === sId && l.userMessage === '25 sheets');
+    assert(userLog, 'Must record user turn with exact input');
+    assert.strictEqual(userLog.turn, 2, 'Turn count must match');
+    assert.strictEqual(userLog.context.name, 'Paper Shredder', 'Context must be logged');
+
+    const analytics = engine.getLogAnalytics();
+    assert(analytics.totalInteractions >= 2, 'Analytics must track total interactions');
+    assert(analytics.totalSessions >= 1, 'Analytics must track unique sessions');
+  });
+
+  // TEST 20: Broad category disambiguation for generic terms (e.g. "paper", "binding")
+  await testAsync('Broad Disambiguation: Generic terms ("paper", "binding") offer relevant subcategories', async () => {
+    const sIdPaper = 't_paper_' + Date.now();
+    const resPaper = await engine.processMessage(sIdPaper, 'paper');
+    assert(resPaper.chips.includes('Paper Shredder Machine'), 'Must offer Paper Shredder Machine');
+    assert(resPaper.chips.includes('Paper Cutting Machine'), 'Must offer Paper Cutting Machine');
+    assert(resPaper.chips.includes('Paper Punching Machine'), 'Must offer Paper Punching Machine');
+    assert(!resPaper.context, 'Must not arbitrarily lock into a sub-card');
+
+    const sIdBinding = 't_bind_' + Date.now();
+    const resBinding = await engine.processMessage(sIdBinding, 'binding');
+    assert(resBinding.chips.includes('Spiral Binding Machine'), 'Must offer Spiral Binding Machine');
+    assert(resBinding.chips.includes('Wiro Binding Machine'), 'Must offer Wiro Binding Machine');
+  });
+
+  // TEST 21: Stemming & alias matching ("holing machine", "hole")
+  await testAsync('Stemming & Aliases: "holing machine" and "hole" route to Paper Punching Machine', async () => {
+    const sIdHoling = 't_holing_' + Date.now();
+    const resHoling = await engine.processMessage(sIdHoling, 'holing machine');
+    assert.strictEqual(resHoling.context.name, 'Paper Punching Machine', 'Must match Paper Punching Machine');
+    assert(resHoling.chips.includes('Single Hole'), 'Must offer Single Hole option');
+    assert(resHoling.chips.includes('Double Hole'), 'Must offer Double Hole option');
+
+    const sIdHole = 't_hole_' + Date.now();
+    const resHole = await engine.processMessage(sIdHole, 'hole');
+    assert.strictEqual(resHole.context.name, 'Paper Punching Machine', 'Must match Paper Punching Machine');
+  });
+
+  // TEST 22: Plural stemming ("notes") & mid-conversation fallback acknowledgment ("tray")
+  await testAsync('Plural Stemming & Contextual Fallback: "notes" routes to CCM; "tray" acknowledged mid-chat', async () => {
+    const sIdNotes = 't_notes_' + Date.now();
+    const resNotes = await engine.processMessage(sIdNotes, 'notes');
+    assert.strictEqual(resNotes.context.name, 'Currency Counting Machine', '"notes" must route to Currency Counting Machine');
+    assert(resNotes.chips.includes('Desktop'), 'Must offer Desktop option');
+    assert(resNotes.chips.includes('Floor Model'), 'Must offer Floor Model option');
+
+    const sIdTray = 't_tray_' + Date.now();
+    await engine.processMessage(sIdTray, 'Get a Quote');
+    const resTray = await engine.processMessage(sIdTray, 'tray');
+    assert(resTray.text.includes('"tray"'), 'Must acknowledge unmatched term "tray"');
+    assert(resTray.chips.includes('Paper Shredder Machine'), 'Must offer category chips');
+  });
+
+  // TEST 23: Dynamic recommendations on category selection and spec refinement
+  await testAsync('Dynamic Recommendations: Category selection shows top models; spec answers dynamically update recommendations', async () => {
+    // 1. Initial category selection shows top category models
+    const sId = 't_recom_' + Date.now();
+    const res1 = await engine.processMessage(sId, 'Paper Shredder Machine');
+    assert.strictEqual(res1.stage, 'COLLECTING_SPECS', 'Must be in COLLECTING_SPECS stage');
+    assert(Array.isArray(res1.products) && res1.products.length > 0, 'Must return initial top recommendations for Paper Shredder');
+    assert(res1.products.some(p => p.name.toLowerCase().includes('shredder')), 'Must recommend shredders');
+
+    // 2. Answering spec with "Cross Cut" updates recommendations to Cross Cut models
+    const res2 = await engine.processMessage(sId, 'Cross Cut');
+    assert(Array.isArray(res2.products) && res2.products.length > 0, 'Must return updated recommendations');
+    assert(res2.products.every(p => p.name.toLowerCase().includes('cross cut')), 'All top recommendations must be Cross Cut models');
+
+    // 3. Alternative session selecting "Strip Cut" updates recommendations to Strip Cut models
+    const sIdStrip = 't_recom_strip_' + Date.now();
+    await engine.processMessage(sIdStrip, 'Paper Shredder Machine');
+    const resStrip = await engine.processMessage(sIdStrip, 'Strip Cut');
+    assert(Array.isArray(resStrip.products) && resStrip.products.length > 0, 'Must return updated recommendations for Strip Cut');
+    assert(resStrip.products.some(p => p.name.toLowerCase().includes('strip cut')), 'Top recommendations must include Strip Cut models');
+    assert(!resStrip.products[0].name.toLowerCase().includes('cross cut'), 'Top recommendation must not be Cross Cut');
+  });
+
+  // TEST 24: Product Selection removes recommendations from subsequent messages
+  await testAsync('Product Selection: Selecting a product removes recommendations from subsequent messages', async () => {
+    // 1. Initial category selection shows recommendations
+    const sId = 't_sel_recom_' + Date.now();
+    const res1 = await engine.processMessage(sId, 'Paper Shredder Machine');
+    assert.strictEqual(res1.stage, 'COLLECTING_SPECS');
+    assert(Array.isArray(res1.products) && res1.products.length > 0, 'Must have recommendations on category selection');
+
+    // 2. Select a specific product model
+    const res2 = await engine.processMessage(sId, 'Select Cross Cut Paper Shredder 35 Sheet Heavy Duty 70L Bin Departmental Office Shredder');
+    assert.strictEqual(res2.stage, 'COLLECTING_QUANTITY');
+    assert(res2.text.includes('Cross Cut Paper Shredder 35 Sheet'), 'Must acknowledge selected product');
+    assert(!res2.products || res2.products.length === 0, 'Must remove product recommendations when product is selected');
+
+    // 3. Subsequent message (providing quantity) must also NOT include product recommendations
+    const res3 = await engine.processMessage(sId, '2 Pieces');
+    assert.strictEqual(res3.stage, 'QUALIFIED');
+    assert(res3.text.includes('Selected Model'), 'Lead summary must specify selected model');
+    assert(!res3.products || res3.products.length === 0, 'Subsequent qualified summary must not recommend other products');
+
+    // 4. Further subsequent message (policy query) must also NOT include product recommendations
+    const res4 = await engine.processMessage(sId, 'What is your shipping freight policy?');
+    assert(!res4.products || res4.products.length === 0, 'Subsequent policy query must not recommend other products');
+  });
+
+  console.log('\n====================================================');
+  console.log(`🏁 Test Results: ${passed} / ${total} Passed`);
+  console.log('====================================================\n');
+
+  if (passed !== total) {
+    process.exit(1);
+  }
+}
+
+runTestSuite().catch(err => {
+  console.error('Test suite failed:', err);
+  process.exit(1);
+});
