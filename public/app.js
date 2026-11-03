@@ -1,6 +1,16 @@
 // Clean Chat Interface Logic with In-Bubble Suggested Chips
 const sessionId = 'session_' + Math.random().toString(36).substring(2, 9);
 
+// Vercel Web Analytics tracking helper
+window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+function trackEvent(name, data = {}) {
+  try {
+    if (typeof window.va === 'function') {
+      window.va('event', { name, ...data });
+    }
+  } catch (e) {}
+}
+
 const chatMessages = document.getElementById('chat-messages');
 const chatForm = document.getElementById('chat-form');
 const userInput = document.getElementById('user-input');
@@ -43,6 +53,13 @@ async function sendMessage(text, isInitial = false) {
 
     const data = await res.json();
     appendMessage('bot', data.text, data.products || [], data.chips || []);
+
+    if (data.stage === 'QUALIFIED' && data.leadSummary) {
+      trackEvent('lead_qualified', {
+        category: data.leadSummary.category,
+        model: data.leadSummary.selectedProduct || 'General'
+      });
+    }
 
   } catch (err) {
     console.error('Chat error:', err);
@@ -113,6 +130,7 @@ function appendMessage(sender, text, products = [], chips = []) {
           btn.style.cursor = 'default';
         });
         pCard.classList.add('selected');
+        trackEvent('product_selected', { product: p.displayName });
         sendMessage(`Select ${p.displayName}`);
       });
 
@@ -135,6 +153,7 @@ function appendMessage(sender, text, products = [], chips = []) {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         chipsWrapper.classList.add('disabled');
+        trackEvent('chip_clicked', { chip: chipText });
         sendMessage(chipText);
       });
       chipsWrapper.appendChild(btn);

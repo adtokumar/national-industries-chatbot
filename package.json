@@ -16,5 +16,8 @@
     "sales-agent"
   ],
   "author": "National Industries",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
 }
