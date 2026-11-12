@@ -147,6 +147,8 @@ LANGFUSE_PUBLIC_KEY=pk-lf-your-public-key
 LANGFUSE_SECRET_KEY=sk-lf-your-secret-key
 ```
 
+Locally, `server.js` reads these from `.env.local` / `.env`. On **Vercel**, add them under Project Settings → Environment Variables (Production) and redeploy; `.env.local` is never deployed. Traces are sent at the end of every chat request (through Vercel's `waitUntil`, so replies aren't delayed), because a serverless function can be paused before the SDK's own 10-second batch timer fires.
+
 When configured, each conversation turn is automatically streamed as an asynchronous trace with:
 - **Session ID & Turn Index**
 - **User input & Bot response text**

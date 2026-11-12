@@ -680,6 +680,51 @@ async function runTestSuite() {
     assert(tracePayload.tags.includes('national-industries'));
     assert(tracePayload.tags.includes('COLLECTING_SPECS'));
     assert.strictEqual(tracePayload.metadata.context, 'Paper Shredder');
+
+    // "New Chat" keeps the sessionId and restarts turn numbers: traces must not reuse "<session>-turn-N" ids
+    const payloads = [];
+    mockLangfuseEngine.langfuse.trace = (data) => { payloads.push(data); return {}; };
+    const sReset = 't_langfuse_reset_' + Date.now();
+    await mockLangfuseEngine.processMessage(sReset, '');
+    await mockLangfuseEngine.processMessage(sReset, 'first chat');
+    mockLangfuseEngine.resetSession(sReset);
+    await mockLangfuseEngine.processMessage(sReset, '');
+    await mockLangfuseEngine.processMessage(sReset, 'second chat');
+    assert.strictEqual(payloads.length, 4, 'Every turn is traced');
+    assert(payloads.every(p => p.id === undefined), 'Langfuse must generate trace ids so repeated turn numbers never collide');
+    assert.deepStrictEqual(payloads.map(p => p.metadata.turn), [1, 2, 1, 2], 'metadata.turn still orders the turns');
+  });
+
+  // TEST 38: Every /api/chat request flushes Langfuse traces (serverless functions can freeze after replying)
+  await testAsync('Langfuse: /api/chat flushes traces, via Vercel waitUntil when available', async () => {
+    const { server, engine: serverEngine } = require('../server');
+    const savedLangfuse = serverEngine.langfuse;
+    const vercelContextKey = Symbol.for('@vercel/request-context');
+    let flushes = 0;
+    serverEngine.langfuse = { trace: () => ({}), flushAsync: async () => { flushes++; } };
+    await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+    const chat = message => fetch(`http://127.0.0.1:${server.address().port}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sessionId: 't_flush_' + Date.now(), message })
+    });
+    try {
+      assert.strictEqual((await chat('')).status, 200);
+      assert.strictEqual(flushes, 1, 'Traces flushed after the chat turn');
+
+      const handedToVercel = [];
+      globalThis[vercelContextKey] = { get: () => ({ waitUntil: p => handedToVercel.push(p) }) };
+      assert.strictEqual((await chat('')).status, 200);
+      assert.strictEqual(flushes, 2, 'Traces flushed on Vercel too');
+      assert.strictEqual(handedToVercel.length, 1, 'Flush handed to Vercel waitUntil so the reply is not delayed');
+
+      serverEngine.langfuse = { trace: () => ({}), flushAsync: async () => { throw new Error('Langfuse down'); } };
+      assert.strictEqual((await chat('')).status, 200, 'A failing Langfuse upload never breaks the chat');
+    } finally {
+      delete globalThis[vercelContextKey];
+      serverEngine.langfuse = savedLangfuse;
+      await new Promise(resolve => server.close(resolve));
+    }
   });
 
   console.log('\n====================================================');

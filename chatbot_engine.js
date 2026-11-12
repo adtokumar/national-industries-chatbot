@@ -1991,11 +1991,13 @@ class ChatbotEngine {
         }
       }
 
-      // Stream trace to Langfuse (https://langfuse.intermesh.net) if configured
+      // Stream trace to Langfuse (https://langfuse.intermesh.net) if configured.
+      // No fixed trace id: turn numbers restart after "New Chat" (same sessionId) and whenever a serverless
+      // instance loses the in-memory session, so "<session>-turn-N" ids collided and turns were lost.
+      // Langfuse generates a unique id per trace; sessionId groups the turns and metadata.turn orders them.
       if (this.langfuse) {
         try {
           this.langfuse.trace({
-            id: `${logEntry.sessionId}-turn-${logEntry.turn}`,
             name: 'chatbot_conversation_turn',
             sessionId: logEntry.sessionId,
             input: logEntry.userMessage || '<initial_greeting>',
@@ -2024,6 +2026,18 @@ class ChatbotEngine {
     } catch (err) {
       console.error('Failed to write conversation log:', err.message);
     }
+  }
+
+  /**
+   * Send queued Langfuse traces now. The SDK batches traces (15 events or every 10 seconds), but a
+   * serverless function (Vercel) can be paused as soon as the response is sent, so the server calls this
+   * after every chat turn. Never rejects: tracing must not affect the chat.
+   */
+  flushTraces() {
+    if (!this.langfuse) return Promise.resolve();
+    return Promise.resolve()
+      .then(() => this.langfuse.flushAsync())
+      .catch(err => console.warn('⚠️ Langfuse flush failed:', err.message));
   }
 
   /**

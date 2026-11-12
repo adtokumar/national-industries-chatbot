@@ -94,6 +94,22 @@ function isLogsRequestAuthorized(req) {
   return providedBuf.length === expectedBuf.length && crypto.timingSafeEqual(providedBuf, expectedBuf);
 }
 
+// Keep a serverless invocation alive until background work (the Langfuse trace upload) finishes.
+// On Vercel this hands the promise to the request context's waitUntil, which is what
+// @vercel/functions' waitUntil() calls, so the reply isn't delayed. If that hook is missing on Vercel,
+// wait up to 1.5 s instead so the upload isn't frozen mid-way. The long-running local server needs neither.
+function keepAliveFor(promise) {
+  const vercelContext = globalThis[Symbol.for('@vercel/request-context')]?.get?.();
+  if (typeof vercelContext?.waitUntil === 'function') {
+    vercelContext.waitUntil(promise);
+    return Promise.resolve();
+  }
+  if (process.env.VERCEL) {
+    return Promise.race([promise, new Promise(resolve => setTimeout(resolve, 1500))]);
+  }
+  return Promise.resolve();
+}
+
 function serveStatic(req, res, parsedUrl) {
   let reqPath = parsedUrl.pathname;
   if (reqPath === '/' || reqPath === '') {
@@ -138,6 +154,7 @@ async function handleRequest(req, res) {
       const userMessage = body.message || '';
 
       const response = await engine.processMessage(sessionId, userMessage);
+      await keepAliveFor(engine.flushTraces());
       sendJson(res, 200, response);
       return;
     }
