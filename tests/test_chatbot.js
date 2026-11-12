@@ -693,6 +693,17 @@ async function runTestSuite() {
     assert.strictEqual(payloads.length, 4, 'Every turn is traced');
     assert(payloads.every(p => p.id === undefined), 'Langfuse must generate trace ids so repeated turn numbers never collide');
     assert.deepStrictEqual(payloads.map(p => p.metadata.turn), [1, 2, 1, 2], 'metadata.turn still orders the turns');
+
+    // The buyer's contact number becomes the trace userId (Langfuse Sessions can be filtered by User IDs)
+    payloads.length = 0;
+    const sUser = 't_langfuse_user_' + Date.now();
+    await mockLangfuseEngine.processMessage(sUser, '');
+    await mockLangfuseEngine.processMessage(sUser, '98765 43210');
+    await mockLangfuseEngine.processMessage(sUser, 'Acme Print Solutions');
+    mockLangfuseEngine.resetSession(sUser);
+    await mockLangfuseEngine.processMessage(sUser, '');
+    assert.deepStrictEqual(payloads.map(p => p.userId), [undefined, '+91-9876543210', '+91-9876543210', '+91-9876543210'],
+      'userId is set from the turn the number is given, and kept after "New Chat"');
   });
 
   // TEST 38: Every /api/chat request flushes Langfuse traces (serverless functions can freeze after replying)

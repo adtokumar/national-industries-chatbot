@@ -2000,6 +2000,9 @@ class ChatbotEngine {
           this.langfuse.trace({
             name: 'chatbot_conversation_turn',
             sessionId: logEntry.sessionId,
+            // The buyer's contact number (their first input) as the Langfuse user, so the Sessions table can be
+            // filtered by "User IDs". Turns before the number is given have no user; the session still matches.
+            userId: session.buyerContact?.phone || undefined,
             input: logEntry.userMessage || '<initial_greeting>',
             output: logEntry.response.text,
             metadata: {

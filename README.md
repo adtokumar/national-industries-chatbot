@@ -151,6 +151,7 @@ Locally, `server.js` reads these from `.env.local` / `.env`. On **Vercel**, add 
 
 When configured, each conversation turn is automatically streamed as an asynchronous trace with:
 - **Session ID & Turn Index**
+- **User ID**: the buyer's contact number, from the turn it is given (filter the Sessions table by **User IDs**)
 - **User input & Bot response text**
 - **Lifecycle Stage** (`INIT`, `COLLECTING_SPECS`, `COLLECTING_QUANTITY`, `QUALIFIED`)
 - **Collected Specifications & Quantity**
