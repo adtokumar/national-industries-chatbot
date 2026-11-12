@@ -501,6 +501,21 @@ async function runTestSuite() {
     assert.deepStrictEqual(engine.matchSpecsFromProductName('Hot and Cold Lamination Film Roll 12 Inch 50 Meter', specs), { width: '12 in', lamination_type: 'Hot & Cold Lamination' });
   });
 
+  // TEST 30: Name matching falls back to the word that sets an option apart from the others
+  await testAsync('Product Selection: "Bundle Counter" in the name answers loose vs bundle note counting', async () => {
+    const sId = 't_sel_bundle_' + Date.now();
+    await engine.processMessage(sId, 'Currency Counting Machine');
+    const resSelect = await engine.processMessage(sId, 'Select namibind Maxsell Bundle Counter Nepal Delhi / Maxell Bundle Counter Nepal, For Currency Counting');
+    assert.strictEqual(resSelect.collectedSpecs.machine_type, 'Bundle Note Counting', '"Bundle" sets the option apart even without "Note" in the name');
+    assert(resSelect.text.includes('desktop or floor model'), 'Should still ask what the name does not answer');
+    const resQty = await engine.processMessage(sId, 'Desktop');
+    assert.strictEqual(resQty.stage, 'COLLECTING_QUANTITY', 'Must not ask loose vs bundle note counting');
+
+    // Only an unambiguous candidate counts
+    const specs = [{ attribute: 'machine_type', options: ['Loose Note Counting', 'Bundle Note Counting'] }];
+    assert.deepStrictEqual(engine.matchSpecsFromProductName('Loose and Bundle Counting Machine', specs), {});
+  });
+
   console.log('\n====================================================');
   console.log(`🏁 Test Results: ${passed} / ${total} Passed`);
   console.log('====================================================\n');

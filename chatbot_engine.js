@@ -1044,19 +1044,35 @@ class ChatbotEngine {
     const nameText = ` ${toWords(productName).join(' ')} `;
     const matchedSpecs = {};
 
+    const inName = w => nameText.includes(` ${w} `);
+
     for (const spec of specQuestions) {
+      const options = (spec.options || []).map(opt => ({ opt, words: toWords(opt) }));
       let bestOption = null;
       let bestWordCount = 0;
-      for (const opt of (spec.options || [])) {
-        const words = toWords(opt);
+      for (const { opt, words } of options) {
         const allInName = words.length > 0 && words.every((w, i) =>
-          (/\d/.test(w) && words[i + 1]) ? nameText.includes(` ${w} ${words[i + 1]} `) : nameText.includes(` ${w} `)
+          (/\d/.test(w) && words[i + 1]) ? nameText.includes(` ${w} ${words[i + 1]} `) : inName(w)
         );
         if (allInName && words.length > bestWordCount) {
           bestOption = opt;
           bestWordCount = words.length;
         }
       }
+
+      // No full match: fall back to the words that set an option apart from the others, when most of its words
+      // are in the name (e.g. "Bundle Counter" -> "Bundle Note Counting" rather than "Loose Note Counting").
+      // Only an unambiguous single candidate counts.
+      if (!bestOption) {
+        const candidates = options.filter(({ opt, words }) => {
+          if (words.some(w => /\d/.test(w))) return false;
+          const otherWords = new Set(options.filter(o => o.opt !== opt).flatMap(o => o.words));
+          const distinctWords = words.filter(w => !otherWords.has(w));
+          return distinctWords.length > 0 && distinctWords.every(inName) && words.filter(inName).length * 2 > words.length;
+        });
+        if (candidates.length === 1) bestOption = candidates[0].opt;
+      }
+
       if (bestOption) matchedSpecs[spec.attribute || spec.name] = bestOption;
     }
 
