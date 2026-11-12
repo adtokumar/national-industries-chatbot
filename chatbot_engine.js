@@ -1174,6 +1174,11 @@ class ChatbotEngine {
         }
       }
 
+      // No buttons, but the question asks what the machine handles ("What items will be shredded?"): take it from the name
+      if (!bestOption && !(spec.options || []).length && /material|item/i.test(`${spec.attribute || ''} ${spec.question || ''}`)) {
+        bestOption = this.materialFromProductName(productName);
+      }
+
       // Still no match on a paper-size question ("A3" / "A4") for a product sized by width instead
       // ("Cold Lamination Machine 1300 mm", "14 Inch ... Lamination Machine"): record the name's width
       if (!bestOption && options.length >= 2 && (spec.options || []).every(opt => /^\s*a\d\+?\s*$/i.test(opt))) {
@@ -1185,6 +1190,26 @@ class ChatbotEngine {
     }
 
     return matchedSpecs;
+  }
+
+  /**
+   * Helper: What a machine handles, from its name: the "for ..." phrase, else the words before "Shredder" / "Crusher"
+   * ("... Shredder Machine for Paper" -> "Paper", "Dual Shaft Pet Bottle Shredder" -> "Pet Bottle"). Returns null if unclear.
+   */
+  materialFromProductName(productName) {
+    const forPhrase = productName.match(/\bfor\s+([a-z][a-z &-]*?)\s*(?:$|[,/()|]|\bmachine\b)/i);
+    if (forPhrase && !/\b(office|home|use|industrial|commercial|personal)\b/i.test(forPhrase[1])) return forPhrase[1].trim();
+
+    const beforeShredder = productName.match(/([a-z][a-z -]*?)\s+(?:shredd(?:er|ing)|crusher|chipper)\b/i);
+    if (!beforeShredder) return null;
+    // Keep the words after the last machine word ("Dual Shaft Pet Bottle" -> "Pet Bottle", "Industrial" -> nothing)
+    const machineWords = /^(namibind|industrial|compact|heavy|duty|dual|single|twin|shaft|multi|product|automatic|semi)$/i;
+    const words = beforeShredder[1].split(/[\s-]+/).filter(Boolean);
+    let start = 0;
+    words.forEach((w, i) => { if (machineWords.test(w)) start = i + 1; });
+    // Waste types are "<kind> Waste"; drop a model name in front ("Terminator Organic Waste" -> "Organic Waste")
+    if (/^waste$/i.test(words[words.length - 1] || '')) start = Math.max(start, words.length - 2);
+    return words.slice(start).join(' ') || null;
   }
 
   /**
@@ -1849,6 +1874,8 @@ class ChatbotEngine {
         const catLower = categoryName.toLowerCase();
         // Skip redundant specs that echo the category
         if (key === 'machine_type' && (valLower === 'paper' || catLower.includes(valLower) || valLower.includes(catLower))) return;
+        // ...or only restate it in other words (e.g. "Function: Paper shredding" for Paper Shredder); still kept in leadSummary
+        if (this.matchSpecsFromProductName(categoryName, [{ attribute: key, options: [val] }])[key]) return;
         const readableKey = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
         summary += `• **${readableKey}**: ${val}\n`;
       });

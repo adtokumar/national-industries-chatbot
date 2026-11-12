@@ -590,6 +590,10 @@ async function runTestSuite() {
       assert(!res.text.includes('intended use'), 'One-button question must be skipped after selection');
       res = await engine.processMessage(sId, res.chips[0]);
     }
+    const resSummary = await engine.processMessage(sId, '1 Piece');
+    assert(resSummary.text.includes('**Sheet Capacity**: 35 sheets'), 'Summary carries the sheet capacity from the name');
+    assert(!resSummary.text.includes('**Function**'), '"Function: Paper shredding" only restates the Paper Shredder category');
+    assert.strictEqual(resSummary.leadSummary.specs.function, 'Paper shredding', 'Still kept in lead data');
 
     const sheetQ = [{ attribute: 'sheet_capacity', options: ['25 sheets', '40 sheets'] }];
     assert.deepStrictEqual(engine.matchSpecsFromProductName('Shredder 12 Sheet 2 x10mm', sheetQ), { sheet_capacity: '12 sheets' });
@@ -599,6 +603,21 @@ async function runTestSuite() {
     assert.deepStrictEqual(engine.matchSpecsFromProductName('Spiral Punching Machine, Size/Dimension: Foot Operated Model', [{ attribute: 'operation_mode', options: ['Manual', 'Electric', 'Manual Leg Operated'] }]), { operation_mode: 'Manual Leg Operated' });
     assert.deepStrictEqual(engine.matchSpecsFromProductName('Cold Lamination Machine Price / Photo Laminator, 1300 mm', [{ attribute: 'paper_size', options: ['A3', 'A4'] }]), { paper_size: '1300 mm' });
     assert.deepStrictEqual(engine.matchSpecsFromProductName('4 In 1 Binding Machine', [{ attribute: 'paper_size', options: ['A3', 'A4'] }]), {}, '"4 In 1" is not a width');
+  });
+
+  // TEST 35: A no-button "what will be shredded" question is answered from the product name
+  await testAsync('Product Selection: Material to shred taken from the name ("for Paper", "Pet Bottle Shredder")', async () => {
+    const sId = 't_sel_material_' + Date.now();
+    await engine.processMessage(sId, 'Paper Shredder Machine');
+    const resSelect = await engine.processMessage(sId, 'Select Namibind MS 300 Compact Dual Shaft Multi-Product Shredder Machine for Paper');
+    assert.strictEqual(resSelect.context.name, 'Industrial Shredder');
+    assert.strictEqual(resSelect.collectedSpecs.material_to_shred, 'Paper', '"for Paper" answers what will be shredded');
+    assert.strictEqual(resSelect.stage, 'COLLECTING_QUANTITY', 'Must not ask what items will be shredded');
+
+    assert.strictEqual(engine.materialFromProductName('Dual Shaft Pet Bottle Shredder PWS-500'), 'Pet Bottle');
+    assert.strictEqual(engine.materialFromProductName('Terminator Organic Waste Shredder'), 'Organic Waste');
+    assert.strictEqual(engine.materialFromProductName('Industrial Shredder Machine Manufacturers'), null, 'No material named');
+    assert.strictEqual(engine.materialFromProductName('Shredder Machine for Office & Home Use'), null, 'Usage is not a material');
   });
 
   // TEST 33: Conversation logs (buyer contact numbers) are only served with LOGS_API_KEY
