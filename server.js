@@ -8,6 +8,32 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+
+// Auto-load environment variables from .env.local or .env if present
+['.env.local', '.env'].forEach(envFile => {
+  const envPath = path.join(__dirname, envFile);
+  if (fs.existsSync(envPath)) {
+    try {
+      const content = fs.readFileSync(envPath, 'utf8');
+      for (const line of content.split('\n')) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) continue;
+        const eqIdx = trimmed.indexOf('=');
+        if (eqIdx > 0) {
+          const key = trimmed.slice(0, eqIdx).trim();
+          let val = trimmed.slice(eqIdx + 1).trim();
+          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+            val = val.slice(1, -1);
+          }
+          if (process.env[key] === undefined) {
+            process.env[key] = val;
+          }
+        }
+      }
+    } catch (e) {}
+  }
+});
+
 const ChatbotEngine = require('./chatbot_engine');
 
 const PORT = process.env.PORT || 3000;

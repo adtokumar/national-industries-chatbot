@@ -38,7 +38,7 @@ class ChatbotEngine {
     this.sessions = new Map();
 
     // Langfuse Observability Integration (configured for https://langfuse.intermesh.net)
-    this.langfuseBaseUrl = process.env.LANGFUSE_BASEURL || process.env.LANGFUSE_HOST || 'https://langfuse.intermesh.net';
+    this.langfuseBaseUrl = process.env.LANGFUSE_BASE_URL || process.env.LANGFUSE_BASEURL || process.env.LANGFUSE_HOST || 'https://langfuse.intermesh.net';
     this.langfusePublicKey = process.env.LANGFUSE_PUBLIC_KEY || options.langfusePublicKey || null;
     this.langfuseSecretKey = process.env.LANGFUSE_SECRET_KEY || options.langfuseSecretKey || null;
     this.langfuse = null;
