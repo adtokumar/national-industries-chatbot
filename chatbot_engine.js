@@ -1833,6 +1833,9 @@ class ChatbotEngine {
     const specEntries = Object.entries(specs);
 
     let summary = `**Summary of your requirement:**\n`;
+    if (session.buyerContact.company) {
+      summary += `• **Company**: ${session.buyerContact.company}\n`;
+    }
     summary += `• **Category**: ${categoryName}\n`;
 
     if (session.selectedProduct) {
@@ -1855,13 +1858,7 @@ class ChatbotEngine {
       summary += `• **Required Quantity**: ${session.collectedQuantity}\n`;
     }
 
-    if (session.buyerContact.company) {
-      summary += `• **Company**: ${session.buyerContact.company}\n`;
-    }
-    if (session.buyerContact.phone) {
-      summary += `• **Contact Number**: ${session.buyerContact.phone}\n`;
-    }
-
+    // The contact number stays in leadSummary for the sales team but is not echoed back in the chat
     summary += `\nOur sales team will prepare and share a customized quotation with exact pricing, GST, and freight charges.`;
 
     session.history.push({ role: 'assistant', content: summary, timestamp: new Date() });

@@ -548,7 +548,8 @@ async function runTestSuite() {
       resLead = await engine.processMessage(sId, resLead.chips[0]);
     }
     assert.deepStrictEqual(resLead.leadSummary.buyerContact, { phone: '+91-9876543210', company: 'Acme Print Solutions' }, 'Lead carries contact details');
-    assert(resLead.text.includes('**Contact Number**: +91-9876543210'), 'Summary shows contact number');
+    assert(resLead.text.startsWith('**Summary of your requirement:**\n• **Company**: Acme Print Solutions\n'), 'Summary starts with company name');
+    assert(!resLead.text.includes('9876543210') && !resLead.text.includes('Contact Number'), 'Summary must not show the contact number');
 
     // New Chat keeps contact details, so the welcome goes straight to product options
     engine.resetSession(sId);
