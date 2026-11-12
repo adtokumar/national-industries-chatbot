@@ -654,6 +654,34 @@ async function runTestSuite() {
     }
   });
 
+  // TEST 37: Langfuse Observability Integration
+  await testAsync('Langfuse: Tracing configured for langfuse.intermesh.net', async () => {
+    assert.strictEqual(engine.langfuseBaseUrl, 'https://langfuse.intermesh.net', 'Must default to https://langfuse.intermesh.net');
+
+    let tracePayload = null;
+    const mockLangfuseEngine = new ChatbotEngine(__dirname + '/..', {
+      langfusePublicKey: 'pk-lf-test',
+      langfuseSecretKey: 'sk-lf-test'
+    });
+    assert(mockLangfuseEngine.langfuse, 'Langfuse instance should be initialized when keys are provided');
+
+    // Intercept trace calls to verify structure
+    mockLangfuseEngine.langfuse.trace = (data) => {
+      tracePayload = data;
+      return {};
+    };
+
+    const sId = 't_langfuse_' + Date.now();
+    await mockLangfuseEngine.processMessage(sId, 'I need a paper shredder');
+
+    assert(tracePayload, 'Trace payload must be captured');
+    assert.strictEqual(tracePayload.sessionId, sId);
+    assert.strictEqual(tracePayload.input, 'I need a paper shredder');
+    assert(tracePayload.tags.includes('national-industries'));
+    assert(tracePayload.tags.includes('COLLECTING_SPECS'));
+    assert.strictEqual(tracePayload.metadata.context, 'Paper Shredder');
+  });
+
   console.log('\n====================================================');
   console.log(`🏁 Test Results: ${passed} / ${total} Passed`);
   console.log('====================================================\n');

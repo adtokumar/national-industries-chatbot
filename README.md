@@ -137,6 +137,26 @@ ChatBot/
 
 ---
 
+## 📊 Observability & Tracing with Langfuse
+The chatbot natively supports tracing and session telemetry to IndiaMART's self-hosted Langfuse platform (**`https://langfuse.intermesh.net`**).
+
+### Setup Environment Variables:
+```env
+LANGFUSE_BASEURL=https://langfuse.intermesh.net
+LANGFUSE_PUBLIC_KEY=pk-lf-your-public-key
+LANGFUSE_SECRET_KEY=sk-lf-your-secret-key
+```
+
+When configured, each conversation turn is automatically streamed as an asynchronous trace with:
+- **Session ID & Turn Index**
+- **User input & Bot response text**
+- **Lifecycle Stage** (`INIT`, `COLLECTING_SPECS`, `COLLECTING_QUANTITY`, `QUALIFIED`)
+- **Collected Specifications & Quantity**
+- **Guardrails Triggered & Lead Summaries**
+- **Filter Tags**: `national-industries`, stage name, category name
+
+---
+
 ## 📖 Onboarding New Sellers
 To onboard another company or seller into the system, consult the comprehensive guide:  
 👉 **[SELLER_ONBOARDING_GUIDE.md](SELLER_ONBOARDING_GUIDE.md)** for file schemas, question cleansing rules, quantity profile setup, and commercial guardrail policies.

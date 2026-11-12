@@ -37,6 +37,25 @@ class ChatbotEngine {
     // Memory store for user sessions: sessionId -> session object
     this.sessions = new Map();
 
+    // Langfuse Observability Integration (configured for https://langfuse.intermesh.net)
+    this.langfuseBaseUrl = process.env.LANGFUSE_BASEURL || process.env.LANGFUSE_HOST || 'https://langfuse.intermesh.net';
+    this.langfusePublicKey = process.env.LANGFUSE_PUBLIC_KEY || options.langfusePublicKey || null;
+    this.langfuseSecretKey = process.env.LANGFUSE_SECRET_KEY || options.langfuseSecretKey || null;
+    this.langfuse = null;
+
+    if (this.langfusePublicKey && this.langfuseSecretKey) {
+      try {
+        const { Langfuse } = require('langfuse');
+        this.langfuse = new Langfuse({
+          publicKey: this.langfusePublicKey,
+          secretKey: this.langfuseSecretKey,
+          baseUrl: this.langfuseBaseUrl
+        });
+      } catch (err) {
+        console.warn('⚠️ Langfuse initialization warning:', err.message);
+      }
+    }
+
     this.init();
   }
 
@@ -1969,6 +1988,37 @@ class ChatbotEngine {
         console.log(`[CHAT_LOG] [${logEntry.sessionId}] Turn ${logEntry.turn}: "${logEntry.userMessage}" -> ${logEntry.response.stage}`);
         if (logEntry.leadSummary) {
           console.log(`[LEAD_QUALIFIED]`, JSON.stringify(logEntry.leadSummary));
+        }
+      }
+
+      // Stream trace to Langfuse (https://langfuse.intermesh.net) if configured
+      if (this.langfuse) {
+        try {
+          this.langfuse.trace({
+            id: `${logEntry.sessionId}-turn-${logEntry.turn}`,
+            name: 'chatbot_conversation_turn',
+            sessionId: logEntry.sessionId,
+            input: logEntry.userMessage || '<initial_greeting>',
+            output: logEntry.response.text,
+            metadata: {
+              turn: logEntry.turn,
+              stage: logEntry.response.stage,
+              context: logEntry.context?.name || 'General',
+              collectedSpecs: logEntry.collectedSpecs,
+              quantity: logEntry.collectedQuantity,
+              chips: logEntry.response.chips,
+              productsCount: logEntry.response.products.length,
+              guardrailsTriggered: logEntry.response.guardrailsTriggered,
+              leadSummary: logEntry.leadSummary
+            },
+            tags: [
+              'national-industries',
+              logEntry.response.stage,
+              logEntry.context?.name || 'General'
+            ]
+          });
+        } catch (lfErr) {
+          // Asynchronous tracing must not interrupt chat flow
         }
       }
     } catch (err) {
