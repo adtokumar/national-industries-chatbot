@@ -945,7 +945,7 @@ class ChatbotEngine {
     if (isPricingQuery) {
       return {
         type: 'pricing_policy',
-        guardrail: 'Strict Guardrail: Do not share price anywhere; quote-based pricing only',
+        guardrail: 'Strict Guardrail: No prices in chat text (product cards show catalog reference price); quote-based pricing only',
         answer: `Pricing is shared directly by our sales team through a customized quotation based on your required model, specifications, and volume. Please let us know your requirements so our team can prepare your quotation.`
       };
     }
@@ -1003,7 +1003,8 @@ class ChatbotEngine {
   }
 
   /**
-   * Format product preview card (Strict Guardrail: No prices shared)
+   * Format product preview card. The card carries the catalog's model-specific reference price when available
+   * (e.g. "₹ 21,000/Piece"); prices are never written into the chat text.
    */
   formatProductPreview(product) {
     return {
@@ -1012,6 +1013,7 @@ class ChatbotEngine {
       displayName: product.display_name || product.name,
       url: product.product_url || 'https://www.namibind.co.in/',
       imageUrl: product.media?.main_image_url || null,
+      price: product.price > 0 && product.price_text ? product.price_text : null,
       moq: product.min_order_quantity || null,
       topSpecs: this.pickKeySpecs(product.specifications)
     };
@@ -1344,7 +1346,7 @@ class ChatbotEngine {
           guardrailsTriggered: [
             'Product selected; recommendations suppressed for subsequent messages',
             'Spec questions fetched by matching the product name; answers evident from the name skipped',
-            'Strict Guardrail: Do not share price anywhere'
+            'Strict Guardrail: No prices in chat text (product cards show catalog reference price)'
           ]
         };
       }
@@ -1376,7 +1378,7 @@ class ChatbotEngine {
           products: [],
           guardrailsTriggered: [
             'Product selected; recommendations suppressed for subsequent messages',
-            'Strict Guardrail: Do not share price anywhere'
+            'Strict Guardrail: No prices in chat text (product cards show catalog reference price)'
           ]
         };
       } else {
@@ -1419,7 +1421,7 @@ class ChatbotEngine {
           collectedSpecs: session.collectedSpecs,
           quantity: session.collectedQuantity,
           products: this.getRecommendationsForContext(session.activeContext, session.collectedSpecs, 3, session),
-          guardrailsTriggered: ['Strict Guardrail: Do not share price anywhere']
+          guardrailsTriggered: ['Strict Guardrail: No prices in chat text (product cards show catalog reference price)']
         };
       }
 
@@ -1716,7 +1718,7 @@ class ChatbotEngine {
           quantity: session.collectedQuantity,
           products: recommendations,
           guardrailsTriggered: [
-            'Strict Guardrail: Do not share price anywhere'
+            'Strict Guardrail: No prices in chat text (product cards show catalog reference price)'
           ]
         };
       } else {
@@ -1818,7 +1820,7 @@ class ChatbotEngine {
         stage: session.stage,
         products: catalogMatches.map(p => this.formatProductPreview(p)),
         guardrailsTriggered: [
-          'Strict Guardrail: Do not share price anywhere; quote-based pricing only',
+          'Strict Guardrail: No prices in chat text (product cards show catalog reference price); quote-based pricing only',
           'Catalog reference links shared from https://www.namibind.co.in/'
         ]
       };

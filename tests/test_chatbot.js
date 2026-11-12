@@ -620,6 +620,16 @@ async function runTestSuite() {
     assert.strictEqual(engine.materialFromProductName('Shredder Machine for Office & Home Use'), null, 'Usage is not a material');
   });
 
+  // TEST 36: Product suggestion cards carry the catalog reference price; chat text stays price-free
+  await testAsync('Product Suggestions: Cards show catalog price when available; chat text has no price', async () => {
+    const sId = 't_card_price_' + Date.now();
+    const res = await engine.processMessage(sId, 'Paper Shredder Machine');
+    assert(res.products.length > 0, 'Category must suggest products');
+    res.products.forEach(p => assert(/^₹ [\d,]+\/\w+/.test(p.price), `Card must show price text, got ${p.price}`));
+    assert(!res.text.includes('₹'), 'Chat text must not include prices');
+    assert.strictEqual(engine.formatProductPreview({ name: 'No Price Model', price: 0, price_text: '' }).price, null, 'No price when unavailable');
+  });
+
   // TEST 33: Conversation logs (buyer contact numbers) are only served with LOGS_API_KEY
   await testAsync('Security: /api/logs endpoints require the LOGS_API_KEY header; other endpoints stay public', async () => {
     const { server } = require('../server');

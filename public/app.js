@@ -138,6 +138,7 @@ function appendMessage(sender, text, products = [], chips = []) {
         ${imgHtml}
         <div class="product-details">
           <div class="product-title" title="${p.displayName}">${p.displayName}</div>
+          ${p.price ? `<div class="product-price" title="Reference price; final quotation from our sales team">${p.price}</div>` : ''}
           <div class="product-links">
             <a href="${p.url}" target="_blank" class="product-btn">Website ↗</a>
             <button type="button" class="product-btn primary select-btn" data-name="${p.displayName}">Select</button>
