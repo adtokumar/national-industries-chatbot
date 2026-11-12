@@ -592,6 +592,7 @@ async function runTestSuite() {
     }
     const resSummary = await engine.processMessage(sId, '1 Piece');
     assert(resSummary.text.includes('**Sheet Capacity**: 35 sheets'), 'Summary carries the sheet capacity from the name');
+    assert(resSummary.text.includes('• **Product**: Paper Shredder') && !resSummary.text.includes('**Category**'), 'Summary labels the category line "Product"');
     assert(!resSummary.text.includes('**Function**'), '"Function: Paper shredding" only restates the Paper Shredder category');
     assert.strictEqual(resSummary.leadSummary.specs.function, 'Paper shredding', 'Still kept in lead data');
 

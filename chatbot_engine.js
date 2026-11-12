@@ -1863,7 +1863,7 @@ class ChatbotEngine {
     if (session.buyerContact.company) {
       summary += `• **Company**: ${session.buyerContact.company}\n`;
     }
-    summary += `• **Category**: ${categoryName}\n`;
+    summary += `• **Product**: ${categoryName}\n`;
 
     if (session.selectedProduct) {
       summary += `• **Selected Model**: ${session.selectedProduct.display_name || session.selectedProduct.name}\n`;
