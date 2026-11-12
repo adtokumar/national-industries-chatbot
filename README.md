@@ -99,9 +99,13 @@ node tests/test_chatbot.js
 Every chat interaction is automatically recorded to disk for conversation analysis:
 - **Log File**: `logs/chat_conversations.jsonl` (structured JSON Lines format)
 - **Logged Fields**: `timestamp`, `sessionId`, `turn`, `userMessage`, `response` (text, chips, stage, guardrails), `context`, `collectedSpecs`, `collectedQuantity`, and `leadSummary`.
-- **Analytics API**:
+- **Analytics API** (protected — logs contain buyers' contact numbers and company names):
   - `GET /api/logs?limit=50`: Fetch recent conversation turns
   - `GET /api/logs/analytics`: Get aggregated metrics (total interactions, unique sessions, categories asked, qualified leads count, guardrail triggers)
+  - Both require the `LOGS_API_KEY` environment variable on the server and the same value in an `x-api-key` request header. Without a configured key they always return `401 Unauthorized`.
+    ```bash
+    curl -H "x-api-key: $LOGS_API_KEY" https://namibind-chatbot.vercel.app/api/logs?limit=20
+    ```
 
 ---
 

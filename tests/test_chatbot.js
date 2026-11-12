@@ -228,7 +228,9 @@ async function runTestSuite() {
   // TEST 16: Other Options navigation
   await testAsync('Navigation: "Other Options" chip displays policy & company contact options', async () => {
     const sId = 't_options_' + Date.now();
-    const resInit = await engine.processMessage(sId, '');
+    await engine.processMessage(sId, '');
+    await engine.processMessage(sId, '9876543210');
+    const resInit = await engine.processMessage(sId, 'Acme Print Solutions');
     assert(resInit.chips.includes('Other Options'), 'Initial chips must include "Other Options"');
     assert(!resInit.chips.includes('Shipping & Freight Policy'), 'Initial chips must not directly show Shipping policy');
     assert(!resInit.chips.includes('Company Location & Contact'), 'Initial chips must not directly show Contact');
@@ -514,6 +516,88 @@ async function runTestSuite() {
     // Only an unambiguous candidate counts
     const specs = [{ attribute: 'machine_type', options: ['Loose Note Counting', 'Bundle Note Counting'] }];
     assert.deepStrictEqual(engine.matchSpecsFromProductName('Loose and Bundle Counting Machine', specs), {});
+  });
+
+  // TEST 31: Welcome asks for contact number, then company name, then shows product options
+  await testAsync('Welcome: Contact number, then company name, then product options; kept on New Chat', async () => {
+    const sId = 't_onboarding_' + Date.now();
+    const resWelcome = await engine.processMessage(sId, '');
+    assert.strictEqual(resWelcome.stage, 'COLLECTING_CONTACT');
+    assert(resWelcome.text.includes('Welcome to **National Industries (Namibind)**'), 'Must greet the buyer');
+    assert(resWelcome.text.includes('contact number'), 'Must ask for contact number first');
+    assert.strictEqual(resWelcome.chips.length, 0, 'Must not show product options before contact details');
+
+    const resInvalid = await engine.processMessage(sId, '12345');
+    assert.strictEqual(resInvalid.stage, 'COLLECTING_CONTACT', 'Invalid number must be asked again');
+
+    const resPolicy = await engine.processMessage(sId, 'What is your shipping freight policy?');
+    assert(resPolicy.text.toLowerCase().includes('freight charges are quote-specific'), 'Policy questions answered during welcome');
+    assert.strictEqual(resPolicy.stage, 'COLLECTING_CONTACT', 'Contact number still required after policy answer');
+
+    const resCompanyAsk = await engine.processMessage(sId, 'my number is +91 98765-43210');
+    assert.strictEqual(resCompanyAsk.stage, 'COLLECTING_COMPANY');
+    assert(resCompanyAsk.text.includes('company name'), 'Must ask for company name second');
+
+    const resMenu = await engine.processMessage(sId, 'Acme Print Solutions');
+    assert.strictEqual(resMenu.stage, 'INIT');
+    assert(resMenu.text.includes('Acme Print Solutions'), 'Must thank the buyer by company name');
+    assert(resMenu.chips.includes('Paper Shredder Machine'), 'Product options shown after contact details');
+
+    let resLead = await engine.processMessage(sId, 'Paper Shredder Machine');
+    while (resLead.stage === 'COLLECTING_SPECS' || resLead.stage === 'COLLECTING_QUANTITY') {
+      resLead = await engine.processMessage(sId, resLead.chips[0]);
+    }
+    assert.deepStrictEqual(resLead.leadSummary.buyerContact, { phone: '+91-9876543210', company: 'Acme Print Solutions' }, 'Lead carries contact details');
+    assert(resLead.text.includes('**Contact Number**: +91-9876543210'), 'Summary shows contact number');
+
+    // New Chat keeps contact details, so the welcome goes straight to product options
+    engine.resetSession(sId);
+    const resAgain = await engine.processMessage(sId, '');
+    assert.strictEqual(resAgain.stage, 'INIT');
+    assert(resAgain.chips.includes('Paper Shredder Machine'), 'Must not ask contact details again after New Chat');
+
+    assert.strictEqual(engine.parseContactNumber('098765 43210'), '+91-9876543210');
+    assert.strictEqual(engine.parseContactNumber('1234567890'), null, 'Not a valid Indian mobile');
+    assert.strictEqual(engine.parseContactNumber('I need 25 sheets shredder'), null);
+  });
+
+  // TEST 32: Never ask buyers for photos of products
+  await testAsync('Guardrail: Never ask for photos of products', async () => {
+    const allQuestions = [
+      ...engine.productCardIndex.flatMap(c => c.specQuestions),
+      ...engine.fallbackIndex.flatMap(f => f.specQuestions)
+    ];
+    assert(!allQuestions.some(q => /photo|picture|image|video/i.test(q.question)), 'No spec question may ask for a photo');
+
+    const sId = 't_no_photo_' + Date.now();
+    let res = await engine.processMessage(sId, 'Lamination Machine');
+    while (res.stage === 'COLLECTING_SPECS') {
+      assert(!/photo/i.test(res.text), 'Lamination flow must not ask for a photo');
+      res = await engine.processMessage(sId, res.chips[0]);
+    }
+  });
+
+  // TEST 33: Conversation logs (buyer contact numbers) are only served with LOGS_API_KEY
+  await testAsync('Security: /api/logs endpoints require the LOGS_API_KEY header; other endpoints stay public', async () => {
+    const { server } = require('../server');
+    await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+    const base = `http://127.0.0.1:${server.address().port}`;
+    const savedKey = process.env.LOGS_API_KEY;
+    try {
+      delete process.env.LOGS_API_KEY;
+      assert.strictEqual((await fetch(`${base}/api/logs`, { headers: { 'x-api-key': 'anything' } })).status, 401, 'No access when no key is configured');
+
+      process.env.LOGS_API_KEY = 'test-logs-key';
+      assert.strictEqual((await fetch(`${base}/api/logs`)).status, 401, 'Missing key rejected');
+      assert.strictEqual((await fetch(`${base}/api/logs/analytics`, { headers: { 'x-api-key': 'wrong-key' } })).status, 401, 'Wrong key rejected');
+      assert.strictEqual((await fetch(`${base}/api/logs`, { headers: { 'x-api-key': 'test-logs-key' } })).status, 200, 'Correct key allowed');
+      assert.strictEqual((await fetch(`${base}/api/logs/analytics`, { headers: { 'x-api-key': 'test-logs-key' } })).status, 200, 'Correct key allowed for analytics');
+      assert.strictEqual((await fetch(`${base}/api/health`)).status, 200, 'Other endpoints stay public');
+    } finally {
+      if (savedKey === undefined) delete process.env.LOGS_API_KEY;
+      else process.env.LOGS_API_KEY = savedKey;
+      await new Promise(resolve => server.close(resolve));
+    }
   });
 
   console.log('\n====================================================');

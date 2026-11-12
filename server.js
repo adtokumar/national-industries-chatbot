@@ -4,6 +4,7 @@
  */
 
 const http = require('http');
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
@@ -53,6 +54,18 @@ function sendJson(res, statusCode, data) {
     'Access-Control-Allow-Headers': 'Content-Type'
   });
   res.end(JSON.stringify(data));
+}
+
+// Conversation logs hold buyers' contact numbers and company names: serve them only with the
+// LOGS_API_KEY environment variable sent as the "x-api-key" header (no key configured = no access)
+function isLogsRequestAuthorized(req) {
+  const expected = process.env.LOGS_API_KEY;
+  const provided = req.headers['x-api-key'];
+  if (!expected || typeof provided !== 'string') return false;
+
+  const providedBuf = Buffer.from(provided);
+  const expectedBuf = Buffer.from(expected);
+  return providedBuf.length === expectedBuf.length && crypto.timingSafeEqual(providedBuf, expectedBuf);
 }
 
 function serveStatic(req, res, parsedUrl) {
@@ -149,6 +162,11 @@ async function handleRequest(req, res) {
       const limit = parseInt(parsedUrl.query.limit, 10) || 10;
       const products = engine.searchCatalogProducts(q, limit).map(p => engine.formatProductPreview(p));
       sendJson(res, 200, { products });
+      return;
+    }
+
+    if (parsedUrl.pathname.startsWith('/api/logs') && !isLogsRequestAuthorized(req)) {
+      sendJson(res, 401, { error: 'Unauthorized' });
       return;
     }
 

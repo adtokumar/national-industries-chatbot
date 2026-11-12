@@ -133,6 +133,9 @@ class ChatbotEngine {
   }
 
   buildIndices() {
+    // Never ask buyers for photos of products (e.g. "Can you share the photo of the machine...?")
+    const asksForPhoto = text => /\b(photos?|pictures?|pics?|images?|videos?)\b/i.test(text || '');
+
     // Index Product Cards by tokens, categories, and aliases
     this.productCardIndex = [];
     for (const card of this.productCards) {
@@ -168,6 +171,7 @@ class ChatbotEngine {
         for (const vo of variantOptions) {
           const qObj = qualificationQuestions.find(q => q.attribute === vo.attribute);
           const questionText = qObj ? qObj.question : `What ${vo.attribute.replace(/_/g, ' ')} do you require?`;
+          if (asksForPhoto(questionText)) continue;
           const resolvedOptions = this.resolveSmartOptions(vo.attribute, questionText, vo.options || []);
           specQuestions.push({
             attribute: vo.attribute,
@@ -178,6 +182,7 @@ class ChatbotEngine {
         }
       } else if (qualificationQuestions.length > 0) {
         for (const qq of qualificationQuestions) {
+          if (asksForPhoto(qq.question)) continue;
           const resolvedOptions = this.resolveSmartOptions(qq.attribute, qq.question, []);
           specQuestions.push({
             attribute: qq.attribute,
@@ -207,7 +212,7 @@ class ChatbotEngine {
       const tokens = new Set();
       this.tokenize(fb.mcat_name).forEach(t => tokens.add(t));
 
-      const specQuestions = (fb.specifications || []).map(spec => ({
+      const specQuestions = (fb.specifications || []).filter(spec => !asksForPhoto(spec.name)).map(spec => ({
         attribute: spec.name.toLowerCase().replace(/[^a-z0-9]+/g, '_'),
         name: spec.name,
         question: `What is your preference for ${spec.name}?`,
@@ -347,7 +352,7 @@ class ChatbotEngine {
     if (!this.sessions.has(sessionId)) {
       this.sessions.set(sessionId, {
         id: sessionId,
-        stage: 'INIT', // INIT, COLLECTING_SPECS, COLLECTING_QUANTITY, QUALIFIED
+        stage: 'INIT', // COLLECTING_CONTACT, COLLECTING_COMPANY, INIT, COLLECTING_SPECS, COLLECTING_QUANTITY, QUALIFIED
         turn: 0,
         activeContext: null, // { type: 'product_card' | 'category_fallback' | 'catalog', data: any }
         selectedProduct: null, // Track chosen model when user selects a product
@@ -363,8 +368,74 @@ class ChatbotEngine {
   }
 
   resetSession(sessionId) {
+    // Keep the buyer's contact number and company name so "New Chat" doesn't ask for them again
+    const buyerContact = this.sessions.get(sessionId)?.buyerContact;
     this.sessions.delete(sessionId);
-    return this.getSession(sessionId);
+    const session = this.getSession(sessionId);
+    if (buyerContact) session.buyerContact = buyerContact;
+    return session;
+  }
+
+  /**
+   * Helper: Read a buyer's contact number from a message: an Indian mobile (optionally +91 / 0 prefixed)
+   * or an international "+<country code>" number. Returns it formatted, or null.
+   */
+  parseContactNumber(text) {
+    const match = String(text || '').match(/\+?\d[\d\s().-]{6,}\d/);
+    if (!match) return null;
+
+    const digits = match[0].replace(/\D/g, '');
+    const local = (digits.length === 12 && digits.startsWith('91')) ? digits.slice(2)
+      : ((digits.length === 11 && digits.startsWith('0')) ? digits.slice(1) : digits);
+    if (/^[6-9]\d{9}$/.test(local)) return `+91-${local}`;
+    if (match[0].startsWith('+') && !digits.startsWith('91') && digits.length >= 8 && digits.length <= 15) return `+${digits}`;
+    return null;
+  }
+
+  /**
+   * Helper: Welcome steps: collect the buyer's contact number, then company name, then show product options
+   */
+  continueOnboarding(session, intro = '') {
+    const contact = session.buyerContact;
+    let text = intro;
+    let chips = [];
+    let guardrail;
+
+    if (!contact.phone) {
+      session.stage = 'COLLECTING_CONTACT';
+      text += `Please share your **contact number** (10-digit mobile) so our sales team can reach you with the quotation.`;
+      guardrail = 'Contact number collected before product options';
+    } else if (!contact.company) {
+      session.stage = 'COLLECTING_COMPANY';
+      text += `Please share your **company name**.`;
+      guardrail = 'Company name collected before product options';
+    } else {
+      session.stage = 'INIT';
+      text += `How can I help you today? You can inquire about:\n`;
+      text += `• **Paper Shredding Machines** (Cross cut, Strip cut, Heavy duty)\n`;
+      text += `• **Currency Counting Machines** (Loose note, Bundle note)\n`;
+      text += `• **Binding & Punching Machines** (Spiral, Wiro, Perfect glue binding)\n`;
+      text += `• **Lamination Machines & Films** (A3/A4, Roll-to-roll)\n`;
+      text += `• **Cutting Plotters & Paper Cutters**\n\n`;
+      text += `Feel free to type your requirement or click one of the options below:`;
+      chips = [
+        'Paper Shredder Machine',
+        'Currency Counting Machine',
+        'Spiral Binding Machine',
+        'Lamination Machine',
+        'Other Options'
+      ];
+      guardrail = 'Standard greeting with guardrail-compliant navigation';
+    }
+
+    session.history.push({ role: 'assistant', content: text, timestamp: new Date() });
+
+    return {
+      text,
+      chips,
+      stage: session.stage,
+      guardrailsTriggered: [guardrail]
+    };
   }
 
   /**
@@ -1116,6 +1187,28 @@ class ChatbotEngine {
   async _processMessageInternal(session, text) {
     session.history.push({ role: 'user', content: text, timestamp: new Date() });
 
+    // 0. Welcome steps: contact number, then company name, before product options
+    if (session.stage === 'COLLECTING_CONTACT') {
+      const phone = this.parseContactNumber(text);
+      if (phone) {
+        session.buyerContact.phone = phone;
+        return this.continueOnboarding(session, 'Thank you! ');
+      }
+      // Answer company / policy questions, then ask for the number again
+      const onboardingPolicy = text ? this.checkBusinessOrPolicyQuery(text) : null;
+      const retryNote = onboardingPolicy ? `${onboardingPolicy.answer}\n\n` : (text ? `That doesn't look like a valid mobile number.\n\n` : '');
+      return this.continueOnboarding(session, retryNote);
+    }
+
+    if (session.stage === 'COLLECTING_COMPANY') {
+      const company = text.replace(/\s+/g, ' ').trim().slice(0, 100);
+      if (company.length >= 2 && /[a-z]/i.test(company)) {
+        session.buyerContact.company = company;
+        return this.continueOnboarding(session, `Thank you, **${company}**!\n\n`);
+      }
+      return this.continueOnboarding(session, text ? `That doesn't look like a company name.\n\n` : '');
+    }
+
     // 1. Check for Greeting
     const isGreeting = /^(hi|hello|hey|namaste|good morning|good afternoon|good evening)\b/i.test(text);
 
@@ -1669,20 +1762,13 @@ class ChatbotEngine {
     }
 
     // Default Fallback / Greeting
-    let welcomeText;
-    if (text && session.turn > 1) {
-      welcomeText = `I couldn't find a direct machinery match for "${text}".\n\nWe specialize in manufacturing and exporting the following core office automation machinery:\n• **Paper Shredder Machines** (Cross cut, Strip cut, Heavy duty)\n• **Currency Counting Machines** (Loose note, Bundle note)\n• **Binding & Punching Machines** (Spiral, Wiro, Perfect glue binding)\n• **Lamination Machines & Films** (A3/A4, Roll-to-roll)\n• **Cutting Plotters & Paper Cutters**\n\nPlease select one of the categories below, or let us know your specific machine requirement:`;
-    } else {
-      welcomeText = `Welcome to **National Industries (Namibind)**!\n`;
-      welcomeText += `We are a leading ISO certified manufacturer & exporter of office automation machinery since 1990.\n\n`;
-      welcomeText += `How can I help you today? You can inquire about:\n`;
-      welcomeText += `• **Paper Shredding Machines** (Cross cut, Strip cut, Heavy duty)\n`;
-      welcomeText += `• **Currency Counting Machines** (Loose note, Bundle note)\n`;
-      welcomeText += `• **Binding & Punching Machines** (Spiral, Wiro, Perfect glue binding)\n`;
-      welcomeText += `• **Lamination Machines & Films** (A3/A4, Roll-to-roll)\n`;
-      welcomeText += `• **Cutting Plotters & Paper Cutters**\n\n`;
-      welcomeText += `Feel free to type your requirement or click one of the options below:`;
+    if (!text || session.turn <= 1) {
+      // Welcome: ask contact number, then company name, before showing product options
+      const welcomeIntro = `Welcome to **National Industries (Namibind)**!\nWe are a leading ISO certified manufacturer & exporter of office automation machinery since 1990.\n\n`;
+      return this.continueOnboarding(session, welcomeIntro);
     }
+
+    const welcomeText = `I couldn't find a direct machinery match for "${text}".\n\nWe specialize in manufacturing and exporting the following core office automation machinery:\n• **Paper Shredder Machines** (Cross cut, Strip cut, Heavy duty)\n• **Currency Counting Machines** (Loose note, Bundle note)\n• **Binding & Punching Machines** (Spiral, Wiro, Perfect glue binding)\n• **Lamination Machines & Films** (A3/A4, Roll-to-roll)\n• **Cutting Plotters & Paper Cutters**\n\nPlease select one of the categories below, or let us know your specific machine requirement:`;
 
     session.history.push({ role: 'assistant', content: welcomeText, timestamp: new Date() });
 
@@ -1731,6 +1817,13 @@ class ChatbotEngine {
       summary += `• **Required Quantity**: ${session.collectedQuantity}\n`;
     }
 
+    if (session.buyerContact.company) {
+      summary += `• **Company**: ${session.buyerContact.company}\n`;
+    }
+    if (session.buyerContact.phone) {
+      summary += `• **Contact Number**: ${session.buyerContact.phone}\n`;
+    }
+
     summary += `\nOur sales team will prepare and share a customized quotation with exact pricing, GST, and freight charges.`;
 
     session.history.push({ role: 'assistant', content: summary, timestamp: new Date() });
@@ -1769,6 +1862,7 @@ class ChatbotEngine {
         selectedProduct: session.selectedProduct ? (session.selectedProduct.display_name || session.selectedProduct.name) : null,
         specs: session.collectedSpecs,
         quantity: session.collectedQuantity,
+        buyerContact: { ...session.buyerContact },
         reasonNote,
         sellerContact: `PNS: ${this.formatPnsNumber(this.businessCard?.pnsNumber || this.businessCard?.phone)}${this.businessCard?.hasImInsta && this.businessCard?.whatsapp ? ' / WhatsApp: ' + this.businessCard.whatsapp : ''}`
       }
@@ -1848,7 +1942,7 @@ class ChatbotEngine {
     const logs = this.getConversationLogs(0);
     const sessionIds = new Set();
     const categoriesCount = {};
-    const stagesReached = { INIT: 0, COLLECTING_SPECS: 0, COLLECTING_QUANTITY: 0, QUALIFIED: 0 };
+    const stagesReached = { COLLECTING_CONTACT: 0, COLLECTING_COMPANY: 0, INIT: 0, COLLECTING_SPECS: 0, COLLECTING_QUANTITY: 0, QUALIFIED: 0 };
     const guardrailCounts = {};
     let qualifiedLeads = 0;
 
