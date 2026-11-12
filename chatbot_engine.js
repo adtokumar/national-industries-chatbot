@@ -481,6 +481,22 @@ class ChatbotEngine {
     return { match: bestMatch, score: highestScore };
   }
 
+  /**
+   * Choose between the best Product Card and Fallback Category matches (Product Cards win ties)
+   */
+  pickBestContext(pcScored, fbScored) {
+    if (pcScored.score >= 50 && pcScored.score >= fbScored.score) {
+      return { type: 'product_card', data: pcScored.match };
+    } else if (fbScored.score >= 50 && fbScored.score > pcScored.score) {
+      return { type: 'category_fallback', data: fbScored.match };
+    } else if (pcScored.score >= 25 && pcScored.score >= fbScored.score) {
+      return { type: 'product_card', data: pcScored.match };
+    } else if (fbScored.score >= 25) {
+      return { type: 'category_fallback', data: fbScored.match };
+    }
+    return null;
+  }
+
   matchProductCard(query) {
     const res = this.matchProductCardWithScore(query);
     return res.score >= 25 ? res.match : null;
@@ -926,8 +942,54 @@ class ChatbotEngine {
       url: product.product_url || 'https://www.namibind.co.in/',
       imageUrl: product.media?.main_image_url || null,
       moq: product.min_order_quantity || null,
-      topSpecs: (product.specifications || []).slice(0, 3).map(s => `${s.name}: ${s.value}`)
+      topSpecs: this.pickKeySpecs(product.specifications)
     };
+  }
+
+  /**
+   * Pick the most useful specifications for the "Key Specs" line.
+   * Listings often lead with low-value ISQs (Brand, Model, Usage) or placeholder values ("standerd", "na"),
+   * so rank by field instead of taking the first few: operation and capacity/size first, then type, power, warranty.
+   * Measurement fields with no number in the value (e.g. "Size/Dimension: foot operated model") rank last.
+   */
+  pickKeySpecs(specifications, limit = 3) {
+    const placeholderValue = /^(|-+|\.|na|n\/a|nil|none|null|standerd|standard|normal|customi[sz]ed)$/i;
+    const measurementName = /size|dimension|thickness|width|length|height|capacity|weight|speed|volt|frequency|consumption|wattage/i;
+    const paperSizeValue = /\b(legal|letter|foolscap|tabloid)\b/i;
+    const nameTiers = [
+      { pattern: /brand|model|usage|application|country|origin|colou?r|packaging|pattern/i, score: 1 },
+      { pattern: /automat|operation|operated|mode|drive/i, score: 30 },
+      { pattern: /capacity|thickness|width|length|sheet|punch|binding|shred|cutting|counting|speed|paper|format|size|throat|hopper|stacker|laminating|roller|hole|pitch/i, score: 30 },
+      { pattern: /type/i, score: 20 },
+      { pattern: /volt|power|phase|motor|frequency/i, score: 15 },
+      { pattern: /warranty/i, score: 12 },
+      { pattern: /material/i, score: 10 },
+      { pattern: /weight|dimension/i, score: 8 }
+    ];
+
+    const ranked = (specifications || [])
+      .map((spec, index) => {
+        const name = String(spec.name || '').trim();
+        const value = String(spec.value || '').trim();
+        if (!name || placeholderValue.test(value)) return null;
+
+        const tier = nameTiers.find(t => t.pattern.test(name));
+        const lacksNumber = measurementName.test(name) && !/\d/.test(value) && !paperSizeValue.test(value);
+        return { text: `${name}: ${value}`, value: value.toLowerCase(), score: lacksNumber ? 0 : (tier ? tier.score : 5), index };
+      })
+      .filter(Boolean)
+      .sort((a, b) => b.score - a.score || a.index - b.index);
+
+    // Skip repeated values (e.g. "Machine Type: Manual" and "Automation Grade: Manual")
+    const picked = [];
+    const seenValues = new Set();
+    for (const spec of ranked) {
+      if (seenValues.has(spec.value)) continue;
+      seenValues.add(spec.value);
+      picked.push(spec.text);
+      if (picked.length === limit) break;
+    }
+    return picked;
   }
 
   /**
@@ -961,6 +1023,59 @@ class ChatbotEngine {
     }
 
     return { extractedSpecs, extractedQuantity };
+  }
+
+  /**
+   * Helper: Answer spec questions from a selected product's name.
+   * An option matches when all of its words appear in the name, with a number directly followed by its unit
+   * (so "70 sheets" doesn't match "35 Sheet ... 70L Bin"). The most specific option wins
+   * (e.g. "Hot & Cold Lamination" over "Cold Lamination Only").
+   */
+  matchSpecsFromProductName(productName, specQuestions) {
+    const fillerWords = new Set(['a', 'an', 'and', 'with', 'only', 'the', 'for', 'of', 'model']);
+    const toWords = text => text
+      .toLowerCase()
+      .replace(/(\d)([a-z])/g, '$1 $2') // "4mm" -> "4 mm"
+      .replace(/\binch(es)?\b/g, 'in') // "12 Inch" matches option "12 in"
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .split(/\s+/)
+      .filter(w => w && !fillerWords.has(w))
+      .map(w => w.replace(/s$/, '')); // "sheets" and "sheet" compare equal
+    const nameText = ` ${toWords(productName).join(' ')} `;
+    const matchedSpecs = {};
+
+    for (const spec of specQuestions) {
+      let bestOption = null;
+      let bestWordCount = 0;
+      for (const opt of (spec.options || [])) {
+        const words = toWords(opt);
+        const allInName = words.length > 0 && words.every((w, i) =>
+          (/\d/.test(w) && words[i + 1]) ? nameText.includes(` ${w} ${words[i + 1]} `) : nameText.includes(` ${w} `)
+        );
+        if (allInName && words.length > bestWordCount) {
+          bestOption = opt;
+          bestWordCount = words.length;
+        }
+      }
+      if (bestOption) matchedSpecs[spec.attribute || spec.name] = bestOption;
+    }
+
+    return matchedSpecs;
+  }
+
+  /**
+   * Helper: Selected product details shown before the next question (Strict Guardrail: No prices shared)
+   */
+  describeSelectedProduct(product, preview) {
+    let text = `You have selected **${product.display_name || product.name}**.\n\n`;
+    if (preview.topSpecs.length > 0) {
+      text += `• **Key Specs**: ${preview.topSpecs.join(' | ')}\n`;
+    }
+    if (product.min_order_quantity) {
+      text += `• **Min Order Qty**: ${product.min_order_quantity} ${product.price_unit || 'Units'}\n`;
+    }
+    text += `• **Official Page**: [View on Namibind.co.in](${preview.url})\n\n`;
+    return text;
   }
 
   /**
@@ -999,6 +1114,18 @@ class ChatbotEngine {
     if (selectedProduct) {
       session.selectedProduct = selectedProduct;
 
+      // Fetch the spec questions related to this product by matching its name to a Product Card / Fallback Category
+      const productName = `${selectedProduct.name || ''} ${selectedProduct.display_name || ''}`;
+      const nameContext = this.pickBestContext(this.matchProductCardWithScore(productName), this.matchCategoryFallbackWithScore(productName));
+      if (nameContext) {
+        const contextName = nameContext.type === 'product_card' ? nameContext.data.canonical_name : nameContext.data.mcat_name;
+        if (session.activeContext?.type !== nameContext.type || session.activeContext?.name !== contextName) {
+          // Answers collected for a different category don't apply to this product
+          session.collectedSpecs = {};
+        }
+        session.activeContext = { type: nameContext.type, name: contextName, data: nameContext.data };
+      }
+
       // Extract specs from product name if evident
       if (selectedProduct.name) {
         if (/cross[\s-]cut/i.test(selectedProduct.name)) session.collectedSpecs.cut_type = 'Cross Cut';
@@ -1019,6 +1146,37 @@ class ChatbotEngine {
         };
       }
 
+      // Skip spec questions the product name already answers; ask the rest before quantity
+      const specQuestions = ['product_card', 'category_fallback'].includes(session.activeContext?.type) ? (session.activeContext.data.specQuestions || []) : [];
+      Object.assign(session.collectedSpecs, this.matchSpecsFromProductName(productName, specQuestions));
+      session.pendingSpecs = specQuestions.filter(s => !session.collectedSpecs[s.attribute || s.name]);
+      session.currentSpecIndex = 0;
+
+      const preview = this.formatProductPreview(selectedProduct);
+
+      if (session.pendingSpecs.length > 0) {
+        session.stage = 'COLLECTING_SPECS';
+        const firstSpec = session.pendingSpecs[0];
+        const responseText = this.describeSelectedProduct(selectedProduct, preview) + firstSpec.question;
+        session.history.push({ role: 'assistant', content: responseText, timestamp: new Date() });
+
+        return {
+          text: responseText,
+          chips: (firstSpec.options || []).slice(0, 6),
+          stage: session.stage,
+          context: session.activeContext,
+          collectedSpecs: session.collectedSpecs,
+          quantity: session.collectedQuantity,
+          selectedProduct: preview,
+          products: [],
+          guardrailsTriggered: [
+            'Product selected; recommendations suppressed for subsequent messages',
+            'Spec questions fetched by matching the product name; answers evident from the name skipped',
+            'Strict Guardrail: Do not share price anywhere'
+          ]
+        };
+      }
+
       // Check quantity rule:
       const activeCard = session.activeContext?.type === 'product_card' ? session.activeContext.data : null;
       const hasQuantity = activeCard ? activeCard.hasQuantity : !!(selectedProduct.price_unit || selectedProduct.min_order_quantity);
@@ -1028,16 +1186,8 @@ class ChatbotEngine {
         const unit = activeCard?.unit || selectedProduct.price_unit || 'Piece';
         const unitSingular = unit === 'piece' ? 'Piece' : (unit === 'roll' ? 'Roll' : unit);
         const unitPlural = unit === 'piece' ? 'Pieces' : (unit === 'roll' ? 'Rolls' : (unit + 's'));
-        
-        let responseText = `You have selected **${selectedProduct.display_name || selectedProduct.name}**.\n\n`;
-        const preview = this.formatProductPreview(selectedProduct);
-        if (preview.topSpecs.length > 0) {
-          responseText += `• **Key Specs**: ${preview.topSpecs.join(' | ')}\n`;
-        }
-        if (selectedProduct.min_order_quantity) {
-          responseText += `• **Min Order Qty**: ${selectedProduct.min_order_quantity} ${selectedProduct.price_unit || 'Units'}\n`;
-        }
-        responseText += `• **Official Page**: [View on Namibind.co.in](${preview.url})\n\n`;
+
+        let responseText = this.describeSelectedProduct(selectedProduct, preview);
         responseText += `How many ${unitPlural.toLowerCase()} do you require?`;
 
         const chips = [`1 ${unitSingular}`, `2-5 ${unitPlural}`, `10+ ${unitPlural}`];
@@ -1131,9 +1281,11 @@ class ChatbotEngine {
           // Finished collecting specs!
           // Check the quantity rule:
           // "if for the category quantity exists, then it should ask otherwise it should skip"
+          // (a selected model sold by piece/MOQ asks quantity even under a fallback category)
           const activeCard = session.activeContext?.type === 'product_card' ? session.activeContext.data : null;
-          const hasQuantity = activeCard ? activeCard.hasQuantity : false;
-          const unit = activeCard ? activeCard.unit : 'pieces';
+          const selected = session.selectedProduct;
+          const hasQuantity = activeCard ? activeCard.hasQuantity : !!(selected && (selected.price_unit || selected.min_order_quantity));
+          const unit = activeCard ? activeCard.unit : 'piece';
 
           if (hasQuantity) {
             session.stage = 'COLLECTING_QUANTITY';
@@ -1345,17 +1497,7 @@ class ChatbotEngine {
     }
 
     // 7. Determine Best Match between Product Card and Fallback Category
-    let chosenContext = null;
-
-    if (pcScored.score >= 50 && pcScored.score >= fbScored.score) {
-      chosenContext = { type: 'product_card', data: pcScored.match };
-    } else if (fbScored.score >= 50 && fbScored.score > pcScored.score) {
-      chosenContext = { type: 'category_fallback', data: fbScored.match };
-    } else if (pcScored.score >= 25 && pcScored.score >= fbScored.score) {
-      chosenContext = { type: 'product_card', data: pcScored.match };
-    } else if (fbScored.score >= 25) {
-      chosenContext = { type: 'category_fallback', data: fbScored.match };
-    }
+    const chosenContext = this.pickBestContext(pcScored, fbScored);
 
     const catalogMatches = this.searchCatalogProducts(text, 3);
 

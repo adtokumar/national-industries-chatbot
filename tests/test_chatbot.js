@@ -371,11 +371,17 @@ async function runTestSuite() {
     assert.strictEqual(res1.stage, 'COLLECTING_SPECS');
     assert(Array.isArray(res1.products) && res1.products.length > 0, 'Must have recommendations on category selection');
 
-    // 2. Select a specific product model
+    // 2. Select a specific product model; its remaining spec questions are asked without recommendations
     const res2 = await engine.processMessage(sId, 'Select Cross Cut Paper Shredder 35 Sheet Heavy Duty 70L Bin Departmental Office Shredder');
-    assert.strictEqual(res2.stage, 'COLLECTING_QUANTITY');
     assert(res2.text.includes('Cross Cut Paper Shredder 35 Sheet'), 'Must acknowledge selected product');
-    assert(!res2.products || res2.products.length === 0, 'Must remove product recommendations when product is selected');
+    assert.strictEqual(res2.collectedSpecs.cut_type, 'Cross Cut', 'Cut type is evident from the product name');
+    let resSpecs = res2;
+    while (resSpecs.stage === 'COLLECTING_SPECS') {
+      assert(!resSpecs.products || resSpecs.products.length === 0, 'Must remove product recommendations when product is selected');
+      resSpecs = await engine.processMessage(sId, resSpecs.chips[0]);
+    }
+    assert.strictEqual(resSpecs.stage, 'COLLECTING_QUANTITY');
+    assert(!resSpecs.products || resSpecs.products.length === 0, 'Quantity prompt must not recommend other products');
 
     // 3. Subsequent message (providing quantity) must also NOT include product recommendations
     const res3 = await engine.processMessage(sId, '2 Pieces');
@@ -393,8 +399,10 @@ async function runTestSuite() {
     const sId = 't_sel_price_' + Date.now();
     await engine.processMessage(sId, 'Lamination Machine');
     const resSelect = await engine.processMessage(sId, 'Select Cold Lamination Machine Price / Photo Laminator, 1300 mm');
-    assert.strictEqual(resSelect.stage, 'COLLECTING_QUANTITY', 'Should transition to COLLECTING_QUANTITY on select');
+    assert.strictEqual(resSelect.stage, 'COLLECTING_SPECS', 'Should ask the remaining spec questions on select');
     assert(resSelect.text.includes('Cold Lamination Machine Price'), 'Must acknowledge the selected model');
+    assert.strictEqual(resSelect.collectedSpecs.lamination_type, 'Cold Lamination Only', '"Cold Lamination" in the name answers hot vs cold');
+    assert(!resSelect.text.includes('hot and cold'), 'Must not ask hot vs cold for a cold laminator');
     assert(!resSelect.text.includes('Pricing is shared directly'), 'Must NOT trigger price guardrail when explicitly selecting model');
 
     // General price inquiry on same model SHOULD trigger guardrail
@@ -445,6 +453,52 @@ async function runTestSuite() {
     // Reset back to default
     engine.businessCard.hasImInsta = false;
     engine.businessCard.whatsapp = null;
+  });
+
+  // TEST 28: Key Specs rank useful ISQs over listing order and skip placeholder values
+  await testAsync('Key Specs: Operation & capacity ISQs shown first; placeholders, low-value and repeated values skipped', async () => {
+    const ranked = engine.pickKeySpecs([
+      { name: 'Brand', value: 'Namibind' },
+      { name: 'Working Speed', value: 'standerd' },
+      { name: 'Voltage', value: 'no' },
+      { name: 'Machine Type', value: 'Manual' },
+      { name: 'Operation Mode', value: 'Manual' },
+      { name: 'Max Paper Size', value: 'Legal' },
+      { name: 'Warranty', value: '1 year' }
+    ]);
+    assert.deepStrictEqual(ranked, ['Operation Mode: Manual', 'Max Paper Size: Legal', 'Warranty: 1 year']);
+
+    // Listing leads with "Size/Dimension: foot operated model | Model Name/Number: spiral 18 | Working Speed: standerd"
+    const sId = 't_key_specs_' + Date.now();
+    await engine.processMessage(sId, 'Spiral Binding Machine');
+    const resSelect = await engine.processMessage(sId, 'Select Spiral Binding Machine Low Price / spiral punching machine, Size/Dimension: Foot Operated Model, Standerd');
+    assert(resSelect.text.includes('**Key Specs**: Automation Grade: Manual | Max Binding Thickness: >50 mm | Max Binding Sheet Width: 200-300 mm'), 'Should show the most useful ISQs');
+    assert(!resSelect.text.includes('Working Speed'), 'Should not show placeholder "standerd" spec');
+    assert(!resSelect.text.includes('Model Name/Number'), 'Should not show low-value model number spec');
+  });
+
+  // TEST 29: Selecting a product asks its category's spec questions, skipping answers evident from the name
+  await testAsync('Product Selection: Spec questions fetched from the product name; answers in the name are skipped', async () => {
+    const sId = 't_sel_specs_' + Date.now();
+    const resSelect = await engine.processMessage(sId, 'Select Manual Spiral Binding Machine 14 Inch FS 45 Hole 4mm Punch Heavy Duty Spiral Binder');
+    assert.strictEqual(resSelect.stage, 'COLLECTING_SPECS');
+    assert.strictEqual(resSelect.context.name, 'Spiral Binding Machine', 'Category matched from the product name');
+    assert.strictEqual(resSelect.collectedSpecs.operation_mode, 'Manual', '"Manual" in the name answers manual vs electric');
+    assert(resSelect.text.includes('What size of paper are you looking to bind?'), 'Should ask the question the name does not answer');
+
+    const resQty = await engine.processMessage(sId, 'A4');
+    assert.strictEqual(resQty.stage, 'COLLECTING_QUANTITY', 'Manual vs electric must not be asked');
+    const resDone = await engine.processMessage(sId, '1 Piece');
+    assert(resDone.text.includes('**Paper Size**: A4') && resDone.text.includes('**Operation Mode**: Manual'), 'Lead summary carries both answers');
+
+    // Matching rules: a number must sit next to its unit; the most specific option wins
+    const specs = [
+      { attribute: 'sheet_capacity', options: ['70 sheets', '35 sheets'] },
+      { attribute: 'width', options: ['12 in', '50 in'] },
+      { attribute: 'lamination_type', options: ['Cold Lamination Only', 'Hot & Cold Lamination'] }
+    ];
+    assert.deepStrictEqual(engine.matchSpecsFromProductName('Cross Cut Paper Shredder 35 Sheet 70L Bin', specs), { sheet_capacity: '35 sheets' });
+    assert.deepStrictEqual(engine.matchSpecsFromProductName('Hot and Cold Lamination Film Roll 12 Inch 50 Meter', specs), { width: '12 in', lamination_type: 'Hot & Cold Lamination' });
   });
 
   console.log('\n====================================================');
