@@ -577,6 +577,29 @@ async function runTestSuite() {
     }
   });
 
+  // TEST 34: Values in the selected product's name win over buttons that don't fit the model
+  await testAsync('Product Selection: Name values fill questions even when not a button; one-button questions skipped', async () => {
+    const sId = 't_sel_values_' + Date.now();
+    await engine.processMessage(sId, 'Paper Shredder Machine');
+    const resSelect = await engine.processMessage(sId, 'Select Cross Cut Paper Shredder 35 Sheet Heavy Duty 70L Bin Departmental Office Shredder');
+    assert.strictEqual(resSelect.collectedSpecs.sheet_capacity, '35 sheets', '"35 Sheet" in the name answers sheet capacity');
+    assert(!resSelect.text.includes('sheet capacity'), 'Must not offer sheet sizes that contradict the model');
+    let res = resSelect;
+    while (res.stage === 'COLLECTING_SPECS') {
+      assert(!res.text.includes('intended use'), 'One-button question must be skipped after selection');
+      res = await engine.processMessage(sId, res.chips[0]);
+    }
+
+    const sheetQ = [{ attribute: 'sheet_capacity', options: ['25 sheets', '40 sheets'] }];
+    assert.deepStrictEqual(engine.matchSpecsFromProductName('Shredder 12 Sheet 2 x10mm', sheetQ), { sheet_capacity: '12 sheets' });
+    assert.deepStrictEqual(engine.matchSpecsFromProductName('Shredder 12 Sheet Feeds 20 Sheets', sheetQ), {}, 'Two different values are ambiguous');
+    assert.deepStrictEqual(engine.matchSpecsFromProductName('Baling Press Capacity: 500/1000 kg', [{ attribute: 'bale_weight', options: ['50 kg', '100 kg'] }]), {}, 'Alternatives are ignored');
+    assert.deepStrictEqual(engine.matchSpecsFromProductName('Auto Feed Vinyl Cutting Plotter', [{ attribute: 'feeding_type', options: ['Manual Feeding', 'Auto Feeder'] }]), { feeding_type: 'Auto Feeder' });
+    assert.deepStrictEqual(engine.matchSpecsFromProductName('Spiral Punching Machine, Size/Dimension: Foot Operated Model', [{ attribute: 'operation_mode', options: ['Manual', 'Electric', 'Manual Leg Operated'] }]), { operation_mode: 'Manual Leg Operated' });
+    assert.deepStrictEqual(engine.matchSpecsFromProductName('Cold Lamination Machine Price / Photo Laminator, 1300 mm', [{ attribute: 'paper_size', options: ['A3', 'A4'] }]), { paper_size: '1300 mm' });
+    assert.deepStrictEqual(engine.matchSpecsFromProductName('4 In 1 Binding Machine', [{ attribute: 'paper_size', options: ['A3', 'A4'] }]), {}, '"4 In 1" is not a width');
+  });
+
   // TEST 33: Conversation logs (buyer contact numbers) are only served with LOGS_API_KEY
   await testAsync('Security: /api/logs endpoints require the LOGS_API_KEY header; other endpoints stay public', async () => {
     const { server } = require('../server');

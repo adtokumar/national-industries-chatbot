@@ -1100,10 +1100,22 @@ class ChatbotEngine {
    * Helper: Answer spec questions from a selected product's name.
    * An option matches when all of its words appear in the name, with a number directly followed by its unit
    * (so "70 sheets" doesn't match "35 Sheet ... 70L Bin"). The most specific option wins
-   * (e.g. "Hot & Cold Lamination" over "Cold Lamination Only").
+   * (e.g. "Hot & Cold Lamination" over "Cold Lamination Only"). Word forms of the same machinery term match
+   * ("Auto Feed" ~ "Auto Feeder"), and a number-with-unit question takes the name's own value when it isn't an option.
    */
   matchSpecsFromProductName(productName, specQuestions) {
     const fillerWords = new Set(['a', 'an', 'and', 'with', 'only', 'the', 'for', 'of', 'model']);
+    // Word forms that mean the same thing in product names and options
+    const wordFamilies = {
+      feeder: 'feed', feeding: 'feed',
+      laminator: 'laminat', lamination: 'laminat', laminating: 'laminat', laminate: 'laminat',
+      binder: 'bind', binding: 'bind',
+      shredder: 'shred', shredding: 'shred',
+      cutter: 'cut', cutting: 'cut',
+      counter: 'count', counting: 'count',
+      perforator: 'perforat', perforation: 'perforat', perforating: 'perforat',
+      foot: 'leg', pedal: 'leg' // "Foot Operated" ~ "Manual Leg Operated"
+    };
     const toWords = text => text
       .toLowerCase()
       .replace(/(\d)([a-z])/g, '$1 $2') // "4mm" -> "4 mm"
@@ -1111,8 +1123,11 @@ class ChatbotEngine {
       .replace(/[^a-z0-9\s]/g, ' ')
       .split(/\s+/)
       .filter(w => w && !fillerWords.has(w))
-      .map(w => w.replace(/s$/, '')); // "sheets" and "sheet" compare equal
+      .map(w => w.replace(/s$/, '')) // "sheets" and "sheet" compare equal
+      .map(w => wordFamilies[w] || w);
     const nameText = ` ${toWords(productName).join(' ')} `;
+    const nameForNumbers = productName.toLowerCase().replace(/\binch(es)?\b/g, 'in').replace(/(\d)\s*"/g, '$1 in');
+    const unitKey = unit => unit.toLowerCase().replace(/s$/, '');
     const matchedSpecs = {};
 
     const inName = w => nameText.includes(` ${w} `);
@@ -1142,6 +1157,28 @@ class ChatbotEngine {
           return distinctWords.length > 0 && distinctWords.every(inName) && words.filter(inName).length * 2 > words.length;
         });
         if (candidates.length === 1) bestOption = candidates[0].opt;
+      }
+
+      // Still no match on a number-with-unit question ("25 sheets", "14 mm", "500 kg/hr"): take the product's own value
+      // when the name states exactly one number with that unit ("35 Sheet" -> "35 sheets", even though it isn't an option).
+      // Ranges and alternatives ("500/1000 kg", "2 x10mm") are ignored.
+      if (!bestOption) {
+        const numericOptions = (spec.options || []).map(opt => String(opt).trim().match(/^(\d+(?:\.\d+)?)\s*([a-z][a-z/]*)$/i)).filter(Boolean);
+        const unit = numericOptions[0]?.[2];
+        if (numericOptions.length >= 2 && numericOptions.every(m => unitKey(m[2]) === unitKey(unit))) {
+          const values = new Set();
+          for (const m of nameForNumbers.matchAll(/(?:^|[\s(,:])(\d+(?:\.\d+)?)\s*([a-z][a-z/]*)/g)) {
+            if (unitKey(m[2]) === unitKey(unit)) values.add(m[1]);
+          }
+          if (values.size === 1) bestOption = `${[...values][0]} ${unit}`;
+        }
+      }
+
+      // Still no match on a paper-size question ("A3" / "A4") for a product sized by width instead
+      // ("Cold Lamination Machine 1300 mm", "14 Inch ... Lamination Machine"): record the name's width
+      if (!bestOption && options.length >= 2 && (spec.options || []).every(opt => /^\s*a\d\+?\s*$/i.test(opt))) {
+        const width = productName.match(/(?:^|[\s(,:])(\d+(?:\.\d+)?)\s*(mm|inch(?:es)?|")(?=[\s),.]|$)/i);
+        if (width) bestOption = `${width[1]} ${width[2].toLowerCase() === 'mm' ? 'mm' : 'inch'}`;
       }
 
       if (bestOption) matchedSpecs[spec.attribute || spec.name] = bestOption;
@@ -1258,7 +1295,8 @@ class ChatbotEngine {
       // Skip spec questions the product name already answers; ask the rest before quantity
       const specQuestions = ['product_card', 'category_fallback'].includes(session.activeContext?.type) ? (session.activeContext.data.specQuestions || []) : [];
       Object.assign(session.collectedSpecs, this.matchSpecsFromProductName(productName, specQuestions));
-      session.pendingSpecs = specQuestions.filter(s => !session.collectedSpecs[s.attribute || s.name]);
+      // A one-option question adds nothing once a model is chosen (e.g. "What is your intended use?" -> "Paper shredding")
+      session.pendingSpecs = specQuestions.filter(s => !session.collectedSpecs[s.attribute || s.name] && (s.options || []).length !== 1);
       session.currentSpecIndex = 0;
 
       const preview = this.formatProductPreview(selectedProduct);
